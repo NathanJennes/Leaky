@@ -6,10 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/09 14:27:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/09 17:07:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "core.h"
 #include "leaky.h"
 #include <stdlib.h>
 
@@ -22,12 +23,12 @@ void	gc_free(void *ptr)
 	if (allocator->capacity == 0)
 		return ;
 	i = 0;
-	while (i < allocator->capacity && allocator->pointers[i] != ptr)
+	while (i < allocator->capacity && allocator->pointers[i].address != ptr)
 		i++;
-	if (i >= allocator->capacity || allocator->pointers[i] == NULL)
+	if (i >= allocator->capacity || allocator->pointers[i].address == NULL)
 		return ;
 	else
-		allocator->pointers[i] = NULL;
+		allocator->pointers[i].address = NULL;
 	if (i < allocator->first_free)
 		allocator->first_free = i;
 	allocator->ptrs_count--;
@@ -56,8 +57,8 @@ void	gc_clean()
 	i = 0;
 	while (i < allocator->capacity)
 	{
-		if (allocator->pointers[i])
-			free(allocator->pointers[i]);
+		if (allocator->pointers[i].address)
+			free(allocator->pointers[i].address);
 		i++;
 	}
 	free(allocator->pointers);

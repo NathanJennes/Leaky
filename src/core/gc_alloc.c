@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_calloc.c                                        :+:      :+:    :+:   */
+/*   gc_alloc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 15:05:46 by                   #+#    #+#             */
-/*   Updated: 2022/04/09 16:54:04 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/09 16:41:41 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/09 16:53:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdlib.h>
+#include "core.h"
 #include "leaky.h"
 
-void	*gc_calloc(size_t count, size_t size)
+void	*gc_alloc(size_t size)
 {
+	t_gc	*allocator;
 	void	*ptr;
 
-	if (gc_failed())
-		return (NULL);
-	ptr = gc_alloc(count * size);
+	allocator = gc(GC_GET, NULL);
+	ptr = malloc(size);
 	if (!ptr)
+	{
+		gc_error();
 		return (NULL);
-	ft_memset(ptr, 0, count * size);
+	}
+	allocator->malloc_calls++;
+	if (!gc_own(ptr))
+		return (NULL);
 	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:19:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/09 14:38:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/09 16:59:27 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,7 @@
 # define GC_SET_CALLBACK 2
 # define GC_SET_CALLBACK_PARAM 3
 
-typedef struct s_gc
-{
-	void	**pointers;
-	size_t	ptrs_count;
-	size_t	capacity;
-	size_t	first_free;
-	int		(*callback)(void *);
-	void	*param;
-}			t_gc;
+typedef struct s_gc t_gc;
 
 //Basic memory interface
 void		*ft_memset(void *b, int c, size_t len);
@@ -40,13 +32,20 @@ void		*ft_memmove(void *dst, const void *src, size_t len);
 void		*ft_calloc(size_t count, size_t size);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
-//Memory management
+
+//Core
 t_gc		*gc(int mode, void *param);
-void		gc_init(t_gc *gc, int (*callback)(void *), void *param);
+int			gc_own(void *ptr);
+int			gc_ownt(void *ptr);
+
+//Memory management
+void		*gc_alloc(size_t size);
 void		*gc_calloc(size_t count, size_t size);
 void		gc_clean();
 void		gc_destroy(void **ptr);
 void		gc_free(void *ptr);
+
+char		gc_failed();
 
 char		*gc_get_next_line(int fd);
 char		*gc_itoa(int n);
@@ -66,7 +65,8 @@ char		**gc_strarray_fromstr(char *str);
 size_t		gc_strarray_size(char **array);
 
 
-int			gc_getfootprint();
+size_t			gc_getfootprint();
+size_t			gc_get_malloc_calls();
 
 
 size_t		ft_strlen(const char *s);

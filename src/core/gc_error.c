@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_calloc.c                                        :+:      :+:    :+:   */
+/*   gc_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 15:05:46 by                   #+#    #+#             */
-/*   Updated: 2022/04/09 16:54:04 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/09 15:54:56 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/09 16:30:57 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdlib.h>
+#include "core.h"
 #include "leaky.h"
 
-void	*gc_calloc(size_t count, size_t size)
+int	gc_error(void)
 {
-	void	*ptr;
+	t_gc	*allocator;
 
-	if (gc_failed())
-		return (NULL);
-	ptr = gc_alloc(count * size);
-	if (!ptr)
-		return (NULL);
-	ft_memset(ptr, 0, count * size);
-	return (ptr);
+	allocator = gc(GC_GET, NULL);
+	allocator->failed = TRUE;
+	if (allocator->new_ptr)
+		free(allocator->new_ptr);
+	if (allocator->callback)
+		allocator->callback(allocator->param);
+	return (0);
+}
+
+char	gc_failed()
+{
+	t_gc	*allocator;
+
+	allocator = gc(GC_GET, NULL);
+	return (allocator->failed);
 }
