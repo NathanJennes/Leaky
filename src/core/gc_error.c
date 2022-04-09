@@ -19,18 +19,9 @@ int	gc_error(void)
 	t_gc	*allocator;
 
 	allocator = gc(GC_GET, NULL);
-	allocator->failed = TRUE;
 	if (allocator->new_ptr)
 		free(allocator->new_ptr);
 	if (allocator->callback)
 		allocator->callback(allocator->param);
 	return (0);
-}
-
-char	gc_failed()
-{
-	t_gc	*allocator;
-
-	allocator = gc(GC_GET, NULL);
-	return (allocator->failed);
 }

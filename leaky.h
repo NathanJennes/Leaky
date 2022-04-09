@@ -45,8 +45,6 @@ void		gc_clean();
 void		gc_destroy(void **ptr);
 void		gc_free(void *ptr);
 
-char		gc_failed();
-
 char		*gc_get_next_line(int fd);
 char		*gc_itoa(int n);
 char		**gc_split(char const *s, char c);

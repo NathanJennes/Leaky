@@ -17,8 +17,6 @@ void	*gc_calloc(size_t count, size_t size)
 {
 	void	*ptr;
 
-	if (gc_failed())
-		return (NULL);
 	ptr = gc_alloc(count * size);
 	if (!ptr)
 		return (NULL);

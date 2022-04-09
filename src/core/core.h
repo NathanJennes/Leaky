@@ -34,7 +34,6 @@ typedef struct s_gc
 	size_t	malloc_calls;
 	int		(*callback)(void *);
 	void	*param;
-	char	failed;
 }			t_gc;
 
 int			gc_init(t_gc *gc, int (*callback)(void *), void *param);
