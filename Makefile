@@ -7,14 +7,28 @@ LDFLAGS		:=		-fsanitize=address
 
 CC			:=		gcc
 
-SRCDIR		:=		src
-SRCS		:=		ft_calloc.c ft_memcpy.c ft_memmove.c ft_memset.c ft_memsetf.c ft_memseti.c ft_strlcpy.c				\
-					gc_calloc.c gc_free.c gc_gc.c gc_get_next_line.c gc_init.c gc_itoa.c gc_split.c gc_split_free.c		\
-					gc_strappend.c gc_strarray_append.c gc_strarray_asstr.c gc_strarray_free.c gc_strarray_from.c		\
-					gc_strarray_fromstr.c gc_strarray_init.c gc_strarray_size.c gc_strdup.c gc_strjoin.c gc_substr.c	\
+BASIC_DIR	:=		basics
+BASIC		:=		ft_calloc.c ft_memcpy.c ft_memmove.c ft_memset.c ft_memseti.c ft_memsetf.c ft_strlcpy.c ft_strlen.c
+
+CORE_DIR	:=		core
+CORE		:=		gc_gc.c gc_init.c
+
+EXTRAS_DIR	:=		extras
+EXTRAS		:=		gc_get_next_line.c gc_split_free.c gc_strappend.c
+
+STD_DIR		:=		standard
+STD			:=		gc_calloc.c gc_free.c gc_itoa.c gc_split.c gc_strdup.c gc_strjoin.c gc_substr.c
+
+STRARR_DIR	:=		string_array
+STRARR		:=		gc_strarray_append.c gc_strarray_asstr.c gc_strarray_free.c gc_strarray_from.c						\
+					gc_strarray_fromstr.c gc_strarray_init.c gc_strarray_size.c
 
 OBJDIR		:=		obj
-OBJS		:=		$(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+OBJS		:=		$(addprefix $(OBJDIR)/, $(BASIC:.c=.o))		\
+					$(addprefix $(OBJDIR)/, $(CORE:.c=.o))		\
+					$(addprefix $(OBJDIR)/, $(EXTRAS:.c=.o))	\
+					$(addprefix $(OBJDIR)/, $(STD:.c=.o))		\
+					$(addprefix $(OBJDIR)/, $(STRARR:.c=.o))	\
 
 DEPENDS		:=		$(OBJS:.o:.d)
 
@@ -23,7 +37,19 @@ all:			$(NAME)
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
-$(OBJDIR)/%.o:	$(SRCDIR)/%.c | $(OBJDIR)
+$(OBJDIR)/%.o:	src/$(BASIC_DIR)/%.c | $(OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o:	src/$(CORE_DIR)/%.c | $(OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o:	src/$(EXTRAS_DIR)/%.c | $(OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o:	src/$(STD_DIR)/%.c | $(OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJDIR)/%.o:	src/$(STRARR_DIR)/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME):		$(OBJS)
