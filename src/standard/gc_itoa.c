@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:22:09 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:47:11 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:47:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ char	*gc_itoa(int n)
 	return (new);
 }
 
-char	*gc_itoat(int n)
+char	*gct_itoa(int n)
 {
 	int		negative;
 	int		i;
@@ -67,7 +67,7 @@ char	*gc_itoat(int n)
 	char	*new;
 
 	ft_init_itoa(&negative, n, &ncpy);
-	new = gc_calloct(ft_numlen(ncpy, negative) + 1, sizeof(char));
+	new = gct_calloc(ft_numlen(ncpy, negative) + 1, sizeof(char));
 	i = ft_numlen(ncpy, negative);
 	new[i--] = 0;
 	if (ncpy == 0)

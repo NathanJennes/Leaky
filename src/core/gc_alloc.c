@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:41:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:30:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:31:24 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	*gc_alloc(size_t size)
 	return (ptr);
 }
 
-void	*gc_alloct(size_t size)
+void	*gct_alloc(size_t size)
 {
 	t_gc	*allocator;
 	void	*ptr;
@@ -45,7 +45,7 @@ void	*gc_alloct(size_t size)
 		return (NULL);
 	}
 	allocator->malloc_calls++;
-	if (!gc_ownt(ptr))
+	if (!gct_own(ptr))
 		return (NULL);
 	return (ptr);
 }

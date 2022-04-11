@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2021/11/05 14:37:24 by njennes          ###   ########lyon.fr   */
+/*   Updated: 2022/04/11 14:54:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ char	**gc_strarray_init()
 	return (array);
 }
 
-char	**gc_strarray_initt()
+char	**gct_strarray_init()
 {
 	char	**array;
 
-	array = gc_calloct(1, sizeof (char *));
+	array = gct_calloc(1, sizeof(char *));
 	return (array);
 }

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:51:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:51:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*gc_strarray_asstr(char **array)
 	return (str);
 }
 
-char	*gc_strarray_asstrt(char **array)
+char	*gct_strarray_asstr(char **array)
 {
 	size_t	i;
 	size_t	arr_size;
@@ -44,7 +44,7 @@ char	*gc_strarray_asstrt(char **array)
 	char	*str;
 
 	if (!array || gc_strarray_size(array) == 0)
-		return (gc_strdupt(""));
+		return (gct_strdup(""));
 	arr_size = gc_strarray_size(array);
 	total_size = 0;
 	i = 0;
@@ -53,7 +53,7 @@ char	*gc_strarray_asstrt(char **array)
 		total_size += ft_strlen(array[i]) + 1;
 		i++;
 	}
-	str = gc_calloct(total_size, sizeof (char));
+	str = gct_calloc(total_size, sizeof(char));
 	copy_into_str(array, arr_size, str);
 	return (str);
 }

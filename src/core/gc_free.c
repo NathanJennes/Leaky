@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/11 14:41:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:41:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	gc_free(void *ptr)
 	free(ptr);
 }
 
-void	gc_freet(void)
+void	gct_free(void)
 {
 	t_gc	*allocator;
 	size_t	i;

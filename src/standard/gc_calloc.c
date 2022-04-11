@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:05:46 by                   #+#    #+#             */
-/*   Updated: 2022/04/11 14:44:41 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:44:45 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,11 @@ void	*gc_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-void	*gc_calloct(size_t count, size_t size)
+void	*gct_calloc(size_t count, size_t size)
 {
 	void	*ptr;
 
-	ptr = gc_alloct(count * size);
+	ptr = gct_alloc(count * size);
 	if (!ptr)
 		return (NULL);
 	ft_memset(ptr, 0, count * size);

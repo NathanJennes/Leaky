@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:19:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:54:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:54:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 //Core
 t_gc		*gc(int mode, void *param);
 int			gc_own(void *ptr);
-int			gc_ownt(void *ptr);
+int			gct_own(void *ptr);
 
 //Memory management
 void		*gc_alloc(size_t size);
@@ -70,17 +70,17 @@ size_t			gc_get_malloc_calls();
 size_t		ft_strlen(const char *s);
 
 
-void		*gc_alloct(size_t size);
-void		gc_freet(void);
-void		*gc_calloct(size_t count, size_t size);
-char		*gc_itoat(int n);
-char		*gc_strdupt(const char *s1);
-char		*gc_strjoint(char *s1, char *s2, int to_free);
-char		*gc_substrt(char const *s, unsigned int start, size_t len);
-char		**gc_strarray_appendt(char **array, char *str);
-char		*gc_strarray_asstrt(char **array);
-char		**gc_strarray_fromt(char **other, size_t size);
-char		**gc_strarray_fromstrt(char *str);
-char		**gc_strarray_initt();
+void		*gct_alloc(size_t size);
+void		gct_free(void);
+void		*gct_calloc(size_t count, size_t size);
+char		*gct_itoa(int n);
+char		*gct_strdup(const char *s1);
+char		*gct_strjoin(char *s1, char *s2, int to_free);
+char		*gct_substr(char const *s, unsigned int start, size_t len);
+char		**gct_strarray_append(char **array, char *str);
+char		*gct_strarray_asstr(char **array);
+char		**gct_strarray_from(char **other, size_t size);
+char		**gct_strarray_fromstr(char *str);
+char		**gct_strarray_init();
 
 #endif

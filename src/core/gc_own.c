@@ -30,7 +30,7 @@ int	gc_own(void *ptr)
 	return (1);
 }
 
-int	gc_ownt(void *ptr)
+int	gct_own(void *ptr)
 {
 	t_gc	*allocator;
 
