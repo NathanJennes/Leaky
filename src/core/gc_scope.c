@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:25 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 16:44:14 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 16:58:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 #include "leaky.h"
 
 static void	free_scope(t_gc *allocator, size_t scope);
+static int	is_legal_scope(t_gc *allocator, int mode);
 
 void	gc_scope_start(void)
 {
 	t_gc	*allocator;
 
 	allocator = gc(GC_GET, NULL);
+	if (!is_legal_scope(allocator, SCOPE_START))
+		return ;
 	allocator->current_scope++;
 }
 
@@ -29,6 +32,8 @@ void	gc_scope_end(void)
 	t_gc	*allocator;
 
 	allocator = gc(GC_GET, NULL);
+	if (!is_legal_scope(allocator, SCOPE_END))
+		return ;
 	free_scope(allocator, allocator->current_scope);
 	allocator->current_scope--;
 }
@@ -50,4 +55,25 @@ static void	free_scope(t_gc *allocator, size_t scope)
 		}
 		i++;
 	}
+}
+
+static int	is_legal_scope(t_gc *allocator, int mode)
+{
+	if (mode == SCOPE_START)
+	{
+		if (allocator->current_scope == UINT64_MAX)
+		{
+			allocator->error = "Leaky: scope overflow! "
+							   "(Do you have a gc_scope_start() inside a while() ?)";
+			return (gc_error());
+		}
+		return (1);
+	}
+	if (allocator->current_scope <= 0)
+	{
+		allocator->error = "Leaky: scope underflow! "
+						   "(Do you have a gc_scope_end() inside a while() ?)";
+		return (gc_error());
+	}
+	return (1);
 }
