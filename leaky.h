@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:19:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:49:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:54:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,10 @@ char		*gc_itoat(int n);
 char		*gc_strdupt(const char *s1);
 char		*gc_strjoint(char *s1, char *s2, int to_free);
 char		*gc_substrt(char const *s, unsigned int start, size_t len);
+char		**gc_strarray_appendt(char **array, char *str);
+char		*gc_strarray_asstrt(char **array);
+char		**gc_strarray_fromt(char **other, size_t size);
+char		**gc_strarray_fromstrt(char *str);
+char		**gc_strarray_initt();
 
 #endif

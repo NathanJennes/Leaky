@@ -19,3 +19,11 @@ char	**gc_strarray_init()
 	array = gc_calloc(1, sizeof (char *));
 	return (array);
 }
+
+char	**gc_strarray_initt()
+{
+	char	**array;
+
+	array = gc_calloct(1, sizeof (char *));
+	return (array);
+}

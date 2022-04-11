@@ -22,3 +22,14 @@ char	**gc_strarray_fromstr(char *str)
 	array = gc_strarray_append(array, str);
 	return (array);
 }
+
+char	**gc_strarray_fromstrt(char *str)
+{
+	char	**array;
+
+	array = gc_strarray_initt();
+	if (!str)
+		return (array);
+	array = gc_strarray_appendt(array, str);
+	return (array);
+}
