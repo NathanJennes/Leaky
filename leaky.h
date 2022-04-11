@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:19:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/09 16:59:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:31:16 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,9 @@ size_t			gc_get_malloc_calls();
 
 
 size_t		ft_strlen(const char *s);
+
+
+void		*gc_alloct(size_t size);
+void		gc_freet(void);
 
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_free.c                                          :+:      :+:    :+:   */
+/*   gc_clean.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/11 14:41:31 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/11 14:34:20 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/11 14:34:38 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "core.h"
 #include "leaky.h"
 
-void	gc_free(void *ptr)
+void	gc_clean()
 {
 	t_gc	*allocator;
 	size_t	i;
@@ -23,32 +23,12 @@ void	gc_free(void *ptr)
 	if (allocator->capacity == 0)
 		return ;
 	i = 0;
-	while (i < allocator->capacity && allocator->pointers[i].address != ptr)
-		i++;
-	if (i >= allocator->capacity || allocator->pointers[i].address == NULL)
-		return ;
-	else
-		allocator->pointers[i] = gc_null_ptr();
-	if (i < allocator->first_free)
-		allocator->first_free = i;
-	allocator->ptrs_count--;
-	free(ptr);
-}
-
-void	gc_freet(void)
-{
-	t_gc	*allocator;
-	size_t	i;
-
-	allocator = gc(GC_GET, NULL);
-	i = 0;
 	while (i < allocator->capacity)
 	{
-		if (allocator->pointers[i].temporary)
-		{
+		if (allocator->pointers[i].address)
 			free(allocator->pointers[i].address);
-			allocator->pointers[i] = gc_null_ptr();
-		}
 		i++;
 	}
+	free(allocator->pointers);
+	allocator->capacity = 0;
 }
