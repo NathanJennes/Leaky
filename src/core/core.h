@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:40:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 16:31:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef struct s_ptr
 {
 	void	*address;
 	char	temporary;
+	size_t	scope;
 }			t_ptr;
 
 typedef struct s_gc
@@ -32,6 +33,7 @@ typedef struct s_gc
 	size_t	capacity;
 	size_t	first_free;
 	size_t	malloc_calls;
+	size_t	current_scope;
 	int		(*callback)(void *);
 	void	*param;
 }			t_gc;

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:19:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:54:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 14:58:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ char		**gc_strarray_fromstr(char *str);
 size_t		gc_strarray_size(char **array);
 
 
-size_t			gc_getfootprint();
-size_t			gc_get_malloc_calls();
+size_t		gc_getfootprint();
+size_t		gc_get_malloc_calls();
 
 
 size_t		ft_strlen(const char *s);
@@ -82,5 +82,8 @@ char		*gct_strarray_asstr(char **array);
 char		**gct_strarray_from(char **other, size_t size);
 char		**gct_strarray_fromstr(char *str);
 char		**gct_strarray_init();
+
+void		gc_scope_start(void);
+void		gc_scope_end(void);
 
 #endif

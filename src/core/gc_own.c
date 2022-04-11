@@ -6,14 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:52 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 16:28:13 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 16:33:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
 
-static t_ptr	create_ptr(void *ptr, char temporary);
+static t_ptr	create_ptr(void *ptr, char temporary, size_t scope);
 static void		insert_ptr(t_gc *gc, t_ptr ptr);
 
 int	gc_own(void *ptr)
@@ -26,7 +26,7 @@ int	gc_own(void *ptr)
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
 		return (0);
-	insert_ptr(allocator, create_ptr(ptr, FALSE));
+	insert_ptr(allocator, create_ptr(ptr, FALSE, allocator->current_scope));
 	return (1);
 }
 
@@ -40,16 +40,18 @@ int	gct_own(void *ptr)
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
 		return (0);
-	insert_ptr(allocator, create_ptr(ptr, TRUE));
+	insert_ptr(allocator, create_ptr(ptr, TRUE, allocator->current_scope));
 	return (1);
 }
 
-static t_ptr	create_ptr(void *ptr, char temporary)
+static t_ptr	create_ptr(void *ptr, char temporary, size_t scope)
 {
 	t_ptr	new_ptr;
 
+	new_ptr = gc_null_ptr();
 	new_ptr.address = ptr;
 	new_ptr.temporary = temporary;
+	new_ptr.scope = scope;
 	return (new_ptr);
 }
 
