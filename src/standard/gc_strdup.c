@@ -22,3 +22,14 @@ char	*gc_strdup(const char *s1)
 	ft_strlcpy(newstr, s1, ft_strlen(s1) + 1);
 	return (newstr);
 }
+
+char	*gc_strdupt(const char *s1)
+{
+	char	*newstr;
+
+	if (!s1)
+		return (NULL);
+	newstr = gc_calloct(ft_strlen(s1) + 1, sizeof(char));
+	ft_strlcpy(newstr, s1, ft_strlen(s1) + 1);
+	return (newstr);
+}
