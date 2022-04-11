@@ -44,5 +44,6 @@ int			gc_must_grow(void);
 int			gc_error(void);
 
 t_ptr		gc_null_ptr(void);
+int			gc_is_ptr_in_gc(void *ptr);
 
 #endif

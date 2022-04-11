@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:52 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/09 16:37:10 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/11 16:28:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	gc_own(void *ptr)
 {
 	t_gc	*allocator;
 
-	if (!ptr)
+	if (!ptr || gc_is_ptr_in_gc(ptr))
 		return (0);
 	allocator = gc(GC_GET, NULL);
 	allocator->new_ptr = ptr;
@@ -34,7 +34,7 @@ int	gct_own(void *ptr)
 {
 	t_gc	*allocator;
 
-	if (!ptr)
+	if (!ptr || gc_is_ptr_in_gc(ptr))
 		return (0);
 	allocator = gc(GC_GET, NULL);
 	allocator->new_ptr = ptr;
