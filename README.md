@@ -1,5 +1,7 @@
 # Leaky
 
+####Release -0.2-
+
 ---
 
 Leaky is an easy-to-use memory management library in C.\
