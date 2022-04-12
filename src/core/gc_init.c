@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:48:09 by                   #+#    #+#             */
-/*   Updated: 2022/04/09 17:02:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:09:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 	allocator->malloc_calls = 1;
 	allocator->callback = callback;
 	allocator->param = param;
-	allocator->capacity = 10;
+	allocator->capacity = 100;
 	return (1);
 }
 
