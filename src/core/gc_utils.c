@@ -21,7 +21,7 @@ t_ptr	gc_null_ptr(void)
 	return (new);
 }
 
-int	gc_is_ptr_in_gc(void *ptr)
+int	gc_contains_ptr(void *ptr)
 {
 	t_gc	*allocator;
 	size_t	i;

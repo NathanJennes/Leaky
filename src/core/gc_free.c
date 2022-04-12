@@ -6,11 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/11 14:41:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 14:54:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "readline/readline.h"
 #include "core.h"
 #include "leaky.h"
 

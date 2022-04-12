@@ -20,7 +20,7 @@ int	gc_own(void *ptr)
 {
 	t_gc	*allocator;
 
-	if (!ptr || gc_is_ptr_in_gc(ptr))
+	if (!ptr || gc_contains_ptr(ptr))
 		return (0);
 	allocator = gc(GC_GET, NULL);
 	allocator->new_ptr = ptr;
@@ -34,7 +34,7 @@ int	gct_own(void *ptr)
 {
 	t_gc	*allocator;
 
-	if (!ptr || gc_is_ptr_in_gc(ptr))
+	if (!ptr || gc_contains_ptr(ptr))
 		return (0);
 	allocator = gc(GC_GET, NULL);
 	allocator->new_ptr = ptr;

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:41:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 19:38:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:06:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,10 @@ void	*gc_alloc(size_t size)
 	void	*ptr;
 
 	allocator = gc(GC_GET, NULL);
-	if (allocator->error)
-		return (NULL);
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		gc_error();
+		gc_error("Leaky: memory allocation error!");
 		return (NULL);
 	}
 	allocator->malloc_calls++;
@@ -43,7 +41,7 @@ void	*gct_alloc(size_t size)
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		gc_error();
+		gc_error("Leaky: memory allocation error!");
 		return (NULL);
 	}
 	allocator->malloc_calls++;

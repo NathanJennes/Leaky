@@ -6,11 +6,8 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:19:41 by njennes           #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2022/04/09 20:55:08 by njennes          ###   ########.fr       */
-=======
 /*   Updated: 2022/04/11 14:58:10 by njennes          ###   ########.fr       */
->>>>>>> 9ae08a181aac2a7b4252c77b998c0ca9c5353149
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +26,12 @@
 # define FREE_FIRST 1
 # define FREE_SECOND 2
 # define FREE_BOTH 3
+
+# define LEAKY_ERROR_ALLOCATION "Leaky: Allocation error!"
+# define LEAKY_ERROR_SCOPE_OVERFLOW \
+"Leaky: scope overflow! (Do you have a gc_scope_start() inside a while() ?)"
+# define LEAKY_ERROR_SCOPE_UNDERFLOW \
+"Leaky: scope underflow! (Do you have a gc_scope_end() inside a while() ?)"
 
 typedef struct s_gc t_gc;
 
@@ -62,6 +65,7 @@ void		*gc_alloc(size_t size);
 //----
 //  Takes a pointer allocated outside the garbage collector and adds it to the list of managed pointers
 //  so that it can be freed by gc_free()/gc_destroy()/gc_clean().
+//  If an error occurs during the transfer, the pointer will be freed.
 //----
 int			gc_own(void *ptr);
 
@@ -84,9 +88,19 @@ int			gc_free(void *ptr);
 void		gc_destroy(void **ptr);
 
 //----
-//  Frees all allocated pointer by the garbage collector since the start of the program
+//  Frees all allocated pointer by the garbage collector since the start of the program.
 //----
 void		gc_clean();
+
+//----
+//  Returns 1 if an error has occured in the garbage collector.
+//----
+int			gc_failed(void);
+
+//----
+//  Returns the last error message. You should not free or modify it.
+//----
+const char	*gc_get_error(void);
 
 //--Standard--
 
@@ -115,8 +129,6 @@ size_t		gc_strarray_size(char **array);
 size_t		gc_getfootprint();
 size_t		gc_get_malloc_calls();
 
-size_t		ft_strlen(const char *s);
-
 void		*gct_alloc(size_t size);
 void		gct_free(void);
 void		*gct_calloc(size_t count, size_t size);
@@ -132,5 +144,16 @@ char		**gct_strarray_init();
 
 void		gc_scope_start(void);
 void		gc_scope_end(void);
+
+//Basics
+
+void		*ft_memset(void *b, int c, size_t len);
+void		*ft_memseti(void *b, int c, size_t len);
+void		*ft_memsetf(void *b, float c, size_t len);
+void		*ft_memcpy(void *dst, const void *src, size_t n);
+void		*ft_memmove(void *dst, const void *src, size_t len);
+void		*ft_calloc(size_t count, size_t size);
+size_t		ft_strlen(const char *s);
+size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 #endif

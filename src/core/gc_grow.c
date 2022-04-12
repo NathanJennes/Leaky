@@ -27,7 +27,7 @@ int	gc_grow(void)
 	new_ptr = ft_calloc(new_size, sizeof (t_ptr));
 	if (!new_ptr)
 	{
-		gc_error();
+		gc_error(LEAKY_ERROR_ALLOCATION);
 		return (0);
 	}
 	ft_memmove(new_ptr, allocator->pointers, allocator->capacity * sizeof(t_ptr));

@@ -62,18 +62,10 @@ static int	is_legal_scope(t_gc *allocator, int mode)
 	if (mode == SCOPE_START)
 	{
 		if (allocator->current_scope == UINT64_MAX)
-		{
-			allocator->error = "Leaky: scope overflow! "
-							   "(Do you have a gc_scope_start() inside a while() ?)";
-			return (gc_error());
-		}
+			return (gc_error(LEAKY_ERROR_SCOPE_OVERFLOW));
 		return (1);
 	}
 	if (allocator->current_scope <= 0)
-	{
-		allocator->error = "Leaky: scope underflow! "
-						   "(Do you have a gc_scope_end() inside a while() ?)";
-		return (gc_error());
-	}
+		return (gc_error(LEAKY_ERROR_SCOPE_UNDERFLOW));
 	return (1);
 }

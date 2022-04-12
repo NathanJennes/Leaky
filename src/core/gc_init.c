@@ -20,7 +20,7 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 	ft_memset(allocator, 0, sizeof(t_gc));
 	allocator->pointers = ft_calloc(allocator->capacity, sizeof(t_ptr));
 	if (!allocator->pointers)
-		return (gc_error());
+		return (gc_error(LEAKY_ERROR_ALLOCATION));
 	allocator->malloc_calls = 1;
 	allocator->callback = callback;
 	allocator->param = param;
