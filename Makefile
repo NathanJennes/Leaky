@@ -5,14 +5,14 @@ INC_DIR		:=		-I. -Isrc/basics
 CFLAGS		:=		-Wall -Werror -Wextra -o2 -MD $(INC_DIR) -fsanitize=address
 LDFLAGS		:=		-fsanitize=address
 
-CC			:=		gcc
+CC			:=		clang
 
 BASIC_DIR	:=		basics
 BASIC		:=		ft_calloc.c gc_memcpy.c gc_memmove.c gc_memset.c gc_memseti.c gc_memsetf.c gc_strlcpy.c gc_strlen.c
 
 CORE_DIR	:=		core
 CORE		:=		gc_gc.c gc_init.c gc_grow.c gc_own.c gc_error.c gc_alloc.c gc_free.c gc_destroy.c gc_clean.c		\
-					gc_utils.c gc_scope.c settings.c
+					gc_utils.c gc_scope.c settings.c error_getters.c
 
 EXTRAS_DIR	:=		extras
 EXTRAS		:=		gc_get_next_line.c gc_strappend.c gc_split.c
@@ -64,4 +64,7 @@ fclean: clean
 
 re: fclean all
 
--include: $(DEPENDS)
+tests:		$(NAME)
+	@$(MAKE) -C test re
+
+-include $(DEPENDS)
