@@ -1,53 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_alloc.c                                         :+:      :+:    :+:   */
+/*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/09 16:41:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 19:38:36 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/11 14:39:01 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/11 16:27:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "core.h"
 #include "leaky.h"
 
-void	*gc_alloc(size_t size)
+t_ptr	gc_null_ptr(void)
 {
-	t_gc	*allocator;
-	void	*ptr;
+	t_ptr	new;
 
-	allocator = gc(GC_GET, NULL);
-	if (allocator->error)
-		return (NULL);
-	ptr = malloc(size);
-	if (!ptr)
-	{
-		gc_error();
-		return (NULL);
-	}
-	allocator->malloc_calls++;
-	if (!gc_own(ptr))
-		return (NULL);
-	return (ptr);
+	ft_memset(&new, 0, sizeof (t_ptr));
+	return (new);
 }
 
-void	*gct_alloc(size_t size)
+int	gc_is_ptr_in_gc(void *ptr)
 {
 	t_gc	*allocator;
-	void	*ptr;
+	size_t	i;
 
 	allocator = gc(GC_GET, NULL);
-	ptr = malloc(size);
-	if (!ptr)
-	{
-		gc_error();
-		return (NULL);
-	}
-	allocator->malloc_calls++;
-	if (!gct_own(ptr))
-		return (NULL);
-	return (ptr);
+	if (allocator->capacity == 0)
+		return (0);
+	i = 0;
+	while (i < allocator->capacity && allocator->pointers[i].address != ptr)
+		i++;
+	if (i >= allocator->capacity || allocator->pointers[i].address == NULL)
+		return (0);
+	return (1);
 }

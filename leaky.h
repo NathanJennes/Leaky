@@ -6,7 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 14:19:41 by njennes           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/04/09 20:55:08 by njennes          ###   ########.fr       */
+=======
+/*   Updated: 2022/04/11 14:58:10 by njennes          ###   ########.fr       */
+>>>>>>> 9ae08a181aac2a7b4252c77b998c0ca9c5353149
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +68,7 @@ int			gc_own(void *ptr);
 //----
 //  Same as gc_own() but it adds it as a temporary pointer.
 //----
-int			gc_ownt(void *ptr);
+int			gct_own(void *ptr);
 
 //----
 //  Frees a pointer allocating by the garbage collector.
@@ -108,8 +112,25 @@ char		**gc_strarray_from(char **other, size_t size);
 char		**gc_strarray_fromstr(char *str);
 size_t		gc_strarray_size(char **array);
 
-//Debug
 size_t		gc_getfootprint();
 size_t		gc_get_malloc_calls();
+
+size_t		ft_strlen(const char *s);
+
+void		*gct_alloc(size_t size);
+void		gct_free(void);
+void		*gct_calloc(size_t count, size_t size);
+char		*gct_itoa(int n);
+char		*gct_strdup(const char *s1);
+char		*gct_strjoin(char *s1, char *s2, int to_free);
+char		*gct_substr(char const *s, unsigned int start, size_t len);
+char		**gct_strarray_append(char **array, char *str);
+char		*gct_strarray_asstr(char **array);
+char		**gct_strarray_from(char **other, size_t size);
+char		**gct_strarray_fromstr(char *str);
+char		**gct_strarray_init();
+
+void		gc_scope_start(void);
+void		gc_scope_end(void);
 
 #endif
