@@ -15,10 +15,10 @@ CORE		:=		gc_gc.c gc_init.c gc_grow.c gc_own.c gc_error.c gc_alloc.c gc_free.c g
 					gc_utils.c gc_scope.c
 
 EXTRAS_DIR	:=		extras
-EXTRAS		:=		gc_get_next_line.c gc_split_free.c gc_strappend.c
+EXTRAS		:=		gc_get_next_line.c gc_strappend.c gc_split.c
 
 STD_DIR		:=		standard
-STD			:=		gc_calloc.c gc_itoa.c gc_split.c gc_strdup.c gc_strjoin.c gc_substr.c
+STD			:=		gc_calloc.c gc_itoa.c gc_strdup.c gc_strjoin.c gc_substr.c
 
 STRARR_DIR	:=		string_array
 STRARR		:=		gc_strarray_append.c gc_strarray_asstr.c gc_strarray_free.c gc_strarray_from.c						\

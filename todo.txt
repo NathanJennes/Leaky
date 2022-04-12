@@ -1,0 +1,2 @@
+More error handling for debbuging:
+-   freeing a pointer that does not belong to leaky sets an error message that can be retrieved

@@ -12,6 +12,7 @@ It is compatible with 42's norminette.
 - Automatically checks and handles allocation error
 - Contains most used libc memory allocating functions
 - Make temporary allocations
+- Make scope based allocations
 - Clean all remaining allocated objects with a single function call
 - Managed string arrays
 - Handles memory allocated outside your program

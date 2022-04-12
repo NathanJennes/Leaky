@@ -15,9 +15,6 @@
 
 # include <stddef.h>
 
-# define TRUE 1
-# define FALSE 0
-
 # define SCOPE_START 1
 # define SCOPE_END -1
 
