@@ -17,7 +17,7 @@ t_ptr	gc_null_ptr(void)
 {
 	t_ptr	new;
 
-	ft_memset(&new, 0, sizeof (t_ptr));
+	gc_memset(&new, 0, sizeof(t_ptr));
 	return (new);
 }
 

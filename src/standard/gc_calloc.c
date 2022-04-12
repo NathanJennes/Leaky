@@ -20,7 +20,7 @@ void	*gc_calloc(size_t count, size_t size)
 	ptr = gc_alloc(count * size);
 	if (!ptr)
 		return (NULL);
-	ft_memset(ptr, 0, count * size);
+	gc_memset(ptr, 0, count * size);
 	return (ptr);
 }
 
@@ -31,6 +31,6 @@ void	*gct_calloc(size_t count, size_t size)
 	ptr = gct_alloc(count * size);
 	if (!ptr)
 		return (NULL);
-	ft_memset(ptr, 0, count * size);
+	gc_memset(ptr, 0, count * size);
 	return (ptr);
 }

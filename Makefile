@@ -8,7 +8,7 @@ LDFLAGS		:=		-fsanitize=address
 CC			:=		gcc
 
 BASIC_DIR	:=		basics
-BASIC		:=		ft_calloc.c ft_memcpy.c ft_memmove.c ft_memset.c ft_memseti.c ft_memsetf.c ft_strlcpy.c ft_strlen.c
+BASIC		:=		ft_calloc.c gc_memcpy.c gc_memmove.c gc_memset.c gc_memseti.c gc_memsetf.c gc_strlcpy.c gc_strlen.c
 
 CORE_DIR	:=		core
 CORE		:=		gc_gc.c gc_init.c gc_grow.c gc_own.c gc_error.c gc_alloc.c gc_free.c gc_destroy.c gc_clean.c		\

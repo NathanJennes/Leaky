@@ -12,7 +12,7 @@
 
 #include "leaky.h"
 
-char	**gc_strarray_init()
+char	**gc_strarray_init(void)
 {
 	char	**array;
 
@@ -20,7 +20,7 @@ char	**gc_strarray_init()
 	return (array);
 }
 
-char	**gct_strarray_init()
+char	**gct_strarray_init(void)
 {
 	char	**array;
 

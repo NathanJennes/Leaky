@@ -6,12 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 14:58:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:23:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaky.h"
-#include "basics.h"
 
 static char	**free_array(char **array, size_t size);
 
@@ -25,7 +24,7 @@ char	**gc_strarray_from(char **other, size_t size)
 	array = gc_calloc(size + 1, sizeof (char *));
 	if (!array)
 		return (NULL);
-	ft_memmove(array, other, size * sizeof (char *));
+	gc_memmove(array, other, size * sizeof(char *));
 	i = 0;
 	while (i < size)
 	{
@@ -47,7 +46,7 @@ char	**gct_strarray_from(char **other, size_t size)
 	array = gct_calloc(size + 1, sizeof(char *));
 	if (!array)
 		return (NULL);
-	ft_memmove(array, other, size * sizeof (char *));
+	gc_memmove(array, other, size * sizeof(char *));
 	i = 0;
 	while (i < size)
 	{

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:42:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/09 16:50:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:31:13 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,11 @@ int	gc_grow(void)
 	new_ptr = ft_calloc(new_size, sizeof (t_ptr));
 	if (!new_ptr)
 	{
-		gc_error(LEAKY_ERROR_ALLOCATION);
+		gc_error(gc_error_allocation());
 		return (0);
 	}
-	ft_memmove(new_ptr, allocator->pointers, allocator->capacity * sizeof(t_ptr));
+	gc_memmove(new_ptr, allocator->pointers,
+		allocator->capacity * sizeof(t_ptr));
 	free(allocator->pointers);
 	allocator->pointers = new_ptr;
 	allocator->capacity = new_size;

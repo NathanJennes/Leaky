@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:48:09 by                   #+#    #+#             */
-/*   Updated: 2022/04/12 15:09:13 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:23:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 {
 	if (!allocator)
 		return (0);
-	ft_memset(allocator, 0, sizeof(t_gc));
+	gc_memset(allocator, 0, sizeof(t_gc));
 	allocator->pointers = ft_calloc(allocator->capacity, sizeof(t_ptr));
 	if (!allocator->pointers)
-		return (gc_error(LEAKY_ERROR_ALLOCATION));
+		return (gc_error(gc_error_allocation()));
 	allocator->malloc_calls = 1;
 	allocator->callback = callback;
 	allocator->param = param;
@@ -28,7 +28,7 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 	return (1);
 }
 
-size_t	gc_getfootprint()
+size_t	gc_getfootprint(void)
 {
 	int		footprint;
 	size_t	i;
@@ -46,7 +46,7 @@ size_t	gc_getfootprint()
 	return (footprint);
 }
 
-size_t	gc_get_malloc_calls()
+size_t	gc_get_malloc_calls(void)
 {
 	t_gc	*allocator;
 

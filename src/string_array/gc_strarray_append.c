@@ -6,12 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 14:59:59 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:23:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaky.h"
-#include "basics.h"
 
 char	**gc_strarray_append(char **array, char *str)
 {
@@ -24,7 +23,7 @@ char	**gc_strarray_append(char **array, char *str)
 	new_array = gc_calloc(size + 2, sizeof (char *));
 	if (!new_array)
 		return (array);
-	ft_memmove(new_array, array, size * sizeof (char *));
+	gc_memmove(new_array, array, size * sizeof(char *));
 	new_array[size] = gc_strdup(str);
 	if (!new_array[size])
 	{
@@ -46,7 +45,7 @@ char	**gct_strarray_append(char **array, char *str)
 	new_array = gct_calloc(size + 2, sizeof(char *));
 	if (!new_array)
 		return (array);
-	ft_memmove(new_array, array, size * sizeof (char *));
+	gc_memmove(new_array, array, size * sizeof(char *));
 	new_array[size] = gct_strdup(str);
 	if (!new_array[size])
 	{

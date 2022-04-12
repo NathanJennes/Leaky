@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 14:12:14 by njennes           #+#    #+#             */
-/*   Updated: 2021/11/04 14:12:21 by njennes          ###   ########lyon.fr   */
+/*   Created: 2021/11/04 14:11:36 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/09 14:22:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	*ft_memset(void *b, int c, size_t len)
+void	*gc_memcpy(void *dst, const void *src, size_t n)
 {
-	size_t			i;
-	unsigned char	*bcpy;
+	size_t				i;
+	unsigned char		*dstcpy;
+	const unsigned char	*srccpy;
 
-	bcpy = b;
+	if (!dst && !src)
+		return (NULL);
+	dstcpy = dst;
+	srccpy = src;
 	i = 0;
-	while (i < len)
+	while (i < n)
 	{
-		bcpy[i] = (unsigned char)c;
+		dstcpy[i] = srccpy[i];
 		i++;
 	}
-	return (b);
+	return (dst);
 }

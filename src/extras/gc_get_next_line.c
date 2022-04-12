@@ -35,11 +35,11 @@ static char	*find_line(int fd, char *buffer, char **line)
 	int		bytes_read;
 	int		add_line_result;
 
-	if (ft_strlen(buffer) == 0)
+	if (gc_strlen(buffer) == 0)
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 	else
-		bytes_read = ft_strlen(buffer);
-	if (ft_strlen(*line) > 0 && bytes_read == 0)
+		bytes_read = gc_strlen(buffer);
+	if (gc_strlen(*line) > 0 && bytes_read == 0)
 		return (*line);
 	if (bytes_read <= 0)
 	{
@@ -71,15 +71,15 @@ static	int	ft_add_to_line(char **line, char *buffer, int bytes_read)
 	char	*new_line;
 
 	new_length = ft_get_line_length(buffer, bytes_read);
-	new_line = gc_calloc(ft_strlen(*line) + new_length + 1, sizeof(char));
-	ft_memmove(new_line, *line, ft_strlen(*line));
-	ft_memmove(&new_line[ft_strlen(*line)], buffer, new_length);
-	new_line[ft_strlen(*line) + new_length] = 0;
+	new_line = gc_calloc(gc_strlen(*line) + new_length + 1, sizeof(char));
+	gc_memmove(new_line, *line, gc_strlen(*line));
+	gc_memmove(&new_line[gc_strlen(*line)], buffer, new_length);
+	new_line[gc_strlen(*line) + new_length] = 0;
 	gc_free(*line);
 	*line = new_line;
 	if (new_length < bytes_read || buffer[new_length - 1] == '\n')
 	{
-		ft_memmove(buffer, &buffer[new_length], bytes_read - new_length);
+		gc_memmove(buffer, &buffer[new_length], bytes_read - new_length);
 		buffer[bytes_read - new_length] = 0;
 		return (1);
 	}

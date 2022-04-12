@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_clean.c                                         :+:      :+:    :+:   */
+/*   error_getters.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 14:34:20 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:34:38 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/12 15:28:20 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/12 15:30:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "core.h"
-#include "leaky.h"
-
-void	gc_clean(void)
+const char	*gc_error_allocation(void)
 {
-	t_gc	*allocator;
-	size_t	i;
+	return ("Leaky: Allocation error!");
+}
 
-	allocator = gc(GC_GET, NULL);
-	if (allocator->capacity == 0)
-		return ;
-	i = 0;
-	while (i < allocator->capacity)
-	{
-		if (allocator->pointers[i].address)
-			free(allocator->pointers[i].address);
-		i++;
-	}
-	free(allocator->pointers);
-	allocator->capacity = 0;
+const char	*gc_error_scope_overflow(void)
+{
+	return ("Leaky: scope overflow! "
+		"(Do you have a gc_scope_start() inside a while() ?)");
+}
+
+const char	*gc_error_scope_underflow(void)
+{
+	return ("Leaky: scope underflow! "
+		"(Do you have a gc_scope_end() inside a while() ?)");
 }

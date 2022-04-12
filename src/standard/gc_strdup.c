@@ -18,10 +18,10 @@ char	*gc_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	newstr = gc_calloc(ft_strlen(s1) + 1, sizeof(char));
+	newstr = gc_calloc(gc_strlen(s1) + 1, sizeof(char));
 	if (!newstr)
 		return (NULL);
-	ft_strlcpy(newstr, s1, ft_strlen(s1) + 1);
+	gc_strlcpy(newstr, s1, gc_strlen(s1) + 1);
 	return (newstr);
 }
 
@@ -31,9 +31,9 @@ char	*gct_strdup(const char *s1)
 
 	if (!s1)
 		return (NULL);
-	newstr = gct_calloc(ft_strlen(s1) + 1, sizeof(char));
+	newstr = gct_calloc(gc_strlen(s1) + 1, sizeof(char));
 	if (!newstr)
 		return (NULL);
-	ft_strlcpy(newstr, s1, ft_strlen(s1) + 1);
+	gc_strlcpy(newstr, s1, gc_strlen(s1) + 1);
 	return (newstr);
 }

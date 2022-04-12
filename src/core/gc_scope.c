@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:25 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 16:58:03 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 15:11:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ static int	is_legal_scope(t_gc *allocator, int mode)
 	if (mode == SCOPE_START)
 	{
 		if (allocator->current_scope == UINT64_MAX)
-			return (gc_error(LEAKY_ERROR_SCOPE_OVERFLOW));
+			return (gc_error(gc_error_scope_overflow()));
 		return (1);
 	}
 	if (allocator->current_scope <= 0)
-		return (gc_error(LEAKY_ERROR_SCOPE_UNDERFLOW));
+		return (gc_error(gc_error_scope_underflow()));
 	return (1);
 }

@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_memseti.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 14:25:42 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/09 14:38:21 by njennes          ###   ########.fr       */
+/*   Created: 2022/01/22 17:04:27 by                   #+#    #+#             */
+/*   Updated: 2022/01/22 17:04:51 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "leaky.h"
+#include <stddef.h>
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+void	*gc_memseti(void *b, int c, size_t len)
 {
 	size_t	i;
+	int		*bcpy;
 
+	bcpy = b;
 	i = 0;
-	while (i + 1 < dstsize && src[i])
+	while (i < len)
 	{
-		dst[i] = src[i];
+		bcpy[i] = c;
 		i++;
 	}
-	if (dstsize > 0)
-		dst[i] = 0;
-	return (ft_strlen(src));
+	return (b);
 }

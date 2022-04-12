@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memseti.c                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By:  <>                                        +#+  +:+       +#+        */
+/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/22 17:04:27 by                   #+#    #+#             */
-/*   Updated: 2022/01/22 17:04:51 by                  ###   ########.fr       */
+/*   Created: 2021/11/04 14:24:17 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/09 14:31:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
-void	*ft_memseti(void *b, int c, size_t len)
+size_t	gc_strlen(const char *s)
 {
-	size_t	i;
-	int		*bcpy;
+	int	i;
 
-	bcpy = b;
 	i = 0;
-	while (i < len)
-	{
-		bcpy[i] = c;
+	while (s[i])
 		i++;
-	}
-	return (b);
+	return (i);
 }

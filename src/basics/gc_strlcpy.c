@@ -1,30 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memmove.c                                       :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 14:11:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/09 14:23:06 by njennes          ###   ########.fr       */
+/*   Created: 2021/11/04 14:25:42 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/09 14:38:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
 #include "leaky.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t len)
+size_t	gc_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	unsigned char	*dstcpy;
-	unsigned char	*srccpy;
+	size_t	i;
 
-	if (!dst && !src)
-		return (dst);
-	dstcpy = (unsigned char *)dst;
-	srccpy = (unsigned char *)src;
-	if (dst < src)
-		return (ft_memcpy(dst, src, len));
-	while (len-- > 0)
-		dstcpy[len] = srccpy[len];
-	return (dst);
+	i = 0;
+	while (i + 1 < dstsize && src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	if (dstsize > 0)
+		dst[i] = 0;
+	return (gc_strlen(src));
 }

@@ -17,9 +17,9 @@ char	*gc_strappend(char *str, char c)
 	size_t	len;
 	char	*new_str;
 
-	len = ft_strlen(str);
+	len = gc_strlen(str);
 	new_str = gc_calloc(len + 2, sizeof(char));
-	ft_memmove(new_str, str, len * sizeof (char));
+	gc_memmove(new_str, str, len * sizeof(char));
 	new_str[len] = c;
 	gc_free(str);
 	return (new_str);

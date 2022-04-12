@@ -25,12 +25,12 @@ char	*gc_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (start > ft_strlen(s))
+	if (start > gc_strlen(s))
 		return (gc_strdup(""));
-	new = gc_calloc(ft_min(ft_strlen(s) - start, len) + 1, sizeof(char));
+	new = gc_calloc(ft_min(gc_strlen(s) - start, len) + 1, sizeof(char));
 	if (!new)
 		return (NULL);
-	ft_strlcpy(new, &s[start], ft_min(ft_strlen(s) - start, len) + 1);
+	gc_strlcpy(new, &s[start], ft_min(gc_strlen(s) - start, len) + 1);
 	return (new);
 }
 
@@ -40,11 +40,11 @@ char	*gct_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (start > ft_strlen(s))
+	if (start > gc_strlen(s))
 		return (gct_strdup(""));
-	new = gct_calloc(ft_min(ft_strlen(s) - start, len) + 1, sizeof(char));
+	new = gct_calloc(ft_min(gc_strlen(s) - start, len) + 1, sizeof(char));
 	if (!new)
 		return (NULL);
-	ft_strlcpy(new, &s[start], ft_min(ft_strlen(s) - start, len) + 1);
+	gc_strlcpy(new, &s[start], ft_min(gc_strlen(s) - start, len) + 1);
 	return (new);
 }

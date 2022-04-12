@@ -12,7 +12,7 @@
 
 #include <stddef.h>
 
-void	*ft_memsetf(void *b, float c, size_t len)
+void	*gc_memsetf(void *b, float c, size_t len)
 {
 	size_t	i;
 	float	*bcpy;

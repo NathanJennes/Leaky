@@ -69,7 +69,7 @@ static int	ft_get_words(char *str, int count, char **tab)
 		tab[i] = gc_strdup(str);
 		if (!tab[i])
 			break ;
-		str += ft_strlen(str);
+		str += gc_strlen(str);
 		i++;
 	}
 	if (i < count)
