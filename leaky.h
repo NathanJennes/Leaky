@@ -18,10 +18,6 @@
 
 # define BUFFER_SIZE 50
 
-# define GC_GET 1
-# define GC_SET_CALLBACK 2
-# define GC_SET_CALLBACK_PARAM 3
-
 # define FREE_NONE 0
 # define FREE_FIRST 1
 # define FREE_SECOND 2
@@ -44,19 +40,52 @@ typedef struct s_gc	t_gc;
 //--------//
 
 //----
-//  Interface for setting up Leaky's behavior.
+//  Sets the error callback of leaky.
 //--
-//  gc(GC_SET_CALLBACK, your_callback_function)
-//    To set allocation error callback.
-//    This function must return an int and take a pointer as parameter.
-//    It will be called upon any allocation error.
-//    It is recommended to save/free all system resources,
-//      then call gc_clean() and exit your program in your callback.
-//--
-//  gc(GC_SET_CALLBACK_PARAM, your param)
-//    To set the parameter that will be passed to the callback.
+//  If an error occur (allocation error, ...), callback will be called.
+//  It is strongly recommended to set one.
+//  It is strongly recommended that you save/free all other ressources that
+//    you may be using, then call gc_clean() and then exit the program.
 //----
-t_gc		*gc(int mode, void *param);
+void		gc_set_callback(int (*callback)(void *));
+
+//----
+//  Sets the parameter that wil be given when calling the error callback.
+//--
+//  This parameter is optional.
+//----
+void		gc_set_callback_param(void *param);
+
+//----
+//  Toggles on or off automatic cleaning upon error.
+//--
+//  This parameter is optional.
+//--
+//  By default, Leaky won't do any king of automatic cleaning
+//    if an error occurs. This is to let you handle your resources as you want.
+//    For example, you might need to do some things with your data before
+//    exiting in the error callback.
+//  If you enable this behavior, all allocated resources will be freed
+//    right after an error occurs, and before the error callback is called.
+//----
+void		gc_clean_on_error(int clean_on_error);
+
+//----
+//  Sets the base capacity in allocations of Leaky.
+//--
+//  This parameter is optional.
+//--
+//  Capacity of allocations is automatically handled by Leaky
+//    (it grows as your program requests more allocations).
+//  This parameter allows you to more precisely configure Leaky
+//    for your use case.
+//  If your program allocated a lot of memory, you might set this number to
+//    something in the thousands. On the other hand you may want to set it to
+//    a lower number.
+//  The base capacity is 100. That means that Leaky can hold 100 pointers at a
+//    time before needing to do any king of reallocation.
+//----
+void		gc_set_default_capacity(size_t capacity);
 
 //----
 //  Works like malloc().

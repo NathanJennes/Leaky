@@ -3,4 +3,5 @@ obj/
 
 *.o
 *.d
+*.a
 libleaky.a

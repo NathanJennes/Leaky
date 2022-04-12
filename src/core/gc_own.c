@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:52 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 14:22:52 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:13:31 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	gc_own(void *ptr)
 
 	if (!ptr || gc_contains_ptr(ptr))
 		return (0);
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
 		return (0);
@@ -36,7 +36,7 @@ int	gct_own(void *ptr)
 
 	if (!ptr || gc_contains_ptr(ptr))
 		return (0);
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
 		return (0);
