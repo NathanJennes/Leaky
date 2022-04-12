@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 14:34:20 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/11 14:34:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:11:38 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	gc_clean(void)
 	t_gc	*allocator;
 	size_t	i;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	if (allocator->capacity == 0)
 		return ;
 	i = 0;
@@ -30,5 +30,5 @@ void	gc_clean(void)
 		i++;
 	}
 	free(allocator->pointers);
-	allocator->capacity = 0;
+	gc_memset(allocator, 0, sizeof (t_gc));
 }

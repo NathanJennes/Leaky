@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 15:26:45 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:25:02 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,13 @@ typedef struct s_gc
 	int			(*callback)(void *);
 	void		*param;
 	const char	*error;
+	int			clean_on_error;
 }			t_gc;
 
-int			gc_init(t_gc *gc, int (*callback)(void *), void *param);
+t_gc		*gc_get(void);
+
+int			gc_init(t_gc *gc, int (*callback)(void *),
+				void *param);
 
 int			gc_grow(void);
 int			gc_must_grow(void);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:42:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 15:31:13 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:14:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	gc_grow(void)
 	t_ptr	*new_ptr;
 	size_t	new_size;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	new_size = get_new_size(allocator);
 	new_ptr = ft_calloc(new_size, sizeof (t_ptr));
 	if (!new_ptr)
@@ -43,7 +43,7 @@ int	gc_must_grow(void)
 {
 	t_gc	*allocator;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	if (allocator->ptrs_count >= allocator->capacity)
 		return (1);
 	return (0);

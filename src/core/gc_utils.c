@@ -26,7 +26,7 @@ int	gc_contains_ptr(void *ptr)
 	t_gc	*allocator;
 	size_t	i;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	if (allocator->capacity == 0)
 		return (0);
 	i = 0;

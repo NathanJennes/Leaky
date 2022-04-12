@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:25 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 15:11:17 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:32:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	gc_scope_start(void)
 {
 	t_gc	*allocator;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	if (!is_legal_scope(allocator, SCOPE_START))
 		return ;
 	allocator->current_scope++;
@@ -31,7 +31,7 @@ void	gc_scope_end(void)
 {
 	t_gc	*allocator;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	if (!is_legal_scope(allocator, SCOPE_END))
 		return ;
 	free_scope(allocator, allocator->current_scope);

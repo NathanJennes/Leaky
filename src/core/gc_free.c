@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/12 18:04:55 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/12 19:14:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	gc_free(void *ptr)
 	t_gc	*allocator;
 	size_t	i;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	if (allocator->capacity == 0)
 		return (0);
 	i = 0;
@@ -41,7 +41,7 @@ void	gct_free(void)
 	t_gc	*allocator;
 	size_t	i;
 
-	allocator = gc(GC_GET, NULL);
+	allocator = gc_get();
 	i = 0;
 	while (i < allocator->capacity)
 	{
