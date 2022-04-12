@@ -1,6 +1,6 @@
 NAME		:=		libleaky.a
 
-INC_DIR		:=		-I.
+INC_DIR		:=		-I. -Isrc/basics
 
 CFLAGS		:=		-Wall -Werror -Wextra -o2 -MD $(INC_DIR) -fsanitize=address
 LDFLAGS		:=		-fsanitize=address

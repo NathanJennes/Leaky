@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "leaky.h"
+#include "basics.h"
 
 char	**gc_strarray_append(char **array, char *str)
 {

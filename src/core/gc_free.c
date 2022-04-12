@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/09 17:07:32 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/09 20:36:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,26 @@
 #include "leaky.h"
 #include <stdlib.h>
 
-void	gc_free(void *ptr)
+int	gc_free(void *ptr)
 {
 	t_gc	*allocator;
 	size_t	i;
 
 	allocator = gc(GC_GET, NULL);
 	if (allocator->capacity == 0)
-		return ;
+		return (0);
 	i = 0;
 	while (i < allocator->capacity && allocator->pointers[i].address != ptr)
 		i++;
 	if (i >= allocator->capacity || allocator->pointers[i].address == NULL)
-		return ;
+		return (0);
 	else
 		allocator->pointers[i].address = NULL;
 	if (i < allocator->first_free)
 		allocator->first_free = i;
 	allocator->ptrs_count--;
 	free(ptr);
+	return (1);
 }
 
 void	gc_destroy(void **ptr)

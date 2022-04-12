@@ -11,26 +11,9 @@
 /* ************************************************************************** */
 
 #include "leaky.h"
+#include "basics.h"
 
-static void	copy_into_str(char **array, size_t arr_size, char *str)
-{
-	size_t	str_size;
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	j = 0;
-	while (i < arr_size)
-	{
-		str_size = ft_strlen(array[i]);
-		ft_memmove(&str[j], array[i], str_size);
-		j += str_size;
-		str[j] = ' ';
-		j++;
-		i++;
-	}
-	str[j - 1] = 0;
-}
+static void	copy_into_str(char **array, size_t arr_size, char *str);
 
 char	*gc_strarray_asstr(char **array)
 {
@@ -52,4 +35,24 @@ char	*gc_strarray_asstr(char **array)
 	str = gc_calloc(total_size, sizeof (char));
 	copy_into_str(array, arr_size, str);
 	return (str);
+}
+
+static void	copy_into_str(char **array, size_t arr_size, char *str)
+{
+	size_t	str_size;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	j = 0;
+	while (i < arr_size)
+	{
+		str_size = ft_strlen(array[i]);
+		ft_memmove(&str[j], array[i], str_size);
+		j += str_size;
+		str[j] = ' ';
+		j++;
+		i++;
+	}
+	str[j - 1] = 0;
 }

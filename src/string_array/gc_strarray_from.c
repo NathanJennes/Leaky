@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "leaky.h"
+#include "basics.h"
 
 char	**gc_strarray_from(char **other, size_t size)
 {
