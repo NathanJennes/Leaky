@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 19:25:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:57:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 
 # define SCOPE_START 1
 # define SCOPE_END -1
+
+# define LK_MAX_ERRORS 1000
 
 typedef struct s_ptr
 {
@@ -36,8 +38,10 @@ typedef struct s_gc
 	size_t		current_scope;
 	int			(*callback)(void *);
 	void		*param;
-	const char	*error;
+	const char	*last_error;
+	char		**errors;
 	int			clean_on_error;
+	int 		ignore_warnings;
 }			t_gc;
 
 t_gc		*gc_get(void);
@@ -49,6 +53,7 @@ int			gc_grow(void);
 int			gc_must_grow(void);
 
 int			gc_error(const char *msg);
+int			gc_add_error(const char *msg);
 
 t_ptr		gc_null_ptr(void);
 int			gc_contains_ptr(void *ptr);

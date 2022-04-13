@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_getters.c                                    :+:      :+:    :+:   */
+/*   gc_get_errors2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 15:28:20 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 15:30:11 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/13 16:10:56 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/13 16:16:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-const char	*gc_error_allocation(void)
+static char	*gc_error_clean_scope_left(void)
 {
-	return ("Leaky: Allocation error!");
+	return ("Leaky: A call to gc_clean() was done but "
+			"some scopes weren't ended");
 }
 
-const char	*gc_error_scope_overflow(void)
+static char	*gc_error_no_exit_callback(void)
 {
-	return ("Leaky: scope overflow! "
-		"(Do you have a gc_scope_start() inside a while() ?)");
-}
-
-const char	*gc_error_scope_underflow(void)
-{
-	return ("Leaky: scope underflow! "
-		"(Do you have a gc_scope_end() inside a while() ?)");
+	return ("Leaky: A fatal error occurred but "
+			"your callback didn't exit the program");
 }
