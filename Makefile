@@ -5,7 +5,7 @@ INC_DIR		:=		-I. -Isrc/basics
 CFLAGS		:=		-Wall -Werror -Wextra -o2 -MD $(INC_DIR) -fsanitize=address
 LDFLAGS		:=		-fsanitize=address
 
-CC			:=		gcc
+CC			:=		clang
 
 BASIC_DIR	:=		basics
 BASIC		:=		ft_calloc.c gc_memcpy.c gc_memmove.c gc_memset.c gc_memseti.c gc_memsetf.c gc_strlcpy.c gc_strlen.c

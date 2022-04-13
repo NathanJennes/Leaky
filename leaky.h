@@ -439,7 +439,7 @@ const char	*gc_error_clean_empty(void);
 //  Example:
 //    if (gc_get_last_error() == gc_error_clean_scope_left()) ...
 //----
-static char	*gc_error_clean_scope_left(void);
+const char	*gc_error_clean_scope_left(void);
 
 //----
 //  Get the error message when a fatal error occurs but your callback
@@ -451,7 +451,7 @@ static char	*gc_error_clean_scope_left(void);
 //  Example:
 //    if (gc_get_last_error() == gc_error_no_exit_callback()) ...
 //----
-static char	*gc_error_no_exit_callback(void);
+const char	*gc_error_no_exit_callback(void);
 
 //----
 //  Get the error message when a setting was changed but
@@ -463,7 +463,7 @@ static char	*gc_error_no_exit_callback(void);
 //  Example:
 //    if (gc_get_last_error() == gc_error_settings_after_allocation()) ...
 //----
-static char	*gc_error_settings_after_allocation(void);
+const char	*gc_error_settings_after_allocation(void);
 
 //----
 //  Returns the current number of allocated pointers.

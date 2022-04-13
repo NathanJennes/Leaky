@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-static char	*gc_error_clean_scope_left(void)
+const char	*gc_error_clean_scope_left(void)
 {
 	return ("Leaky: A call to gc_clean() was done but "
 			"some scopes weren't ended");
 }
 
-static char	*gc_error_no_exit_callback(void)
+const char	*gc_error_no_exit_callback(void)
 {
 	return ("Leaky: A fatal error occurred but "
 			"your callback didn't exit the program");
 }
 
-static char	*gc_error_settings_after_allocation(void)
+const char	*gc_error_settings_after_allocation(void)
 {
 	return ("Leaky: A setting was changed but an allocation already occurred");
 }

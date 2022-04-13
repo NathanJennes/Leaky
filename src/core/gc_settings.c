@@ -68,5 +68,5 @@ void	gc_ignore_warnings(int ignore_warnings)
 	if (!can_change_settings())
 		return ;
 	allocator = gc_get();
-	allocator->ignore_warnings = LK_TRUE;
+	allocator->ignore_warnings = ignore_warnings;
 }
