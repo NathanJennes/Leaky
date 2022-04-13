@@ -454,6 +454,18 @@ static char	*gc_error_clean_scope_left(void);
 static char	*gc_error_no_exit_callback(void);
 
 //----
+//  Get the error message when a setting was changed but
+//    an allocation already occurred.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_settings_after_allocation()) ...
+//----
+static char	*gc_error_settings_after_allocation(void);
+
+//----
 //  Returns the current number of allocated pointers.
 //----
 size_t		gc_getfootprint(void);

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/13 15:57:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/13 16:14:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			gc_must_grow(void);
 
 int			gc_error(const char *msg);
 int			gc_add_error(const char *msg);
+int			can_change_settings(void);
 
 t_ptr		gc_null_ptr(void);
 int			gc_contains_ptr(void *ptr);
