@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:48:09 by                   #+#    #+#             */
-/*   Updated: 2022/04/12 19:25:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:47:01 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 	allocator->malloc_calls = 1;
 	allocator->callback = callback;
 	allocator->param = param;
+	allocator->errors = gc_strarray_init();
 	return (1);
 }
 

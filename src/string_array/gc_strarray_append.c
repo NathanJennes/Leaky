@@ -6,13 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 15:23:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:47:49 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "leaky.h"
 
-char	**gc_strarray_append(char **array, char *str)
+char	**gc_strarray_append(char **array, const char *str)
 {
 	size_t	size;
 	char	**new_array;
@@ -34,7 +34,7 @@ char	**gc_strarray_append(char **array, char *str)
 	return (new_array);
 }
 
-char	**gct_strarray_append(char **array, char *str)
+char	**gct_strarray_append(char **array, const char *str)
 {
 	size_t	size;
 	char	**new_array;

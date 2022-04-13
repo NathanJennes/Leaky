@@ -152,11 +152,6 @@ void		gc_clean(void);
 int			gc_failed(void);
 
 //----
-//  Returns the last error message. You should not free or modify it.
-//----
-const char	*gc_get_error(void);
-
-//----
 //  Starts a new scope.
 //--
 //  Scopes can be started and ended anywhere.
@@ -316,14 +311,14 @@ char		**gct_strarray_init(void);
 //    If the old one (pointed to by the parameter array)
 //    was allocated by Leaky, it will be freed and should not be used
 //----
-char		**gc_strarray_append(char **array, char *str);
+char		**gc_strarray_append(char **array, const char *str);
 
 //----
 //  Same as gc_strarray_append() but the array created is temporary.
 //--
 //  Temporary pointers can all be freed at any point by a call to gct_free().
 //----
-char		**gct_strarray_append(char **array, char *str);
+char		**gct_strarray_append(char **array, const char *str);
 
 //----
 //  Creates a string from the concatenation of all strings in array.
@@ -371,14 +366,26 @@ char		**gct_strarray_fromstr(char *str);
 //----
 size_t		gc_strarray_size(char **array);
 
-//--Debug--
+//---------//
+//--Debug--//
+//---------//
+
+//----
+//  Returns the last error message. You should not free or modify it.
+//----
+const char	*gc_get_last_error(void);
+
+//----
+//  Returns an array of error strings. You should not free or modify it.
+//----
+const char	**gc_get_errors(void);
 
 //----
 //  Get the error message when an allocation crashes.
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
-//    if (gc_get_error() == gc_error_allocation()) ...
+//    if (gc_get_last_error() == gc_error_allocation()) ...
 //----
 const char	*gc_error_allocation(void);
 
@@ -387,7 +394,7 @@ const char	*gc_error_allocation(void);
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
-//    if (gc_get_error() == gc_error_scope_overflow()) ...
+//    if (gc_get_last_error() == gc_error_scope_overflow()) ...
 //----
 const char	*gc_error_scope_overflow(void);
 
@@ -397,9 +404,66 @@ const char	*gc_error_scope_overflow(void);
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
-//    if (gc_get_error() == gc_error_scope_underflow()) ...
+//    if (gc_get_last_error() == gc_error_scope_underflow()) ...
 //----
 const char	*gc_error_scope_underflow(void);
+
+//----
+//  Get the error message when you get too many errors.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_errors_overflow()) ...
+//----
+const char	*gc_error_errors_overflow(void);
+
+//----
+//  Get the error message when you call gc_clean() without allocating anything.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_clean_empty()) ...
+//----
+const char	*gc_error_clean_empty(void);
+
+//----
+//  Get the error message when you call gc_clean() without ending all scopes.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_clean_scope_left()) ...
+//----
+static char	*gc_error_clean_scope_left(void);
+
+//----
+//  Get the error message when a fatal error occurs but your callback
+//    doesn't exit the program.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_no_exit_callback()) ...
+//----
+static char	*gc_error_no_exit_callback(void);
+
+//----
+//  Get the error message when a setting was changed but
+//    an allocation already occurred.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_settings_after_allocation()) ...
+//----
+static char	*gc_error_settings_after_allocation(void);
 
 //----
 //  Returns the current number of allocated pointers.

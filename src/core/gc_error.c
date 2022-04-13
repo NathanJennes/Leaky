@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:54:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 19:13:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/13 15:57:39 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	gc_error(const char *msg)
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	allocator->error = msg;
+	allocator->last_error = msg;
 	if (allocator->new_ptr)
 	{
 		free(allocator->new_ptr);
@@ -29,23 +29,19 @@ int	gc_error(const char *msg)
 		gc_clean();
 	if (allocator->callback)
 		allocator->callback(allocator->param);
+	gc_add_error(gc_error_no_exit_callback());
 	return (0);
 }
 
-int	gc_failed(void)
+int	gc_add_error(const char *msg)
 {
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	if (allocator->error)
+	if (allocator->ignore_warnings)
 		return (1);
-	return (0);
-}
-
-const char	*gc_get_error(void)
-{
-	t_gc	*allocator;
-
-	allocator = gc_get();
-	return (allocator->error);
+	if (gc_strarray_size(allocator->errors) >= LK_MAX_ERRORS)
+		return (gc_error(gc_error_errors_overflow()));
+	allocator->errors = gc_strarray_append(allocator->errors, msg);
+	return (1);
 }

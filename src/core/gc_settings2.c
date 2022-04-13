@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_getters.c                                    :+:      :+:    :+:   */
+/*   gc_settings2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/12 15:28:20 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 15:30:11 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/13 16:26:03 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/13 16:27:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-const char	*gc_error_allocation(void)
+#include "core.h"
+#include "leaky.h"
+
+int	can_change_settings(void)
 {
-	return ("Leaky: Allocation error!");
+	t_gc	*allocator;
+
+	allocator = gc_get();
+	if (allocator->ptrs_count)
+	{
+		gc_add_error(gc_error_settings_after_allocation());
+		return (0);
+	}
+	return (1);
 }
 
-const char	*gc_error_scope_overflow(void)
-{
-	return ("Leaky: scope overflow! "
-		"(Do you have a gc_scope_start() inside a while() ?)");
-}
-
-const char	*gc_error_scope_underflow(void)
-{
-	return ("Leaky: scope underflow! "
-		"(Do you have a gc_scope_end() inside a while() ?)");
-}
