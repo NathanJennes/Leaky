@@ -65,4 +65,7 @@ fclean: clean
 
 re: fclean all
 
+tests:	re
+	$(MAKE) -C test re
+
 -include: $(DEPENDS)
