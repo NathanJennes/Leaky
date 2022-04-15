@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/15 10:50:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/15 10:58:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	gc_free(void *ptr)
 	if (i >= allocator->capacity || allocator->pointers[i].address == NULL)
 		return (0);
 	free_childs(&allocator->pointers[i]);
+	if (allocator->pointers[i].parent)
+		allocator->pointers[i].parent->child_count--;
 	allocator->pointers[i] = gc_null_ptr();
 	if (i < allocator->first_free)
 		allocator->first_free = i;
@@ -49,8 +51,11 @@ void	gct_free(void)
 	{
 		if (allocator->pointers[i].temporary)
 		{
-			free_childs(&allocator->pointers[i]);
+			if (allocator->pointers[i].child_count)
+				free_childs(&allocator->pointers[i]);
 			free(allocator->pointers[i].address);
+			if (allocator->pointers[i].parent)
+				allocator->pointers[i].parent->child_count--;
 			allocator->pointers[i] = gc_null_ptr();
 			if (i < allocator->first_free)
 				allocator->first_free = i;
@@ -71,8 +76,11 @@ static void	free_childs(t_ptr *ptr)
 	{
 		if (allocator->pointers[i].parent == ptr)
 		{
-			free_childs(&allocator->pointers[i]);
+			if (allocator->pointers[i].child_count)
+				free_childs(&allocator->pointers[i]);
 			free(allocator->pointers[i].address);
+			if (allocator->pointers[i].parent)
+				allocator->pointers[i].parent->child_count--;
 			allocator->pointers[i] = gc_null_ptr();
 			if (i < allocator->first_free)
 				allocator->first_free = i;

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/15 10:34:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/15 10:53:33 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_ptr
 	char			temporary;
 	size_t			scope;
 	struct s_ptr	*parent;
+	size_t			child_count;
 }					t_ptr;
 
 typedef struct s_gc
