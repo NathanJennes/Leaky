@@ -215,6 +215,19 @@ void		gc_scope_start(void);
 //----
 void		gc_scope_end(void);
 
+//----
+//  Makes this the parent of all new allocations.
+//--
+//  If this pointer is freed, all of its child will be freed too.
+//  You can end this object creation by calling gc_object_end().
+//----
+void	gc_object_start(void *ptr);
+
+//----
+//  End the current object creation.
+//----
+void	gc_object_end();
+
 //------------//
 //--Standard--//
 //------------//

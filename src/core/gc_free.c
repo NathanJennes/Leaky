@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/15 10:58:00 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/15 11:03:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	gc_free(void *ptr)
 	size_t	i;
 
 	allocator = gc_get();
-	if (allocator->capacity == 0)
+	if (allocator->capacity == 0 || !gc_contains_ptr(ptr) || ptr == NULL)
 		return (0);
 	i = 0;
 	while (i < allocator->capacity && allocator->pointers[i].address != ptr)

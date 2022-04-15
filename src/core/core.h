@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/15 10:53:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/15 11:07:01 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int			gc_add_error(const char *msg);
 int			can_change_settings(void);
 
 t_ptr		gc_null_ptr(void);
+t_ptr		*gc_get_internal_ptr(void *ptr);
 int			gc_contains_ptr(void *ptr);
 
 #endif
