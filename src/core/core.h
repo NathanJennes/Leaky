@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/13 16:14:46 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/15 10:34:30 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,16 @@
 
 typedef struct s_ptr
 {
-	void	*address;
-	char	temporary;
-	size_t	scope;
-}			t_ptr;
+	void			*address;
+	char			temporary;
+	size_t			scope;
+	struct s_ptr	*parent;
+}					t_ptr;
 
 typedef struct s_gc
 {
 	void		*new_ptr;
+	t_ptr		*current_parent;
 	t_ptr		*pointers;
 	size_t		ptrs_count;
 	size_t		capacity;
