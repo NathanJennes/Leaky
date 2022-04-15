@@ -1,2 +1,3 @@
-More error handling for debbuging:
--   freeing a pointer that does not belong to leaky sets an error message that can be retrieved
+Reference counting for child/parents
+
+Be able to catch scope changes

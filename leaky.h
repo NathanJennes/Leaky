@@ -452,7 +452,7 @@ const char	*gc_error_clean_empty(void);
 //  Example:
 //    if (gc_get_last_error() == gc_error_clean_scope_left()) ...
 //----
-static char	*gc_error_clean_scope_left(void);
+const char	*gc_error_clean_scope_left(void);
 
 //----
 //  Get the error message when a fatal error occurs but your callback
@@ -464,7 +464,7 @@ static char	*gc_error_clean_scope_left(void);
 //  Example:
 //    if (gc_get_last_error() == gc_error_no_exit_callback()) ...
 //----
-static char	*gc_error_no_exit_callback(void);
+const char	*gc_error_no_exit_callback(void);
 
 //----
 //  Get the error message when a setting was changed but
@@ -476,7 +476,43 @@ static char	*gc_error_no_exit_callback(void);
 //  Example:
 //    if (gc_get_last_error() == gc_error_settings_after_allocation()) ...
 //----
-static char	*gc_error_settings_after_allocation(void);
+const char	*gc_error_settings_after_allocation(void);
+
+//----
+//  Get the error message when you are trying to attach a pointer to another
+//    but the parent doesn't belong to Leaky.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_attach_wrong_parent()) ...
+//----
+const char	*gc_error_attach_wrong_parent(void);
+
+//----
+//  Get the error message when you are trying to attach a pointer to another
+//    but the pointer doesn't belong to Leaky.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_attach_wrong_pointer()) ...
+//----
+const char	*gc_error_attach_wrong_pointer(void);
+
+//----
+//  Get the error message when you are trying to detach a pointer
+//    from its parent but the pointer doesn't belong to Leaky.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_detach_wrong_pointer()) ...
+//----
+const char	*gc_error_detach_wrong_pointer(void);
 
 //----
 //  Returns the current number of allocated pointers.
