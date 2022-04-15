@@ -422,6 +422,16 @@ const char	*gc_error_scope_overflow(void);
 const char	*gc_error_scope_underflow(void);
 
 //----
+//  Get the error message when you try to make a pointer dependent from
+//    a parent, but the pointer already has the maximum amount of parents.
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_detach_wrong_pointer()) ...
+//----
+const char	*gc_error_too_much_parents(void);
+
+//----
 //  Get the error message when you get too many errors.
 //--
 //  Non-fatal error can be ignored with gc_ignore_warnings().

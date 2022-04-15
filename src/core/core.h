@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/15 11:07:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/15 16:01:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct s_ptr
 	void			*address;
 	char			temporary;
 	size_t			scope;
-	struct s_ptr	*parent;
+	struct s_ptr	**parents;
+	size_t			parent_count;
+	size_t			parent_capacity;
 	size_t			child_count;
 }					t_ptr;
 
@@ -55,6 +57,12 @@ int			gc_init(t_gc *gc, int (*callback)(void *),
 int			gc_grow(void);
 int			gc_must_grow(void);
 
+void		*gc_ialloc(size_t size);
+void		*gc_icalloc(size_t count, size_t size);
+int			gc_iown(void *ptr);
+
+void		gc_add_parent(t_ptr *ptr, t_ptr *parent);
+
 int			gc_error(const char *msg);
 int			gc_add_error(const char *msg);
 int			can_change_settings(void);
@@ -62,5 +70,6 @@ int			can_change_settings(void);
 t_ptr		gc_null_ptr(void);
 t_ptr		*gc_get_internal_ptr(void *ptr);
 int			gc_contains_ptr(void *ptr);
+size_t		gc_get_internal_ptr_index(t_ptr *ptr);
 
 #endif

@@ -29,7 +29,8 @@ int	gc_error(const char *msg)
 		gc_clean();
 	if (allocator->callback)
 		allocator->callback(allocator->param);
-	gc_add_error(gc_error_no_exit_callback());
+	if (msg != gc_error_errors_overflow())
+		gc_add_error(gc_error_no_exit_callback());
 	return (0);
 }
 

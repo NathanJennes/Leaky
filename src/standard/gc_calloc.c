@@ -34,3 +34,15 @@ void	*gct_calloc(size_t count, size_t size)
 	gc_memset(ptr, 0, count * size);
 	return (ptr);
 }
+
+
+void	*gc_icalloc(size_t count, size_t size)
+{
+	void	*ptr;
+
+	ptr = gc_ialloc(count * size);
+	if (!ptr)
+		return (NULL);
+	gc_memset(ptr, 0, count * size);
+	return (ptr);
+}
