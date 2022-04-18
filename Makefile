@@ -39,6 +39,7 @@ OBJS		:=		$(addprefix $(OBJDIR)/, $(BASIC:.c=.o))		\
 
 DEPENDS		:=		$(OBJS:.o:.d)
 
+.PHONY: all
 all:			$(NAME)
 
 $(OBJDIR):
@@ -64,13 +65,17 @@ $(OBJDIR)/%.o:	src/$(ERROR_DIR)/%.c | $(OBJDIR)
 
 $(NAME):		$(OBJS)
 	@ar -rcs $(NAME) $(OBJS)
+	@echo "Compiled Leaky"
 
+.PHONY: clean
 clean:
 	@rm -rf $(OBJDIR)
 
+.PHONY: fclean
 fclean: clean
 	@rm -f $(NAME)
 
+.PHONY: re
 re: fclean all
 
 -include: $(DEPENDS)

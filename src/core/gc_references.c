@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:27:03 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 13:36:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:34:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,11 @@ static int	grow_childs(t_ptr *ptr)
 		return (gc_error(gc_error_allocation()));
 	gc_memmove(new, ptr->childs, ptr->child_capacity * sizeof (t_ptr *));
 	ptr->child_capacity = new_parent_capacity;
+	gc_free(ptr->childs);
+	ptr->childs = new;
 	return (1);
 }
-
+#include <stdio.h>
 static int	has_child(t_ptr *ptr, t_ptr *child)
 {
 	size_t	i;
@@ -90,7 +92,7 @@ static int	has_child(t_ptr *ptr, t_ptr *child)
 	if (!ptr->childs)
 		return (0);
 	i = 0;
-	while (ptr->childs[i])
+	while (i < ptr->child_capacity)
 	{
 		if (ptr->childs[i] == child)
 			return (1);

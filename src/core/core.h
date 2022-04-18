@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 13:40:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/18 14:40:05 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ int			gc_must_grow(void);
 void		*gc_ialloc(size_t size);
 void		*gc_icalloc(size_t count, size_t size);
 int			gc_iown(void *ptr);
+char		*gc_istrdup(const char *s1);
+char		**gc_istrarray_append(char **array, const char *str);
+char		**gc_istrarray_init(void);
 
 int			gc_add_child(t_ptr *ptr, t_ptr *child);
 int			gc_remove_child(t_ptr *ptr, t_ptr *child);

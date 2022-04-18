@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:54:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/13 15:57:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/18 14:53:54 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ int	gc_add_error(const char *msg)
 	allocator = gc_get();
 	if (allocator->ignore_warnings)
 		return (1);
+	if (!allocator->errors)
+		allocator->errors = gc_istrarray_init();
 	if (gc_strarray_size(allocator->errors) >= LK_MAX_ERRORS)
 		return (gc_error(gc_error_errors_overflow()));
-	allocator->errors = gc_strarray_append(allocator->errors, msg);
+	allocator->errors = gc_istrarray_append(allocator->errors, msg);
 	return (1);
 }

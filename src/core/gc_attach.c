@@ -36,7 +36,7 @@ int	gc_detach(void *ptr, void *parent)
 	internal_ptr = gc_get_internal_ptr(ptr);
 	internal_parent = gc_get_internal_ptr(parent);
 	if (!internal_parent)
-		return gc_add_error(gc_error_detach_wrong_parent());
+		return gc_add_error(gc_error_detach_not_parent());
 	if (!internal_ptr)
 		return gc_add_error(gc_error_detach_wrong_pointer());
 	gc_remove_child(internal_parent, internal_ptr);

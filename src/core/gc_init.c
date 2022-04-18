@@ -25,7 +25,6 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 	allocator->malloc_calls = 1;
 	allocator->callback = callback;
 	allocator->param = param;
-	allocator->errors = gc_strarray_init();
 	return (1);
 }
 

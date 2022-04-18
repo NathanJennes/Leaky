@@ -16,7 +16,7 @@
 
 # include <stddef.h>
 
-# define BUFFER_SIZE 50
+# define BUFFER_SIZE 1024
 
 # define FREE_NONE 0
 # define FREE_FIRST 1
@@ -88,6 +88,13 @@ void		gc_clean_on_error(int clean_on_error);
 void		gc_set_default_capacity(size_t capacity);
 
 //----
+//  Toggles on or off warnings.
+//--
+//  This parameter is optional.
+//----
+void	gc_ignore_warnings(int ignore_warnings);
+
+//----
 //  Works like malloc().
 //--
 //  A pointer allocated with gc_alloc() MUST be freed by
@@ -150,6 +157,12 @@ void		gc_clean(void);
 //  Returns 1 if an error has occured in Leaky.
 //----
 int			gc_failed(void);
+
+//----
+//  Call this to get to the callback.
+//  Set msg to the error message you want.
+//----
+int	gc_error(const char *msg);
 
 //----
 //  Starts a new scope.
@@ -534,18 +547,6 @@ const char	*gc_error_attach_wrong_pointer(void);
 //    if (gc_get_last_error() == gc_error_detach_wrong_pointer()) ...
 //----
 const char	*gc_error_detach_wrong_pointer(void);
-
-//----
-//  Get the error message when you are trying to detach a pointer
-//    from its parent but the parent doesn't belong to Leaky.
-//--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
-//--
-//  Can be used to figure out the type of error that was thrown.
-//  Example:
-//    if (gc_get_last_error() == gc_error_detach_wrong_parent()) ...
-//----
-const char	*gc_error_detach_wrong_parent(void);
 
 //----
 //  Get the error message when you are trying to attach a pointer

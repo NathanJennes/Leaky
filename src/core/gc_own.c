@@ -6,15 +6,14 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:52 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 12:38:27 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/18 15:27:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "core.h"
 #include "leaky.h"
 
-static t_ptr	create_ptr(
-		t_gc *allocator, void *ptr, char temporary, size_t scope);
+static t_ptr	create_ptr(void *ptr, char temporary, size_t scope);
 static void		insert_ptr(t_gc *gc, t_ptr ptr);
 
 int	gc_own(void *ptr)
@@ -27,8 +26,9 @@ int	gc_own(void *ptr)
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
 		return (0);
-	insert_ptr(allocator, create_ptr(allocator, ptr,
-			LK_FALSE, allocator->current_scope));
+	insert_ptr(allocator, create_ptr(ptr, LK_FALSE, allocator->current_scope));
+	if (allocator->current_parent)
+		gc_attach(ptr, allocator->current_parent->address);
 	return (1);
 }
 
@@ -42,8 +42,9 @@ int	gct_own(void *ptr)
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
 		return (0);
-	insert_ptr(allocator, create_ptr(allocator, ptr,
-			LK_TRUE, allocator->current_scope));
+	insert_ptr(allocator, create_ptr(ptr, LK_TRUE, allocator->current_scope));
+	if (allocator->current_parent)
+		gc_attach(ptr, allocator->current_parent->address);
 	return (1);
 }
 
@@ -57,22 +58,20 @@ int	gc_iown(void *ptr)
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
 		return (0);
-	insert_ptr(allocator, create_ptr(allocator, ptr,
-			LK_FALSE, 0));
+	insert_ptr(allocator, create_ptr(ptr, LK_FALSE, 0));
 	return (1);
 }
 
-static t_ptr	create_ptr(
-		t_gc *allocator, void *ptr,char temporary, size_t scope)
+static t_ptr	create_ptr(void *ptr,char temporary, size_t scope)
 {
+	t_gc	*allocator;
 	t_ptr	new_ptr;
 
+	allocator = gc_get();
 	new_ptr = gc_null_ptr();
 	new_ptr.address = ptr;
 	new_ptr.temporary = temporary;
 	new_ptr.scope = scope;
-	if (allocator->current_parent)
-		gc_attach(ptr, allocator->current_parent->address);
 	return (new_ptr);
 }
 
