@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/15 16:01:17 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/18 13:40:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@ typedef struct s_ptr
 	void			*address;
 	char			temporary;
 	size_t			scope;
-	struct s_ptr	**parents;
-	size_t			parent_count;
-	size_t			parent_capacity;
+	struct s_ptr	**childs;
+	size_t			child_capacity;
 	size_t			child_count;
 }					t_ptr;
 
@@ -61,7 +60,8 @@ void		*gc_ialloc(size_t size);
 void		*gc_icalloc(size_t count, size_t size);
 int			gc_iown(void *ptr);
 
-void		gc_add_parent(t_ptr *ptr, t_ptr *parent);
+int			gc_add_child(t_ptr *ptr, t_ptr *child);
+int			gc_remove_child(t_ptr *ptr, t_ptr *child);
 
 int			gc_error(const char *msg);
 int			gc_add_error(const char *msg);

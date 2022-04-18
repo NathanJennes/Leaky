@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:52 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/15 15:55:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/04/18 12:38:27 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ static t_ptr	create_ptr(
 	new_ptr.address = ptr;
 	new_ptr.temporary = temporary;
 	new_ptr.scope = scope;
-	new_ptr.parent = allocator->current_parent;
+	if (allocator->current_parent)
+		gc_attach(ptr, allocator->current_parent->address);
 	return (new_ptr);
 }
 

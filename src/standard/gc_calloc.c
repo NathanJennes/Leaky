@@ -13,6 +13,8 @@
 #include <stddef.h>
 #include "leaky.h"
 
+void	*gc_ialloc(size_t size);
+
 void	*gc_calloc(size_t count, size_t size)
 {
 	void	*ptr;

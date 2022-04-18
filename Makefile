@@ -13,7 +13,7 @@ BASIC		:=		ft_calloc.c gc_memcpy.c gc_memmove.c gc_memset.c gc_memseti.c gc_mems
 CORE_DIR	:=		core
 CORE		:=		gc_gc.c gc_init.c gc_grow.c gc_own.c gc_error.c gc_alloc.c gc_free.c gc_destroy.c gc_clean.c		\
 					gc_utils.c gc_scope.c gc_settings.c gc_debug.c gc_error_getters.c gc_get_errors2.c gc_settings2.c\
-					gc_object.c gc_attach.c gc_get_errors3.c gc_stack_magic.c gc_references.c
+					gc_object.c gc_attach.c gc_get_errors3.c gc_references.c
 
 EXTRAS_DIR	:=		extras
 EXTRAS		:=		gc_get_next_line.c gc_strappend.c gc_split.c

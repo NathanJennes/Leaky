@@ -228,6 +228,17 @@ void	gc_object_start(void *ptr);
 //----
 void	gc_object_end();
 
+//----
+//  Makes ptr a child of parent.
+//  If parent is freed, ptr will be too.
+//--
+int	gc_attach(void *ptr, void *parent);
+
+//----
+//  Detaches ptr from parent so that if parent is freed, ptr won't be freed.
+//--
+int	gc_detach(void *ptr, void *parent);
+
 //------------//
 //--Standard--//
 //------------//
@@ -523,6 +534,42 @@ const char	*gc_error_attach_wrong_pointer(void);
 //    if (gc_get_last_error() == gc_error_detach_wrong_pointer()) ...
 //----
 const char	*gc_error_detach_wrong_pointer(void);
+
+//----
+//  Get the error message when you are trying to detach a pointer
+//    from its parent but the parent doesn't belong to Leaky.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_detach_wrong_parent()) ...
+//----
+const char	*gc_error_detach_wrong_parent(void);
+
+//----
+//  Get the error message when you are trying to attach a pointer
+//    to a parent, but it already has that parent.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_attach_same_parent()) ...
+//----
+const char	*gc_error_attach_same_parent(void);
+
+//----
+//  Get the error message when you are trying to detach a pointer
+//    from its parent, but it didn't had that parent.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_detach_not_parent()) ...
+//----
+const char	*gc_error_detach_not_parent(void);
 
 //----
 //  Returns the current number of allocated pointers.
