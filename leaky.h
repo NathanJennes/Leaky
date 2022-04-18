@@ -92,7 +92,7 @@ void		gc_set_default_capacity(size_t capacity);
 //--
 //  This parameter is optional.
 //----
-void	gc_ignore_warnings(int ignore_warnings);
+void		gc_ignore_warnings(int ignore_warnings);
 
 //----
 //  Works like malloc().
@@ -162,7 +162,7 @@ int			gc_failed(void);
 //  Call this to get to the callback.
 //  Set msg to the error message you want.
 //----
-int	gc_error(const char *msg);
+int			gc_error(const char *msg);
 
 //----
 //  Starts a new scope.
@@ -234,23 +234,23 @@ void		gc_scope_end(void);
 //  If this pointer is freed, all of its child will be freed too.
 //  You can end this object creation by calling gc_object_end().
 //----
-void	gc_object_start(void *ptr);
+void		gc_object_start(void *ptr);
 
 //----
 //  End the current object creation.
 //----
-void	gc_object_end();
+void		gc_object_end(void);
 
 //----
 //  Makes ptr a child of parent.
 //  If parent is freed, ptr will be too.
 //--
-int	gc_attach(void *ptr, void *parent);
+int			gc_attach(void *ptr, void *parent);
 
 //----
 //  Detaches ptr from parent so that if parent is freed, ptr won't be freed.
 //--
-int	gc_detach(void *ptr, void *parent);
+int			gc_detach(void *ptr, void *parent);
 
 //------------//
 //--Standard--//

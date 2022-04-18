@@ -37,7 +37,6 @@ void	*gct_calloc(size_t count, size_t size)
 	return (ptr);
 }
 
-
 void	*gc_icalloc(size_t count, size_t size)
 {
 	void	*ptr;

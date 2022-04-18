@@ -13,13 +13,13 @@
 const char	*gc_error_clean_scope_left(void)
 {
 	return ("Leaky: A call to gc_clean() was done but "
-			"some scopes weren't ended");
+		"some scopes weren't ended");
 }
 
 const char	*gc_error_no_exit_callback(void)
 {
 	return ("Leaky: A fatal error occurred but "
-			"your callback didn't exit the program");
+		"your callback didn't exit the program");
 }
 
 const char	*gc_error_settings_after_allocation(void)
@@ -30,11 +30,11 @@ const char	*gc_error_settings_after_allocation(void)
 const char	*gc_error_attach_wrong_parent(void)
 {
 	return ("Leaky: Trying to attach a pointer to a parent "
-			"that doesn't belong to Leaky");
+		"that doesn't belong to Leaky");
 }
 
 const char	*gc_error_attach_wrong_pointer(void)
 {
 	return ("Leaky: Trying to set the parent of a pointer "
-			"that doesn't belong to Leaky");
+		"that doesn't belong to Leaky");
 }

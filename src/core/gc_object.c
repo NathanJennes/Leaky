@@ -20,7 +20,7 @@ void	gc_object_start(void *ptr)
 	allocator->current_parent = gc_get_internal_ptr(ptr);
 }
 
-void	gc_object_end()
+void	gc_object_end(void)
 {
 	t_gc	*allocator;
 

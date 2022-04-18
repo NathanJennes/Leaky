@@ -35,5 +35,5 @@ const char	**gc_get_errors(void)
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	return ((const char **) (allocator->errors));
+	return ((const char **)(allocator->errors));
 }

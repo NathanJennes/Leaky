@@ -57,7 +57,6 @@ char	**gct_strarray_append(char **array, const char *str)
 	return (new_array);
 }
 
-
 char	**gc_istrarray_append(char **array, const char *str)
 {
 	size_t	size;

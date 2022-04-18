@@ -25,4 +25,3 @@ int	can_change_settings(void)
 	}
 	return (1);
 }
-

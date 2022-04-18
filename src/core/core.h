@@ -45,7 +45,7 @@ typedef struct s_gc
 	const char	*last_error;
 	char		**errors;
 	int			clean_on_error;
-	int 		ignore_warnings;
+	int			ignore_warnings;
 }			t_gc;
 
 t_gc		*gc_get(void);

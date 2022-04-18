@@ -62,7 +62,7 @@ int	gc_iown(void *ptr)
 	return (1);
 }
 
-static t_ptr	create_ptr(void *ptr,char temporary, size_t scope)
+static t_ptr	create_ptr(void *ptr, char temporary, size_t scope)
 {
 	t_gc	*allocator;
 	t_ptr	new_ptr;

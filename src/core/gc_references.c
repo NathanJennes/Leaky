@@ -84,7 +84,7 @@ static int	grow_childs(t_ptr *ptr)
 	ptr->childs = new;
 	return (1);
 }
-#include <stdio.h>
+
 static int	has_child(t_ptr *ptr, t_ptr *child)
 {
 	size_t	i;
