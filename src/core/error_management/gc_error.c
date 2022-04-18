@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "core.h"
+#include "src/core/core.h"
 #include "leaky.h"
 
 int	gc_error(const char *msg)
