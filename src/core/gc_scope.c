@@ -10,6 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifdef __linux__
+# include <stdint.h>
+#endif
+
 #include <stdlib.h>
 #include "core.h"
 #include "leaky.h"

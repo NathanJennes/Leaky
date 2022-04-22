@@ -15,6 +15,11 @@
 #include <unistd.h>
 #include <stdio.h>
 
+#ifdef __linux__
+# include <stdint.h>
+# define OPEN_MAX 1024
+#endif
+
 static char	*find_line(int fd, char *buffer, char **line);
 static int	ft_get_line_length(char *line, int bytes_read);
 static int	ft_add_to_line(char **line, char *buffer, int bytes_read);
