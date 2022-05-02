@@ -25,10 +25,10 @@ int	gc_error(const char *msg)
 		free(allocator->new_ptr);
 		allocator->new_ptr = NULL;
 	}
-	if (allocator->clean_on_error)
-		gc_clean();
 	if (allocator->callback)
 		allocator->callback(allocator->param);
+	if (allocator->clean_on_error)
+		gc_clean();
 	if (msg != gc_error_errors_overflow())
 		gc_add_error(gc_error_no_exit_callback());
 	return (0);
