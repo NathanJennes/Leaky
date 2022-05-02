@@ -1,9 +1,11 @@
 NAME		:=		libleaky.a
+NAMED		:=		libleakyd.a
 
 INC_DIR		:=		-I.
 
-CFLAGS		:=		-Wall -Werror -Wextra -o2 $(INC_DIR) -fsanitize=address
-LDFLAGS		:=		-fsanitize=address
+CFLAGSD		:=		-Wall -Werror -Wextra -o2 $(INC_DIR) -fsanitize=address
+
+CFLAGS		:=		-Wall -Werror -Wextra -o2 $(INC_DIR)
 
 CC			:=		gcc
 
@@ -30,6 +32,7 @@ STRARR		:=		gc_strarray_append.c gc_strarray_asstr.c gc_strarray_free.c gc_strar
 					gc_strarray_fromstr.c gc_strarray_init.c gc_strarray_size.c
 
 OBJDIR		:=		obj
+OBJDIRD		:=		objd
 OBJS		:=		$(addprefix $(OBJDIR)/, $(BASIC:.c=.o))		\
 					$(addprefix $(OBJDIR)/, $(CORE:.c=.o))		\
 					$(addprefix $(OBJDIR)/, $(EXTRAS:.c=.o))	\
@@ -37,14 +40,28 @@ OBJS		:=		$(addprefix $(OBJDIR)/, $(BASIC:.c=.o))		\
 					$(addprefix $(OBJDIR)/, $(STRARR:.c=.o))	\
 					$(addprefix $(OBJDIR)/, $(ERROR:.c=.o))		\
 
+OBJSD		:=		$(addprefix $(OBJDIRD)/, $(BASIC:.c=d.o))	\
+					$(addprefix $(OBJDIRD)/, $(CORE:.c=d.o))	\
+					$(addprefix $(OBJDIRD)/, $(EXTRAS:.c=d.o))	\
+					$(addprefix $(OBJDIRD)/, $(STD:.c=d.o))		\
+					$(addprefix $(OBJDIRD)/, $(STRARR:.c=d.o))	\
+					$(addprefix $(OBJDIRD)/, $(ERROR:.c=d.o))	\
+
 DEPENDS		:=		$(OBJS:.o:.d)
 
 .PHONY: all
 all:			$(NAME)
 
+.PHONY: debug
+debug:			$(NAMED)
+
 $(OBJDIR):
 	@mkdir -p $(OBJDIR)
 
+$(OBJDIRD):
+	@mkdir -p $(OBJDIRD)
+
+#release
 $(OBJDIR)/%.o:	src/$(BASIC_DIR)/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -63,17 +80,42 @@ $(OBJDIR)/%.o:	src/$(STRARR_DIR)/%.c | $(OBJDIR)
 $(OBJDIR)/%.o:	src/$(ERROR_DIR)/%.c | $(OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+#Debug
+$(OBJDIRD)/%d.o:	src/$(BASIC_DIR)/%.c | $(OBJDIRD)
+	@$(CC) $(CFLAGSD) -c $< -o $@
+
+$(OBJDIRD)/%d.o:	src/$(CORE_DIR)/%.c | $(OBJDIRD)
+	@$(CC) $(CFLAGSD) -c $< -o $@
+
+$(OBJDIRD)/%d.o:	src/$(EXTRAS_DIR)/%.c | $(OBJDIRD)
+	@$(CC) $(CFLAGSD) -c $< -o $@
+
+$(OBJDIRD)/%d.o:	src/$(STD_DIR)/%.c | $(OBJDIRD)
+	@$(CC) $(CFLAGSD) -c $< -o $@
+
+$(OBJDIRD)/%d.o:	src/$(STRARR_DIR)/%.c | $(OBJDIRD)
+	@$(CC) $(CFLAGSD) -c $< -o $@
+
+$(OBJDIRD)/%d.o:	src/$(ERROR_DIR)/%.c | $(OBJDIRD)
+	@$(CC) $(CFLAGSD) -c $< -o $@
+
 $(NAME):		$(OBJS)
 	@ar -rcs $(NAME) $(OBJS)
+	@echo "Compiled Leaky"
+
+$(NAMED):		$(OBJSD)
+	@ar -rcs $(NAMED) $(OBJSD)
 	@echo "Compiled Leaky"
 
 .PHONY: clean
 clean:
 	@rm -rf $(OBJDIR)
+	@rm -rf $(OBJDIRD)
 
 .PHONY: fclean
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f $(NAMED)
 
 .PHONY: re
 re: fclean all
