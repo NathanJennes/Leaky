@@ -6,10 +6,11 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:07:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/13 16:25:24 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/02 14:57:46 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "core.h"
 #include "leaky.h"
 
@@ -27,8 +28,6 @@ void	gc_set_callback_param(void *param)
 {
 	t_gc	*allocator;
 
-	if (!can_change_settings())
-		return ;
 	allocator = gc_get();
 	allocator->param = param;
 }
@@ -56,6 +55,7 @@ void	gc_set_default_capacity(size_t capacity)
 		allocator->capacity = 1;
 	else
 		allocator->capacity = capacity;
+	free(allocator->pointers);
 	allocator->pointers = ft_calloc(allocator->capacity, sizeof(t_ptr));
 	if (!allocator->pointers)
 		gc_error(gc_error_allocation());

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/04/18 13:39:11 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/02 17:42:58 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 static void	free_childs(t_ptr *ptr);
 static void	free_ptr(t_ptr *ptr);
+static void	update_parents(t_ptr *ptr);
 
 int	gc_free(void *ptr)
 {
@@ -29,6 +30,7 @@ int	gc_free(void *ptr)
 	if (!internal_ptr)
 		return (0);
 	free_childs(internal_ptr);
+	update_parents(internal_ptr);
 	free_ptr(internal_ptr);
 	return (1);
 }
@@ -45,6 +47,7 @@ void	gct_free(void)
 		if (allocator->pointers[i].temporary)
 		{
 			free_childs(&allocator->pointers[i]);
+			update_parents(&allocator->pointers[i]);
 			free_ptr(&allocator->pointers[i]);
 		}
 		i++;
@@ -66,6 +69,30 @@ static void	free_childs(t_ptr *ptr)
 		{
 			free_childs(ptr->childs[i]);
 			free_ptr(ptr->childs[i]);
+		}
+		i++;
+	}
+}
+
+static void	update_parents(t_ptr *ptr)
+{
+	t_gc	*allocator;
+	size_t	i;
+	size_t	j;
+
+	allocator = gc_get();
+	i = 0;
+	while (i < allocator->capacity)
+	{
+		if (&allocator->pointers[i] != ptr && allocator->pointers[i].childs)
+		{
+			j = 0;
+			while (j < allocator->pointers[i].child_capacity)
+			{
+				if (allocator->pointers[i].childs[j] == ptr)
+					allocator->pointers[i].childs[j] = NULL;
+				j++;
+			}
 		}
 		i++;
 	}
