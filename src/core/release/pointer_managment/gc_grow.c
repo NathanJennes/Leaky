@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 static size_t	get_new_size(t_gc *allocator);

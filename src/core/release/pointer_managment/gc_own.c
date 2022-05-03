@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 static t_ptr	create_ptr(void *ptr, char temporary, size_t scope);

@@ -56,6 +56,9 @@ RELEASE_REFERENCES		:=		gc_object.c gc_attach.c gc_references.c
 RELEASE_ALLOCATION_DIR	:=		$(RELEASE_CORE_DIR)/allocation
 RELEASE_ALOCATION		:=		gc_alloc.c
 
+RELEASE_PTR_MGT_DIR		:=		$(RELEASE_CORE_DIR)/pointer_managment
+RELEASE_PTR_MGT			:=		gc_own.c gc_grow.c
+
 #---------#
 #  Debug  #
 #---------#
@@ -81,6 +84,9 @@ DEBUG_REFERENCES		:=		gc_object.c gc_attach.c gc_references.c
 DEBUG_ALLOCATION_DIR	:=		$(DEBUG_CORE_DIR)/allocation
 DEBUG_ALOCATION			:=		gc_alloc.c
 
+DEBUG_PTR_MGT_DIR		:=		$(DEBUG_CORE_DIR)/pointer_managment
+DEBUG_PTR_MGT			:=		gc_own.c gc_grow.c
+
 
 RELEASE_OBJDIR		:=	obj
 DEBUG_OBJDIR		:=	objd
@@ -94,6 +100,7 @@ RELEASE_OBJS		:=	$(addprefix $(RELEASE_OBJDIR)/, $(BASIC:.c=.o))				\
 						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_SETTINGS:.c=.o))	\
 						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_REFERENCES:.c=.o))\
 						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_ALLOCATION:.c=.o))\
+						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_PTR_MGT:.c=.o))	\
 
 DEBUG_OBJS			:=	$(addprefix $(DEBUG_OBJDIR)/, $(BASIC:.c=d.o))				\
 						$(addprefix $(DEBUG_OBJDIR)/, $(EXTRAS:.c=d.o))				\
@@ -105,6 +112,7 @@ DEBUG_OBJS			:=	$(addprefix $(DEBUG_OBJDIR)/, $(BASIC:.c=d.o))				\
 						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_SETTINGS:.c=d.o))		\
 						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_REFERENCES:.c=d.o))	\
 						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_ALLOCATION:.c=d.o))	\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_PTR_MGT:.c=d.o))		\
 
 DEPENDS		:=		$(OBJS:.o:.d)
 
@@ -154,6 +162,9 @@ $(RELEASE_OBJDIR)/%.o:	src/$(RELEASE_REFERENCES_DIR)/%.c | $(RELEASE_OBJDIR)
 $(RELEASE_OBJDIR)/%.o:	src/$(RELEASE_ALLOCATION_DIR)/%.c | $(RELEASE_OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+$(RELEASE_OBJDIR)/%.o:	src/$(RELEASE_PTR_MGT_DIR)/%.c | $(RELEASE_OBJDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+
 #---------#
 #  Debug  #
 #---------#
@@ -188,6 +199,9 @@ $(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_REFERENCES_DIR)/%.c | $(DEBUG_OBJDIR)
 $(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_ALLOCATION_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
+$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_PTR_MGT_DIR)/%.c | $(DEBUG_OBJDIR)
+	@$(CC) $(CFLAGSD) -c $< -o $@
+
 $(RELEASE_NAME):		$(RELEASE_OBJS)
 	@ar -rcs $(RELEASE_NAME) $(RELEASE_OBJS)
 	@echo "Compiled Leaky"
@@ -211,5 +225,11 @@ re: fclean all
 
 .PHONY: debug_re
 debug_re: fclean debug
+
+.PHONY: both
+both: $(RELEASE_NAME) $(DEBUG_NAME)
+
+.PHONY: both_re
+both_re: re debug_re
 
 -include: $(DEPENDS)
