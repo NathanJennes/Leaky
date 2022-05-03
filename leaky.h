@@ -592,6 +592,12 @@ const char	*gc_error_attach_same_parent(void);
 //    if (gc_get_last_error() == gc_error_detach_not_parent()) ...
 //----
 const char	*gc_error_detach_not_parent(void);
+
+//----
+//  Print Leaky's internal allocations.
+//  For Debug purposes.
+//----
+void		gc_print_status(void);
 #endif
 
 //----
