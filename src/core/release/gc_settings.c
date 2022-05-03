@@ -60,13 +60,3 @@ void	gc_set_default_capacity(size_t capacity)
 	if (!allocator->pointers)
 		gc_error(gc_error_allocation());
 }
-
-void	gc_ignore_warnings(int ignore_warnings)
-{
-	t_gc	*allocator;
-
-	if (!can_change_settings())
-		return ;
-	allocator = gc_get();
-	allocator->ignore_warnings = ignore_warnings;
-}

@@ -6,12 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:54:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 14:44:28 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 16:12:38 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "src/core/Release/core.h"
+#include "src/core/debug/core.h"
 #include "leaky.h"
 
 #ifndef DEBUG

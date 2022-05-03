@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <printf.h>
-#include "src/core/Release/core.h"
+#include "src/core/debug/core.h"
 
 int	gc_failed(void)
 {

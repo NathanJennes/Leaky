@@ -6,12 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:43:34 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 15:45:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 15:45:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <printf.h>
-#include "src/core/Release/core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 int	gc_failed(void)

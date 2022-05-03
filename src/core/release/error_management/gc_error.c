@@ -6,12 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:54:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 15:29:21 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 15:45:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "src/core/Release/core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 int	gc_error(const char *msg)
