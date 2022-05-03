@@ -16,7 +16,7 @@
 int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 {
 	if (!allocator)
-		return (0);
+		return (LK_FAILURE);
 	gc_memset(allocator, 0, sizeof(t_gc));
 	allocator->capacity = 100;
 	allocator->pointers = ft_calloc(allocator->capacity, sizeof(t_ptr));
@@ -25,7 +25,7 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 	allocator->malloc_calls = 1;
 	allocator->callback = callback;
 	allocator->param = param;
-	return (1);
+	return (LK_SUCCESS);
 }
 
 size_t	gc_getfootprint(void)

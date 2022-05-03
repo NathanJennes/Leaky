@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:52 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 15:27:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 17:31:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ int	gc_own(void *ptr)
 	t_gc	*allocator;
 
 	if (!ptr || gc_contains_ptr(ptr))
-		return (0);
+		return (LK_FAILURE);
 	allocator = gc_get();
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
-		return (0);
+		return (LK_FAILURE);
 	insert_ptr(allocator, create_ptr(ptr, LK_FALSE, allocator->current_scope));
 	if (allocator->current_parent)
 		gc_attach(ptr, allocator->current_parent->address);
-	return (1);
+	return (LK_SUCCESS);
 }
 
 int	gct_own(void *ptr)
@@ -37,15 +37,15 @@ int	gct_own(void *ptr)
 	t_gc	*allocator;
 
 	if (!ptr || gc_contains_ptr(ptr))
-		return (0);
+		return (LK_FAILURE);
 	allocator = gc_get();
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
-		return (0);
+		return (LK_FAILURE);
 	insert_ptr(allocator, create_ptr(ptr, LK_TRUE, allocator->current_scope));
 	if (allocator->current_parent)
 		gc_attach(ptr, allocator->current_parent->address);
-	return (1);
+	return (LK_SUCCESS);
 }
 
 int	gc_iown(void *ptr)
@@ -53,13 +53,13 @@ int	gc_iown(void *ptr)
 	t_gc	*allocator;
 
 	if (!ptr || gc_contains_ptr(ptr))
-		return (0);
+		return (LK_FAILURE);
 	allocator = gc_get();
 	allocator->new_ptr = ptr;
 	if (gc_must_grow() && !gc_grow())
-		return (0);
+		return (LK_FAILURE);
 	insert_ptr(allocator, create_ptr(ptr, LK_FALSE, 0));
-	return (1);
+	return (LK_SUCCESS);
 }
 
 static t_ptr	create_ptr(void *ptr, char temporary, size_t scope)

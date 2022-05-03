@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/03 14:32:32 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 17:30:04 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,14 @@ int	gc_free(void *ptr)
 
 	allocator = gc_get();
 	if (allocator->capacity == 0)
-		return (0);
+		return (LK_FAILURE);
 	internal_ptr = gc_get_internal_ptr(ptr);
 	if (!internal_ptr)
-		return (0);
+		return (LK_FAILURE);
 	free_childs(internal_ptr);
 	update_parents(internal_ptr);
 	free_ptr(internal_ptr);
-#ifdef DEBUG
-	printf("Leaky Freeing\n");
-	gc_print_status();
-#endif
-	return (1);
+	return (LK_SUCCESS);
 }
 
 void	gct_free(void)

@@ -25,7 +25,7 @@ int	gc_attach(void *ptr, void *parent)
 	if (!internal_ptr)
 		return (gc_add_error(gc_error_attach_wrong_pointer()));
 	gc_add_child(internal_parent, internal_ptr);
-	return (1);
+	return (LK_SUCCESS);
 }
 
 int	gc_detach(void *ptr, void *parent)
@@ -40,5 +40,5 @@ int	gc_detach(void *ptr, void *parent)
 	if (!internal_ptr)
 		return (gc_add_error(gc_error_detach_wrong_pointer()));
 	gc_remove_child(internal_parent, internal_ptr);
-	return (1);
+	return (LK_SUCCESS);
 }

@@ -45,16 +45,16 @@ int	gc_contains_ptr(void *ptr)
 	size_t	i;
 
 	if (!ptr)
-		return (0);
+		return (LK_FALSE);
 	allocator = gc_get();
 	if (allocator->capacity == 0)
-		return (0);
+		return (LK_FALSE);
 	i = 0;
 	while (i < allocator->capacity && allocator->pointers[i].address != ptr)
 		i++;
 	if (i >= allocator->capacity || allocator->pointers[i].address == NULL)
-		return (0);
-	return (1);
+		return (LK_FALSE);
+	return (LK_TRUE);
 }
 
 size_t	gc_get_internal_ptr_index(t_ptr *ptr)

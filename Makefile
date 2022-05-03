@@ -1,9 +1,9 @@
-NAME		:=		libleaky.a
-NAMED		:=		libleakyd.a
+RELEASE_NAME		:=		libleaky.a
+DEBUG_NAME			:=		libleakyd.a
 
 INC_DIR		:=		-I.
 
-CFLAGSD		:=		-Wall -Werror -Wextra -o2 $(INC_DIR) -fsanitize=address
+CFLAGSD		:=		-Wall -Werror -Wextra -o2 $(INC_DIR) -fsanitize=address -DDEBUG
 
 CFLAGS		:=		-Wall -Werror -Wextra -o2 $(INC_DIR)
 
@@ -50,106 +50,107 @@ RELEASE_ERROR		:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_erro
 #---------#
 
 DEBUG_CORE_DIR		:=		$(CORE_DIR)/debug
-DEBUG_CORE			:=		gc_gc.c gc_grow.c gc_own.c gc_alloc.c gc_free.c gc_destroy.c gc_clean.c							\
-							gc_utils.c																						\
-							gc_init.c gc_scope.c gc_settings.c gc_settings2.c												\
-							gc_object.c gc_attach.c gc_references.c
+DEBUG_CORE			:=		gc_gc.c gc_grow.c gc_own.c gc_alloc.c gc_free.c gc_destroy.c gc_clean.c						\
+							gc_utils.c																					\
+							gc_init.c gc_scope.c gc_settings.c gc_settings2.c											\
+							gc_object.c gc_attach.c gc_references.c														\
+							gc_debug.c
 
 DEBUG_ERROR_DIR		:=		$(DEBUG_CORE_DIR)/error_management
 DEBUG_ERROR			:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_get_errors3.c gc_error.c
 
 
-OBJDIR		:=		obj
-OBJDIRD		:=		objd
-OBJS		:=		$(addprefix $(OBJDIR)/, $(BASIC:.c=.o))			\
-					$(addprefix $(OBJDIR)/, $(EXTRAS:.c=.o))		\
-					$(addprefix $(OBJDIR)/, $(STD:.c=.o))			\
-					$(addprefix $(OBJDIR)/, $(STRARR:.c=.o))		\
-					$(addprefix $(OBJDIR)/, $(RELEASE_CORE:.c=.o))	\
-					$(addprefix $(OBJDIR)/, $(RELEASE_ERROR:.c=.o))	\
+RELEASE_OBJDIR		:=	obj
+DEBUG_OBJDIR		:=	objd
+RELEASE_OBJS		:=	$(addprefix $(RELEASE_OBJDIR)/, $(BASIC:.c=.o))			\
+						$(addprefix $(RELEASE_OBJDIR)/, $(EXTRAS:.c=.o))		\
+						$(addprefix $(RELEASE_OBJDIR)/, $(STD:.c=.o))			\
+						$(addprefix $(RELEASE_OBJDIR)/, $(STRARR:.c=.o))		\
+						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_CORE:.c=.o))	\
+						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_ERROR:.c=.o))	\
 
-OBJSD		:=		$(addprefix $(OBJDIRD)/, $(BASIC:.c=d.o))		\
-					$(addprefix $(OBJDIRD)/, $(EXTRAS:.c=d.o))		\
-					$(addprefix $(OBJDIRD)/, $(STD:.c=d.o))			\
-					$(addprefix $(OBJDIRD)/, $(STRARR:.c=d.o))		\
-					$(addprefix $(OBJDIRD)/, $(DEBUG_CORE:.c=d.o))	\
-					$(addprefix $(OBJDIRD)/, $(DEBUG_ERROR:.c=d.o))	\
+DEBUG_OBJS			:=	$(addprefix $(DEBUG_OBJDIR)/, $(BASIC:.c=d.o))			\
+						$(addprefix $(DEBUG_OBJDIR)/, $(EXTRAS:.c=d.o))			\
+						$(addprefix $(DEBUG_OBJDIR)/, $(STD:.c=d.o))			\
+						$(addprefix $(DEBUG_OBJDIR)/, $(STRARR:.c=d.o))			\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_CORE:.c=d.o))		\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_ERROR:.c=d.o))	\
 
 DEPENDS		:=		$(OBJS:.o:.d)
 
 .PHONY: all
-all:			$(NAME)
+all:			$(RELEASE_NAME)
 
 .PHONY: debug
-debug:			$(NAMED)
+debug:			$(DEBUG_NAME)
 
-$(OBJDIR):
-	@mkdir -p $(OBJDIR)
+$(RELEASE_OBJDIR):
+	@mkdir -p $(RELEASE_OBJDIR)
 
-$(OBJDIRD):
-	@mkdir -p $(OBJDIRD)
+$(DEBUG_OBJDIR):
+	@mkdir -p $(DEBUG_OBJDIR)
 
 #-----------#
 #  Release  #
 #-----------#
 
-$(OBJDIR)/%.o:	src/$(BASIC_DIR)/%.c | $(OBJDIR)
+$(RELEASE_OBJDIR)/%.o:	src/$(BASIC_DIR)/%.c | $(RELEASE_OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o:	src/$(EXTRAS_DIR)/%.c | $(OBJDIR)
+$(RELEASE_OBJDIR)/%.o:	src/$(EXTRAS_DIR)/%.c | $(RELEASE_OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o:	src/$(STD_DIR)/%.c | $(OBJDIR)
+$(RELEASE_OBJDIR)/%.o:	src/$(STD_DIR)/%.c | $(RELEASE_OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o:	src/$(STRARR_DIR)/%.c | $(OBJDIR)
+$(RELEASE_OBJDIR)/%.o:	src/$(STRARR_DIR)/%.c | $(RELEASE_OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o:	src/$(RELEASE_CORE_DIR)/%.c | $(OBJDIR)
+$(RELEASE_OBJDIR)/%.o:	src/$(RELEASE_CORE_DIR)/%.c | $(RELEASE_OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJDIR)/%.o:	src/$(RELEASE_ERROR_DIR)/%.c | $(OBJDIR)
+$(RELEASE_OBJDIR)/%.o:	src/$(RELEASE_ERROR_DIR)/%.c | $(RELEASE_OBJDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 #---------#
 #  Debug  #
 #---------#
 
-$(OBJDIRD)/%d.o:	src/$(BASIC_DIR)/%.c | $(OBJDIRD)
+$(DEBUG_OBJDIR)/%d.o:	src/$(BASIC_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(OBJDIRD)/%d.o:	src/$(EXTRAS_DIR)/%.c | $(OBJDIRD)
+$(DEBUG_OBJDIR)/%d.o:	src/$(EXTRAS_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(OBJDIRD)/%d.o:	src/$(STD_DIR)/%.c | $(OBJDIRD)
+$(DEBUG_OBJDIR)/%d.o:	src/$(STD_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(OBJDIRD)/%d.o:	src/$(STRARR_DIR)/%.c | $(OBJDIRD)
+$(DEBUG_OBJDIR)/%d.o:	src/$(STRARR_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(OBJDIRD)/%d.o:	src/$(DEBUG_CORE_DIR)/%.c | $(OBJDIRD)
+$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_CORE_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(OBJDIRD)/%d.o:	src/$(DEBUG_ERROR_DIR)/%.c | $(OBJDIRD)
+$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_ERROR_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(NAME):		$(OBJS)
-	@ar -rcs $(NAME) $(OBJS)
+$(RELEASE_NAME):		$(RELEASE_OBJS)
+	@ar -rcs $(RELEASE_NAME) $(RELEASE_OBJS)
 	@echo "Compiled Leaky"
 
-$(NAMED):		$(OBJSD)
-	@ar -rcs $(NAMED) $(OBJSD)
+$(DEBUG_NAME):		$(DEBUG_OBJS)
+	@ar -rcs $(DEBUG_NAME) $(DEBUG_OBJS)
 	@echo "Compiled Leaky"
 
 .PHONY: clean
 clean:
-	@rm -rf $(OBJDIR)
-	@rm -rf $(OBJDIRD)
+	@rm -rf $(RELEASE_OBJDIR)
+	@rm -rf $(DEBUG_OBJDIR)
 
 .PHONY: fclean
 fclean: clean
-	@rm -f $(NAME)
-	@rm -f $(NAMED)
+	@rm -f $(RELEASE_NAME)
+	@rm -f $(DEBUG_NAME)
 
 .PHONY: re
 re: fclean all

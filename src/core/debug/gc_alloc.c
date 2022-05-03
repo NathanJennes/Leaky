@@ -28,10 +28,6 @@ void	*gc_alloc(size_t size)
 		return (NULL);
 	}
 	allocator->malloc_calls++;
-#ifdef DEBUG
-	printf("Leaky Allocating\n");
-	gc_print_status();
-#endif
 	if (!gc_own(ptr))
 		return (NULL);
 	return (ptr);
@@ -50,10 +46,6 @@ void	*gct_alloc(size_t size)
 		return (NULL);
 	}
 	allocator->malloc_calls++;
-#ifdef DEBUG
-	printf("Leaky Allocating Temporary\n");
-	gc_print_status();
-#endif
 	if (!gct_own(ptr))
 		return (NULL);
 	return (ptr);
@@ -72,10 +64,6 @@ void	*gc_ialloc(size_t size)
 		return (NULL);
 	}
 	allocator->malloc_calls++;
-#ifdef DEBUG
-	printf("Leaky Allocating Internal\n");
-	gc_print_status();
-#endif
 	if (!gc_iown(ptr))
 		return (NULL);
 	return (ptr);

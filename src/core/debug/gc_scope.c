@@ -67,9 +67,9 @@ static int	is_legal_scope(t_gc *allocator, int mode)
 	{
 		if (allocator->current_scope == UINT64_MAX)
 			return (gc_error(gc_error_scope_overflow()));
-		return (1);
+		return (LK_TRUE);
 	}
 	if (allocator->current_scope <= 0)
 		return (gc_error(gc_error_scope_underflow()));
-	return (1);
+	return (LK_TRUE);
 }

@@ -21,7 +21,7 @@ int	can_change_settings(void)
 	if (allocator->ptrs_count)
 	{
 		gc_add_error(gc_error_settings_after_allocation());
-		return (0);
+		return (LK_FALSE);
 	}
-	return (1);
+	return (LK_TRUE);
 }

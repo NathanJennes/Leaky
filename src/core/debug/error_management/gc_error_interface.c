@@ -6,12 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:43:34 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 14:39:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 17:24:11 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <printf.h>
 #include "src/core/debug/core.h"
+#include "leaky.h"
 
 int	gc_failed(void)
 {
@@ -19,8 +20,8 @@ int	gc_failed(void)
 
 	allocator = gc_get();
 	if (allocator->last_error)
-		return (1);
-	return (0);
+		return (LK_TRUE);
+	return (LK_FALSE);
 }
 
 const char	*gc_get_last_error(void)

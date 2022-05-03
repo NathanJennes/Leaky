@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:42:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 19:14:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 17:30:19 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	gc_grow(void)
 	if (!new_ptr)
 	{
 		gc_error(gc_error_allocation());
-		return (0);
+		return (LK_FAILURE);
 	}
 	gc_memmove(new_ptr, allocator->pointers,
 		allocator->capacity * sizeof(t_ptr));
@@ -36,7 +36,7 @@ int	gc_grow(void)
 	allocator->pointers = new_ptr;
 	allocator->capacity = new_size;
 	allocator->malloc_calls++;
-	return (1);
+	return (LK_SUCCESS);
 }
 
 int	gc_must_grow(void)
@@ -45,8 +45,8 @@ int	gc_must_grow(void)
 
 	allocator = gc_get();
 	if (allocator->ptrs_count >= allocator->capacity)
-		return (1);
-	return (0);
+		return (LK_TRUE);
+	return (LK_FALSE);
 }
 
 static size_t	get_new_size(t_gc *allocator)

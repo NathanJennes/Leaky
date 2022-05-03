@@ -28,15 +28,15 @@ int	gc_add_child(t_ptr *ptr, t_ptr *child)
 	if (has_child(ptr, child))
 		return (gc_add_error(gc_error_attach_same_parent()));
 	if (!ptr->childs && !init_childs(ptr))
-		return (0);
+		return (LK_FAILURE);
 	if (ptr->child_capacity == ptr->child_count && !grow_childs(ptr))
-		return (0);
+		return (LK_FAILURE);
 	i = 0;
 	while (i < ptr->child_capacity && ptr->childs[i])
 		i++;
 	ptr->childs[i] = child;
 	ptr->child_count++;
-	return (1);
+	return (LK_SUCCESS);
 }
 
 int	gc_remove_child(t_ptr *ptr, t_ptr *child)
@@ -55,7 +55,7 @@ int	gc_remove_child(t_ptr *ptr, t_ptr *child)
 		ptr->childs[i] = NULL;
 		ptr->child_count--;
 	}
-	return (1);
+	return (LK_SUCCESS);
 }
 
 static int	init_childs(t_ptr *ptr)
@@ -64,7 +64,7 @@ static int	init_childs(t_ptr *ptr)
 	if (!ptr->childs)
 		return (gc_error(gc_error_allocation()));
 	ptr->child_capacity = 5;
-	return (1);
+	return (LK_SUCCESS);
 }
 
 static int	grow_childs(t_ptr *ptr)
@@ -85,7 +85,7 @@ static int	grow_childs(t_ptr *ptr)
 	ptr->child_capacity = new_parent_capacity;
 	gc_free(ptr->childs);
 	ptr->childs = new;
-	return (1);
+	return (LK_SUCCESS);
 }
 
 static int	has_child(t_ptr *ptr, t_ptr *child)
@@ -93,13 +93,13 @@ static int	has_child(t_ptr *ptr, t_ptr *child)
 	size_t	i;
 
 	if (!ptr->childs)
-		return (0);
+		return (LK_FALSE);
 	i = 0;
 	while (i < ptr->child_capacity)
 	{
 		if (ptr->childs[i] == child)
-			return (1);
+			return (LK_TRUE);
 		i++;
 	}
-	return (0);
+	return (LK_FALSE);
 }
