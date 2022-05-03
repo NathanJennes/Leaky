@@ -33,3 +33,8 @@ const char	*gc_error_detach_not_parent(void)
 	return ("Leaky: Trying to detach a pointer from it's parent but "
 		"it didn't had that parent");
 }
+
+const char	*gc_error_own_twice(void)
+{
+	return ("Leaky: trying to own a pointer that Leaky already owns");
+}

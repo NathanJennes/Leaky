@@ -15,3 +15,8 @@ const char	*gc_error_no_exit_callback(void)
 	return ("Leaky: A fatal error occurred but "
 		"your callback didn't exit the program");
 }
+
+const char	*gc_error_own_twice(void)
+{
+	return ("Leaky: trying to own a pointer that Leaky already owns");
+}

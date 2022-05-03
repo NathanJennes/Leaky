@@ -430,13 +430,6 @@ size_t		gc_strarray_size(char **array);
 //----
 const char	*gc_get_last_error(void);
 
-# ifdef DEBUG
-//----
-//  Returns an array of error strings. You should not free or modify it.
-//----
-const char	**gc_get_errors(void);
-# endif
-
 //----
 //  Get the error message when an allocation crashes.
 //--
@@ -466,6 +459,16 @@ const char	*gc_error_scope_overflow(void);
 const char	*gc_error_scope_underflow(void);
 
 //----
+//  Get the error message when you try to own a pointer that
+//  already belongs to Leaky.
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_own_twice()) ...
+//----
+const char	*gc_error_own_twice(void);
+
+//----
 //  Get the error message when you try to make a pointer dependent from
 //    a parent, but the pointer already has the maximum amount of parents.
 //--
@@ -476,6 +479,11 @@ const char	*gc_error_scope_underflow(void);
 const char	*gc_error_too_much_parents(void);
 
 # ifdef DEBUG
+//----
+//  Returns an array of error strings. You should not free or modify it.
+//----
+const char	**gc_get_errors(void);
+
 //----
 //  Get the error message when you get too many errors.
 //--
