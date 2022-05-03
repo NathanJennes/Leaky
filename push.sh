@@ -9,9 +9,8 @@ fi
 make re
 
 if (( $? != 0 )); then
-  exit
-else
   echo "Make error!"
+  exit
 fi
 
 make fclean

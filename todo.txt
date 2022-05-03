@@ -2,3 +2,9 @@ Reference counting for child/parents
 -> now if a parent gets freed, all its childs gets freed aswell, even if it had more parents
 
 Be able to catch scope changes
+
+Difference error/warning
+
+Refactor: Create interfaces for all core functions so that code isn't repeated 10 times
+
+Add a LEAKY_DEBUG preprocessor in leaky.h so that debug only functions are not shown by default

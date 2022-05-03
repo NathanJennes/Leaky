@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "leaky.h"
-#include "src/core/core.h"
+#include "src/core/Release/core.h"
 
 char	*gc_strdup(const char *s1)
 {

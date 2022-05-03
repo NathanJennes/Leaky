@@ -26,6 +26,9 @@
 # define LK_FALSE 0
 # define LK_TRUE 1
 
+# define LK_FAILURE 0
+# define LK_SUCCESS 1
+
 typedef struct s_gc	t_gc;
 
 //----IMPORTANT----
@@ -33,6 +36,28 @@ typedef struct s_gc	t_gc;
 //    gc_free() / gc_destroy() / gc_clean() / gc_scope_end().
 //  Otherwise, double free might occur.
 //  Best practice is to only use gc_* functions.
+//----
+
+//----
+//  Leaky in Release/Debug
+//--
+//  You can compile leaky in Release mode by calling make or make re.
+//  You can also compile it in debug mode by calling make debug or make debug_re
+//
+//  The Debug version of the lib will be called libleakyd.a, so make sure to
+//  link with -lleakyd in Debug mode.
+//--
+//  By default, this header will only show functions for Release mode.
+//  If you want to access functions for debug purposes, you must define
+//  the preprocessor macro LEAKY_DEBUG somewhere in your code or
+//  at compilation time.
+//--
+//  Release mode will offer the best performances, while debug mode will
+//  accumulate warnings so that you can use see what's wrong with your code.
+//  Debug mode also contains symbolization from fsanitize=address.
+//--
+//  When compiling in Release mode, debug features are physically nor present
+//  the generated lib to be as fast as possible.
 //----
 
 //--------//
@@ -86,13 +111,6 @@ void		gc_clean_on_error(int clean_on_error);
 //    time before needing to do any king of reallocation.
 //----
 void		gc_set_default_capacity(size_t capacity);
-
-//----
-//  Toggles on or off warnings.
-//--
-//  This parameter is optional.
-//----
-void		gc_ignore_warnings(int ignore_warnings);
 
 //----
 //  Works like malloc().
@@ -154,7 +172,7 @@ void		gc_destroy(void **ptr);
 void		gc_clean(void);
 
 //----
-//  Returns 1 if an error has occured in Leaky.
+//  Returns LK_TRUE if an error has occured in Leaky.
 //----
 int			gc_failed(void);
 
@@ -412,10 +430,12 @@ size_t		gc_strarray_size(char **array);
 //----
 const char	*gc_get_last_error(void);
 
+# ifdef DEBUG
 //----
 //  Returns an array of error strings. You should not free or modify it.
 //----
 const char	**gc_get_errors(void);
+# endif
 
 //----
 //  Get the error message when an allocation crashes.
@@ -455,6 +475,7 @@ const char	*gc_error_scope_underflow(void);
 //----
 const char	*gc_error_too_much_parents(void);
 
+# ifdef DEBUG
 //----
 //  Get the error message when you get too many errors.
 //--
@@ -571,6 +592,7 @@ const char	*gc_error_attach_same_parent(void);
 //    if (gc_get_last_error() == gc_error_detach_not_parent()) ...
 //----
 const char	*gc_error_detach_not_parent(void);
+#endif
 
 //----
 //  Returns the current number of allocated pointers.

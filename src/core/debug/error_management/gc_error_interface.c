@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_strarray_init.c                                 :+:      :+:    :+:   */
+/*   gc_error_interface.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 15:24:33 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/13 15:43:34 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/03 14:39:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "leaky.h"
+#include <printf.h>
 #include "src/core/Release/core.h"
 
-char	**gc_strarray_init(void)
+int	gc_failed(void)
 {
-	char	**array;
+	t_gc	*allocator;
 
-	array = gc_calloc(1, sizeof (char *));
-	return (array);
+	allocator = gc_get();
+	if (allocator->last_error)
+		return (1);
+	return (0);
 }
 
-char	**gct_strarray_init(void)
+const char	*gc_get_last_error(void)
 {
-	char	**array;
+	t_gc	*allocator;
 
-	array = gct_calloc(1, sizeof(char *));
-	return (array);
+	allocator = gc_get();
+	return (allocator->last_error);
 }
 
-char	**gc_istrarray_init(void)
+const char	**gc_get_errors(void)
 {
-	char	**array;
+	t_gc	*allocator;
 
-	array = gc_icalloc(1, sizeof(char *));
-	return (array);
+	allocator = gc_get();
+	return ((const char **)(allocator->errors));
 }

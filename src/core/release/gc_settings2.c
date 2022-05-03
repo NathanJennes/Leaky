@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_strarray_init.c                                 :+:      :+:    :+:   */
+/*   gc_settings2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 15:24:33 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/13 16:26:03 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/13 16:27:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "core.h"
 #include "leaky.h"
-#include "src/core/Release/core.h"
 
-char	**gc_strarray_init(void)
+int	can_change_settings(void)
 {
-	char	**array;
+	t_gc	*allocator;
 
-	array = gc_calloc(1, sizeof (char *));
-	return (array);
-}
-
-char	**gct_strarray_init(void)
-{
-	char	**array;
-
-	array = gct_calloc(1, sizeof(char *));
-	return (array);
-}
-
-char	**gc_istrarray_init(void)
-{
-	char	**array;
-
-	array = gc_icalloc(1, sizeof(char *));
-	return (array);
+	allocator = gc_get();
+	if (allocator->ptrs_count)
+		return (LK_FALSE);
+	return (LK_TRUE);
 }

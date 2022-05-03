@@ -5,29 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/13 15:43:34 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 14:29:29 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/03 14:37:30 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/03 14:41:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <printf.h>
+#include <stdio.h>
 #include "src/core/core.h"
 
-#ifdef DEBUG
 static void	print_ptr_childs(t_ptr ptr);
-#endif
 
-int	gc_failed(void)
-{
-	t_gc	*allocator;
-
-	allocator = gc_get();
-	if (allocator->last_error)
-		return (1);
-	return (0);
-}
-
-#ifdef DEBUG
 void	gc_print_status(void)
 {
 	size_t	i;
@@ -70,21 +57,4 @@ static void	print_ptr_childs(t_ptr ptr)
 			printf("\t\t[%lu]:\t%p\n", i, ptr.childs[i]->address);
 		i++;
 	}
-}
-#endif
-
-const char	*gc_get_last_error(void)
-{
-	t_gc	*allocator;
-
-	allocator = gc_get();
-	return (allocator->last_error);
-}
-
-const char	**gc_get_errors(void)
-{
-	t_gc	*allocator;
-
-	allocator = gc_get();
-	return ((const char **)(allocator->errors));
 }

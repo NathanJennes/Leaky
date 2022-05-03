@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_strarray_init.c                                 :+:      :+:    :+:   */
+/*   gc_clean.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/04 14:26:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 15:24:33 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/11 14:34:20 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/02 14:55:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
+#include <printf.h>
+#include "core.h"
 #include "leaky.h"
-#include "src/core/Release/core.h"
 
-char	**gc_strarray_init(void)
+void	gc_clean(void)
 {
-	char	**array;
+	t_gc	*allocator;
+	size_t	i;
 
-	array = gc_calloc(1, sizeof (char *));
-	return (array);
-}
-
-char	**gct_strarray_init(void)
-{
-	char	**array;
-
-	array = gct_calloc(1, sizeof(char *));
-	return (array);
-}
-
-char	**gc_istrarray_init(void)
-{
-	char	**array;
-
-	array = gc_icalloc(1, sizeof(char *));
-	return (array);
+	allocator = gc_get();
+	i = 0;
+	while (i < allocator->capacity)
+	{
+		if (allocator->pointers[i].address)
+			free(allocator->pointers[i].address);
+		i++;
+	}
+	free(allocator->pointers);
+	gc_memset(allocator, 0, sizeof (t_gc));
 }
