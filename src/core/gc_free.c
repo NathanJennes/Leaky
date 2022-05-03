@@ -6,11 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/02 17:42:58 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 14:32:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "core.h"
 #include "leaky.h"
 
@@ -32,6 +33,10 @@ int	gc_free(void *ptr)
 	free_childs(internal_ptr);
 	update_parents(internal_ptr);
 	free_ptr(internal_ptr);
+#ifdef DEBUG
+	printf("Leaky Freeing\n");
+	gc_print_status();
+#endif
 	return (1);
 }
 
@@ -78,22 +83,13 @@ static void	update_parents(t_ptr *ptr)
 {
 	t_gc	*allocator;
 	size_t	i;
-	size_t	j;
 
 	allocator = gc_get();
 	i = 0;
 	while (i < allocator->capacity)
 	{
 		if (&allocator->pointers[i] != ptr && allocator->pointers[i].childs)
-		{
-			j = 0;
-			while (j < allocator->pointers[i].child_capacity)
-			{
-				if (allocator->pointers[i].childs[j] == ptr)
-					allocator->pointers[i].childs[j] = NULL;
-				j++;
-			}
-		}
+			gc_remove_child(&allocator->pointers[i], ptr);
 		i++;
 	}
 }

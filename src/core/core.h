@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 14:40:05 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 14:14:12 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int			gc_remove_child(t_ptr *ptr, t_ptr *child);
 int			gc_error(const char *msg);
 int			gc_add_error(const char *msg);
 int			can_change_settings(void);
+void		gc_print_status(void);
 
 t_ptr		gc_null_ptr(void);
 t_ptr		*gc_get_internal_ptr(void *ptr);

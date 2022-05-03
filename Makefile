@@ -3,7 +3,7 @@ NAMED		:=		libleakyd.a
 
 INC_DIR		:=		-I.
 
-CFLAGSD		:=		-Wall -Werror -Wextra -o2 $(INC_DIR) -fsanitize=address
+CFLAGSD		:=		-Wall -Werror -Wextra -o2 $(INC_DIR) -fsanitize=address -DDEBUG
 
 CFLAGS		:=		-Wall -Werror -Wextra -o2 $(INC_DIR)
 
