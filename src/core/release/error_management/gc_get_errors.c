@@ -18,13 +18,13 @@ const char	*gc_error_allocation(void)
 const char	*gc_error_scope_overflow(void)
 {
 	return ("Leaky: Scope overflow! "
-			"(Do you have a gc_scope_start() inside a while() ?)");
+		"(Do you have a gc_scope_start() inside a while() ?)");
 }
 
 const char	*gc_error_scope_underflow(void)
 {
 	return ("Leaky: Scope underflow! "
-			"(Do you have a gc_scope_end() inside a while() ?)");
+		"(Do you have a gc_scope_end() inside a while() ?)");
 }
 
 const char	*gc_error_errors_overflow(void)
@@ -35,5 +35,5 @@ const char	*gc_error_errors_overflow(void)
 const char	*gc_error_too_much_parents(void)
 {
 	return ("Leaky: Trying to attach a pointer to a parent but "
-			"it already has the maximum amount of parents");
+		"it already has the maximum amount of parents");
 }

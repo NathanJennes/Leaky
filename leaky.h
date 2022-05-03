@@ -598,7 +598,7 @@ const char	*gc_error_detach_not_parent(void);
 //  For Debug purposes.
 //----
 void		gc_print_status(void);
-#endif
+# endif
 
 //----
 //  Returns the current number of allocated pointers.

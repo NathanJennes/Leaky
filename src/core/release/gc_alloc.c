@@ -15,19 +15,15 @@
 #include "core.h"
 #include "leaky.h"
 
+static void	*alloc(size_t size);
+
 void	*gc_alloc(size_t size)
 {
-	t_gc	*allocator;
 	void	*ptr;
 
-	allocator = gc_get();
-	ptr = malloc(size);
+	ptr = alloc(size);
 	if (!ptr)
-	{
-		gc_error(gc_error_allocation());
-		return (NULL);
-	}
-	allocator->malloc_calls++;
+		return (ptr);
 	if (!gc_own(ptr))
 		return (NULL);
 	return (ptr);
@@ -35,23 +31,29 @@ void	*gc_alloc(size_t size)
 
 void	*gct_alloc(size_t size)
 {
-	t_gc	*allocator;
 	void	*ptr;
 
-	allocator = gc_get();
-	ptr = malloc(size);
+	ptr = alloc(size);
 	if (!ptr)
-	{
-		gc_error(gc_error_allocation());
-		return (NULL);
-	}
-	allocator->malloc_calls++;
+		return (ptr);
 	if (!gct_own(ptr))
 		return (NULL);
 	return (ptr);
 }
 
 void	*gc_ialloc(size_t size)
+{
+	void	*ptr;
+
+	ptr = alloc(size);
+	if (!ptr)
+		return (ptr);
+	if (!gc_iown(ptr))
+		return (NULL);
+	return (ptr);
+}
+
+static void	*alloc(size_t size)
 {
 	t_gc	*allocator;
 	void	*ptr;
@@ -64,7 +66,5 @@ void	*gc_ialloc(size_t size)
 		return (NULL);
 	}
 	allocator->malloc_calls++;
-	if (!gc_iown(ptr))
-		return (NULL);
 	return (ptr);
 }
