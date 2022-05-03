@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 void	gc_destroy(void **ptr)

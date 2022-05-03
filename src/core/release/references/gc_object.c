@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "src/core/release/core.h"
 
 void	gc_object_start(void *ptr)
 {

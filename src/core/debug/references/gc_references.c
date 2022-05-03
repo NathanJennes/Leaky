@@ -14,7 +14,7 @@
 # include <stdint.h>
 #endif
 #include <stdlib.h>
-#include "core.h"
+#include "src/core/debug/core.h"
 #include "leaky.h"
 
 static int	init_childs(t_ptr *ptr);

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 void	gc_set_callback(int (*callback)(void *))

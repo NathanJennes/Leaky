@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 int	gc_attach(void *ptr, void *parent)

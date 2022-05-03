@@ -6,13 +6,12 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/03 15:35:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 17:31:23 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
-#include "core.h"
+#include "src/core/debug/core.h"
 #include "leaky.h"
 
 static void	free_childs(t_ptr *ptr);

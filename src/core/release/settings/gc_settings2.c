@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_destroy.c                                       :+:      :+:    :+:   */
+/*   gc_settings2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/11 14:33:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 19:13:31 by njennes          ###   ########.fr       */
+/*   Created: 2022/04/13 16:26:03 by njennes           #+#    #+#             */
+/*   Updated: 2022/04/13 16:27:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
-void	gc_destroy(void **ptr)
+int	can_change_settings(void)
 {
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	if (!ptr)
-		return ;
-	gc_free(*ptr);
-	*ptr = NULL;
+	if (allocator->ptrs_count)
+		return (LK_FALSE);
+	return (LK_TRUE);
 }

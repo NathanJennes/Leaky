@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <printf.h>
-#include "core.h"
+#include "src/core/debug/core.h"
 #include "leaky.h"
 
 static void	check_for_warnings(t_gc *allocator);

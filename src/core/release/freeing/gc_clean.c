@@ -11,8 +11,7 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <printf.h>
-#include "core.h"
+#include "src/core/release/core.h"
 #include "leaky.h"
 
 void	gc_clean(void)

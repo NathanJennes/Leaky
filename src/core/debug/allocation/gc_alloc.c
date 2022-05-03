@@ -6,13 +6,13 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:41:41 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 17:43:55 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/03 17:44:26 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <stdio.h>
-#include "core.h"
+#include "src/core/debug/core.h"
 #include "leaky.h"
 
 static void	*alloc(size_t size);
