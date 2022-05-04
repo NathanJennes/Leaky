@@ -10,3 +10,7 @@ Difference error/warning
 Refactor: Create interfaces for all core functions so that code isn't repeated 10 times
 
 Check errors on parents/child additions
+
+Check for circular dependencies
+
+Optimize freeing by skipping updating childs/parents for pointers that will be freed

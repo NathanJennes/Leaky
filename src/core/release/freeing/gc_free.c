@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/03 15:35:08 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 13:43:37 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,35 +56,30 @@ void	gct_free(void)
 
 static void	free_childs(t_ptr *ptr)
 {
-	t_gc	*allocator;
 	size_t	i;
 
 	if (!ptr->childs)
 		return ;
-	allocator = gc_get();
 	i = 0;
 	while (i < ptr->child_capacity)
 	{
 		if (ptr->childs[i])
-		{
-			free_childs(ptr->childs[i]);
-			free_ptr(ptr->childs[i]);
-		}
+			gc_free(ptr->childs[i]->address);
 		i++;
 	}
 }
 
 static void	update_parents(t_ptr *ptr)
 {
-	t_gc	*allocator;
 	size_t	i;
 
-	allocator = gc_get();
+	if (!ptr->parents)
+		return ;
 	i = 0;
-	while (i < allocator->capacity)
+	while (i < ptr->parent_capacity)
 	{
-		if (&allocator->pointers[i] != ptr && allocator->pointers[i].childs)
-			gc_remove_child(&allocator->pointers[i], ptr);
+		if (ptr->parents[i])
+			gc_remove_child(ptr->parents[i], ptr);
 		i++;
 	}
 }
@@ -102,5 +97,7 @@ static void	free_ptr(t_ptr *ptr)
 	free(ptr->address);
 	if (ptr->childs)
 		gc_free(ptr->childs);
+	if (ptr->parents)
+		gc_free(ptr->parents);
 	*ptr = gc_null_ptr();
 }
