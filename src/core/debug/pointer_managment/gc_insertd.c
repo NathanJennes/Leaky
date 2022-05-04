@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_object.c                                        :+:      :+:    :+:   */
+/*   gc_insertd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 11:00:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/15 11:08:05 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/03 18:38:40 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/core/debug/core.h"
+#include "src/core/debug/cored.h"
+#include "leaky.h"
 
-void	gc_object_start(void *ptr)
+int	gc_can_insert(void *ptr)
 {
 	t_gc	*allocator;
 
+	if (!ptr)
+		return (LK_FALSE);
+	if (gc_contains_ptr(ptr))
+		return (gc_add_error(gc_error_own_twice()));
 	allocator = gc_get();
-	allocator->current_parent = gc_get_internal_ptr(ptr);
-}
-
-void	gc_object_end(void)
-{
-	t_gc	*allocator;
-
-	allocator = gc_get();
-	allocator->current_parent = NULL;
+	allocator->new_ptr = ptr;
+	if (gc_must_grow() && !gc_grow())
+		return (LK_FALSE);
+	return (LK_TRUE);
 }

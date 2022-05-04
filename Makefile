@@ -64,28 +64,28 @@ RELEASE_PTR_MGT			:=		gc_own.c gc_grow.c gc_insert.c
 #---------#
 
 DEBUG_CORE_DIR			:=		$(CORE_DIR)/debug
-DEBUG_CORE				:=		gc_gc.c gc_grow.c gc_own.c																\
-								gc_utils.c																				\
-								gc_init.c gc_scope.c																	\
-								gc_debug.c
+DEBUG_CORE				:=		gc_gcd.c gc_growd.c gc_ownd.c															\
+								gc_utilsd.c																				\
+								gc_initd.c gc_scoped.c																	\
+								gc_debugd.c
 
 DEBUG_ERROR_DIR			:=		$(DEBUG_CORE_DIR)/error_management
-DEBUG_ERROR				:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_get_errors3.c gc_error.c
+DEBUG_ERROR				:=		gc_error_interfaced.c gc_get_errorsd.c gc_get_errors2d.c gc_get_errors3d.c gc_errord.c
 
 DEBUG_FREEING_DIR		:=		$(DEBUG_CORE_DIR)/freeing
-DEBUG_FREEING			:=		gc_clean.c gc_destroy.c gc_free.c
+DEBUG_FREEING			:=		gc_cleand.c gc_destroyd.c gc_freed.c
 
 DEBUG_SETTINGS_DIR		:=		$(DEBUG_CORE_DIR)/settings
-DEBUG_SETTINGS			:=		gc_settings.c gc_settings2.c
+DEBUG_SETTINGS			:=		gc_settingsd.c gc_settings2d.c
 
 DEBUG_REFERENCES_DIR	:=		$(DEBUG_CORE_DIR)/references
-DEBUG_REFERENCES		:=		gc_object.c gc_attach.c gc_references.c
+DEBUG_REFERENCES		:=		gc_objectd.c gc_attachd.c gc_referencesd.c
 
 DEBUG_ALLOCATION_DIR	:=		$(DEBUG_CORE_DIR)/allocation
-DEBUG_ALOCATION			:=		gc_alloc.c
+DEBUG_ALOCATION			:=		gc_allocd.c
 
 DEBUG_PTR_MGT_DIR		:=		$(DEBUG_CORE_DIR)/pointer_managment
-DEBUG_PTR_MGT			:=		gc_own.c gc_grow.c gc_insert.c
+DEBUG_PTR_MGT			:=		gc_ownd.c gc_growd.c gc_insertd.c
 
 
 RELEASE_OBJDIR		:=	obj
@@ -103,17 +103,17 @@ RELEASE_OBJS		:=	$(addprefix $(RELEASE_OBJDIR)/, $(BASIC:.c=.o))				\
 						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_ALLOCATION:.c=.o))\
 						$(addprefix $(RELEASE_OBJDIR)/, $(RELEASE_PTR_MGT:.c=.o))	\
 
-DEBUG_OBJS			:=	$(addprefix $(DEBUG_OBJDIR)/, $(BASIC:.c=d.o))				\
-						$(addprefix $(DEBUG_OBJDIR)/, $(EXTRAS:.c=d.o))				\
-						$(addprefix $(DEBUG_OBJDIR)/, $(STD:.c=d.o))				\
-						$(addprefix $(DEBUG_OBJDIR)/, $(STRARR:.c=d.o))				\
-						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_CORE:.c=d.o))			\
-						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_ERROR:.c=d.o))		\
-						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_FREEING:.c=d.o))		\
-						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_SETTINGS:.c=d.o))		\
-						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_REFERENCES:.c=d.o))	\
-						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_ALLOCATION:.c=d.o))	\
-						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_PTR_MGT:.c=d.o))		\
+DEBUG_OBJS			:=	$(addprefix $(DEBUG_OBJDIR)/, $(BASIC:.c=.o))				\
+						$(addprefix $(DEBUG_OBJDIR)/, $(EXTRAS:.c=.o))				\
+						$(addprefix $(DEBUG_OBJDIR)/, $(STD:.c=.o))					\
+						$(addprefix $(DEBUG_OBJDIR)/, $(STRARR:.c=.o))				\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_CORE:.c=.o))			\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_ERROR:.c=.o))			\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_FREEING:.c=.o))		\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_SETTINGS:.c=.o))		\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_REFERENCES:.c=.o))	\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_ALLOCATION:.c=.o))	\
+						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_PTR_MGT:.c=.o))		\
 
 DEPENDS		:=		$(DEBUG_OBJS:.o=.d) $(RELEASE_OBJS:.o=.d)
 
@@ -170,37 +170,37 @@ $(RELEASE_OBJDIR)/%.o:	src/$(RELEASE_PTR_MGT_DIR)/%.c | $(RELEASE_OBJDIR)
 #  Debug  #
 #---------#
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(BASIC_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(BASIC_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(EXTRAS_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(EXTRAS_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(STD_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(STD_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(STRARR_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(STRARR_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_CORE_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(DEBUG_CORE_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_ERROR_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(DEBUG_ERROR_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_FREEING_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(DEBUG_FREEING_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_SETTINGS_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(DEBUG_SETTINGS_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_REFERENCES_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(DEBUG_REFERENCES_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_ALLOCATION_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(DEBUG_ALLOCATION_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
-$(DEBUG_OBJDIR)/%d.o:	src/$(DEBUG_PTR_MGT_DIR)/%.c | $(DEBUG_OBJDIR)
+$(DEBUG_OBJDIR)/%.o:	src/$(DEBUG_PTR_MGT_DIR)/%.c | $(DEBUG_OBJDIR)
 	@$(CC) $(CFLAGSD) -c $< -o $@
 
 $(RELEASE_NAME):		$(RELEASE_OBJS)
@@ -233,4 +233,4 @@ both: $(RELEASE_NAME) $(DEBUG_NAME)
 .PHONY: both_re
 both_re: re debug_re
 
-include $(DEPENDS)
+-include $(DEPENDS)

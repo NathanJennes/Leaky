@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_attach.c                                        :+:      :+:    :+:   */
+/*   gc_attachd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:21:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 17:24:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/core/debug/core.h"
+#include "src/core/debug/cored.h"
 #include "leaky.h"
 
 int	gc_attach(void *ptr, void *parent)

@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_clean.c                                         :+:      :+:    :+:   */
+/*   gc_cleand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 14:34:20 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/02 14:55:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "src/core/debug/core.h"
+#include "src/core/debug/cored.h"
 #include "leaky.h"
 
 static void	check_for_warnings(t_gc *allocator);

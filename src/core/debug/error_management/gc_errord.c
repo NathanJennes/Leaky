@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_error.c                                         :+:      :+:    :+:   */
+/*   gc_errord.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:54:56 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 17:23:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "src/core/debug/core.h"
+#include "src/core/debug/cored.h"
 #include "leaky.h"
 
 int	gc_error(const char *msg)

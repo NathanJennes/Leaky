@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_scope.c                                         :+:      :+:    :+:   */
+/*   gc_scoped.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:25 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/12 19:32:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:32 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #endif
 
 #include <stdlib.h>
-#include "core.h"
+#include "cored.h"
 #include "leaky.h"
 
 static void	free_scope(t_gc *allocator, size_t scope);

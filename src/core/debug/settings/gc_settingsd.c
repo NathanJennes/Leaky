@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_settings.c                                      :+:      :+:    :+:   */
+/*   gc_settingsd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:07:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/02 14:57:46 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "src/core/debug/core.h"
+#include "src/core/debug/cored.h"
 #include "leaky.h"
 
 void	gc_set_callback(int (*callback)(void *))

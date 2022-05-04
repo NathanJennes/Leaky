@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_references.c                                    :+:      :+:    :+:   */
+/*   gc_referencesd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:27:03 by njennes           #+#    #+#             */
-/*   Updated: 2022/04/18 15:34:37 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # include <stdint.h>
 #endif
 #include <stdlib.h>
-#include "src/core/debug/core.h"
+#include "src/core/debug/cored.h"
 #include "leaky.h"
 
 static int	init_childs(t_ptr *ptr);
