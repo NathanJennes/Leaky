@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:03:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 17:56:20 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:33:36 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	gc_add_parent(int64_t ptr, int64_t parent)
 	i = 0;
 	while (i < gc_ptr(ptr)->parent_capacity && gc_ptr(ptr)->parents[i] != -1)
 		i++;
-	gc_ptr(ptr)->parents[i] = gc_get_internal_ptr(gc_ptr(parent)->address);
+	gc_ptr(ptr)->parents[i] = parent;
 	gc_ptr(ptr)->parent_count++;
 	return (LK_SUCCESS);
 }
@@ -42,13 +42,11 @@ int	gc_add_parent(int64_t ptr, int64_t parent)
 int	gc_remove_parent(int64_t ptr, int64_t parent)
 {
 	size_t	i;
-	int64_t	parent_index;
 
 	if (!gc_ptr(ptr)->parents || !has_parent(ptr, parent))
 		return (gc_add_error(gc_error_detach_not_parent()));
-	parent_index = gc_get_internal_ptr(gc_ptr(parent)->address);
 	i = 0;
-	while (i < gc_ptr(ptr)->parent_capacity && gc_ptr(ptr)->parents[i] != parent_index)
+	while (i < gc_ptr(ptr)->parent_capacity && gc_ptr(ptr)->parents[i] != parent)
 		i++;
 	if (i < gc_ptr(ptr)->parent_capacity)
 	{
@@ -94,17 +92,13 @@ static int	grow_parents(int64_t ptr)
 static int	has_parent(int64_t ptr, int64_t parent)
 {
 	size_t	i;
-	int64_t	parent_index;
 
 	if (!gc_ptr(ptr)->parents)
-		return (LK_FALSE);
-	parent_index = gc_get_internal_ptr(gc_ptr(parent)->address);
-	if (parent_index == -1)
 		return (LK_FALSE);
 	i = 0;
 	while (i < gc_ptr(ptr)->parent_capacity)
 	{
-		if (gc_ptr(ptr)->parents[i] == parent_index)
+		if (gc_ptr(ptr)->parents[i] == parent)
 			return (LK_TRUE);
 		i++;
 	}

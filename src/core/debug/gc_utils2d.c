@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:54:10 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 17:39:34 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:29:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,11 @@ t_ptr	*gc_ptr(int64_t index)
 		return (NULL);
 	allocator = gc_get();
 	return (&allocator->pointers[index]);
+}
+
+int	gc_is_valid_ptr_index(int64_t index)
+{
+	if (index >= 0)
+		return (1);
+	return (0);
 }

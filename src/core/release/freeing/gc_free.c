@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/04 18:14:44 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:14:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	gc_free(void *ptr)
 	if (allocator->capacity == 0)
 		return (LK_FAILURE);
 	internal_ptr = gc_get_internal_ptr(ptr);
-	if (!internal_ptr)
+	if (!gc_is_valid_ptr_index(internal_ptr))
 		return (LK_FAILURE);
 	free_childs(internal_ptr);
 	update_parents(internal_ptr);

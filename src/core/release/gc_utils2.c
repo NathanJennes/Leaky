@@ -32,3 +32,10 @@ t_ptr	*gc_ptr(int64_t index)
 	allocator = gc_get();
 	return (&allocator->pointers[index]);
 }
+
+int	gc_is_valid_ptr_index(int64_t index)
+{
+	if (index >= 0)
+		return (1);
+	return (0);
+}

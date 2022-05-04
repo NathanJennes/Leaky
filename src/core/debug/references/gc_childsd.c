@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:27:03 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:07:15 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:33:02 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,15 @@ static int	grow_childs(int64_t ptr)
 static int	has_child(int64_t ptr, int64_t child)
 {
 	size_t	i;
-	int64_t	child_index;
 
-	if (!gc_ptr(ptr)->childs)
+	if (!gc_is_valid_ptr_index(child) || !gc_is_valid_ptr_index(ptr))
 		return (LK_FALSE);
-	child_index = gc_get_internal_ptr(gc_ptr(child)->address);
-	if (child_index == -1)
+	if (!gc_ptr(ptr)->childs)
 		return (LK_FALSE);
 	i = 0;
 	while (i < gc_ptr(ptr)->child_capacity)
 	{
-		if (gc_ptr(ptr)->childs[i] == child_index)
+		if (gc_ptr(ptr)->childs[i] == child)
 			return (LK_TRUE);
 		i++;
 	}

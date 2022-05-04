@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:17:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:21:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int64_t		gc_get_internal_ptr(void *ptr);
 int			gc_contains_ptr(void *ptr);
 int64_t		gc_get_current_parent(void);
 int			gc_has_global_parent(void);
+int			gc_is_valid_ptr_index(int64_t index);
 
 t_ptr		gc_create_generic_ptr(void *address);
 t_ptr		gc_create_temporary_ptr(void *address);
