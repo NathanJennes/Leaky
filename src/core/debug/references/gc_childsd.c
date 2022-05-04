@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:27:03 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 15:13:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:52:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static int	init_childs(t_ptr *ptr)
 	ptr->childs = gc_icalloc(5, sizeof (int64_t));
 	if (!ptr->childs)
 		return (gc_error(gc_error_allocation()));
+	gc_memsetl(ptr->childs, -1, 5 * sizeof (int64_t));
 	ptr->child_capacity = 5;
 	return (LK_SUCCESS);
 }
@@ -81,6 +82,7 @@ static int	grow_childs(t_ptr *ptr)
 	new = gc_icalloc(new_child_capacity, sizeof (int64_t));
 	if (!new)
 		return (gc_error(gc_error_allocation()));
+	gc_memsetl(new, -1, new_child_capacity * sizeof (int64_t));
 	gc_memmove(new, ptr->childs, ptr->child_capacity * sizeof (int64_t));
 	ptr->child_capacity = new_child_capacity;
 	gc_free(ptr->childs);
