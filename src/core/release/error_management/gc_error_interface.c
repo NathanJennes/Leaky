@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/13 15:43:34 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 15:45:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:15:35 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,9 @@ const char	*gc_get_last_error(void)
 
 	allocator = gc_get();
 	return (allocator->last_error);
+}
+
+const char	**gc_get_errors(void)
+{
+	return (NULL);
 }

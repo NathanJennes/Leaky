@@ -47,10 +47,10 @@ typedef struct s_gc	t_gc;
 //  The Debug version of the lib will be called libleakyd.a, so make sure to
 //  link with -lleakyd in Debug mode.
 //--
-//  By default, this header will only show functions for Release mode.
-//  If you want to access functions for debug purposes, you must define
-//  the preprocessor macro LEAKY_DEBUG somewhere in your code or
-//  at compilation time.
+//  All functions (Debug and Release) are always available so that you don't
+//  have to use a different code in your project depending on the target build.
+//  If you call a Debug function in Release mode,
+//  this function won't do anything.
 //--
 //  Release mode will offer the best performances, while debug mode will
 //  accumulate warnings so that you can use see what's wrong with your code.
@@ -478,7 +478,6 @@ const char	*gc_error_own_twice(void);
 //----
 const char	*gc_error_too_much_parents(void);
 
-# ifdef DEBUG
 //----
 //  Returns an array of error strings. You should not free or modify it.
 //----
@@ -606,7 +605,6 @@ const char	*gc_error_detach_not_parent(void);
 //  For Debug purposes.
 //----
 void		gc_print_status(void);
-# endif
 
 //----
 //  Returns the current number of allocated pointers.

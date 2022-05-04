@@ -42,7 +42,7 @@ RELEASE_CORE			:=		gc_gc.c gc_grow.c gc_own.c gc_alloc.c gc_free.c gc_destroy.c 
 								gc_init.c gc_scope.c																	\
 
 RELEASE_ERROR_DIR		:=		$(RELEASE_CORE_DIR)/error_management
-RELEASE_ERROR			:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_error.c
+RELEASE_ERROR			:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_get_errors3.c gc_error.c
 
 RELEASE_FREEING_DIR		:=		$(RELEASE_CORE_DIR)/freeing
 RELEASE_FREEING			:=		gc_clean.c gc_destroy.c gc_free.c

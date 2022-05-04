@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_get_errors.c                                    :+:      :+:    :+:   */
+/*   gc_get_errorsd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 15:28:20 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/03 15:45:49 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:29:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ const char	*gc_error_errors_overflow(void)
 	return ("Leaky: Errors overflow! Did you properly set-up your callback ?");
 }
 
-const char	*gc_error_too_much_parents(void)
+const char	*gc_error_clean_empty(void)
 {
-	return ("Leaky: Trying to attach a pointer to a parent but "
-		"it already has the maximum amount of parents");
+	return ("Leaky: A call to gc_clean() was done but "
+		"no memory has been allocated");
 }
