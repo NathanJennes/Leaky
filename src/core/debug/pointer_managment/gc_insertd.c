@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 18:38:40 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 12:40:18 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,18 @@ int	gc_can_insert(void *ptr)
 	if (gc_must_grow() && !gc_grow())
 		return (LK_FALSE);
 	return (LK_TRUE);
+}
+
+void	gc_insert_ptr(t_ptr ptr)
+{
+	t_gc	*allocator;
+	size_t	i;
+
+	allocator = gc_get();
+	i = allocator->first_free;
+	allocator->pointers[i] = ptr;
+	while (i < allocator->capacity && allocator->pointers[i].address)
+		i++;
+	allocator->first_free = i;
+	allocator->ptrs_count++;
 }

@@ -69,6 +69,8 @@ t_ptr		*gc_get_internal_ptr(void *ptr);
 int			gc_contains_ptr(void *ptr);
 size_t		gc_get_internal_ptr_index(t_ptr *ptr);
 
-int			gc_can_insert(void *ptr);
+t_ptr		gc_create_generic_ptr(void *address);
+t_ptr		gc_create_temporary_ptr(void *address);
+t_ptr		gc_create_internal_ptr(void *address);
 
 #endif

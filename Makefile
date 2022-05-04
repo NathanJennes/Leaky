@@ -57,7 +57,7 @@ RELEASE_ALLOCATION_DIR	:=		$(RELEASE_CORE_DIR)/allocation
 RELEASE_ALOCATION		:=		gc_alloc.c
 
 RELEASE_PTR_MGT_DIR		:=		$(RELEASE_CORE_DIR)/pointer_managment
-RELEASE_PTR_MGT			:=		gc_own.c gc_grow.c gc_insert.c
+RELEASE_PTR_MGT			:=		gc_own.c gc_grow.c gc_insert.c gc_ptr_factory.c
 
 #---------#
 #  Debug  #
@@ -85,7 +85,7 @@ DEBUG_ALLOCATION_DIR	:=		$(DEBUG_CORE_DIR)/allocation
 DEBUG_ALOCATION			:=		gc_allocd.c
 
 DEBUG_PTR_MGT_DIR		:=		$(DEBUG_CORE_DIR)/pointer_managment
-DEBUG_PTR_MGT			:=		gc_ownd.c gc_growd.c gc_insertd.c
+DEBUG_PTR_MGT			:=		gc_ownd.c gc_growd.c gc_insertd.c gc_ptr_factoryd.c
 
 
 RELEASE_OBJDIR		:=	obj
