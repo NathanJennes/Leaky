@@ -3,9 +3,9 @@ DEBUG_NAME			:=		libleakyd.a
 
 INC_DIR		:=		-I.
 
-CFLAGSD		:=		-Wall -Werror -Wextra -o2 $(INC_DIR) -fsanitize=address -DDEBUG
+CFLAGSD		:=		-Wall -Werror -Wextra -o2 -MD $(INC_DIR) -g3 -fsanitize=address -DDEBUG
 
-CFLAGS		:=		-Wall -Werror -Wextra -o2 $(INC_DIR)
+CFLAGS		:=		-Wall -Werror -Wextra -o2 -MD $(INC_DIR)
 
 CC			:=		gcc
 
@@ -115,7 +115,7 @@ DEBUG_OBJS			:=	$(addprefix $(DEBUG_OBJDIR)/, $(BASIC:.c=d.o))				\
 						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_ALLOCATION:.c=d.o))	\
 						$(addprefix $(DEBUG_OBJDIR)/, $(DEBUG_PTR_MGT:.c=d.o))		\
 
-DEPENDS		:=		$(OBJS:.o:.d)
+DEPENDS		:=		$(DEBUG_OBJS:.o=.d) $(RELEASE_OBJS:.o=.d)
 
 .PHONY: all
 all:			$(RELEASE_NAME)
@@ -233,4 +233,4 @@ both: $(RELEASE_NAME) $(DEBUG_NAME)
 .PHONY: both_re
 both_re: re debug_re
 
--include: $(DEPENDS)
+include $(DEPENDS)
