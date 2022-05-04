@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:37:30 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 19:15:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:16:02 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static void	print_ptr_parents(t_ptr ptr)
 
 	allocator = gc_get();
 	i = 0;
-	printf("\tChilds:\n");
+	printf("\tParents:\n");
 	while (i < ptr.parent_capacity)
 	{
 		if (ptr.parents[i] != -1)
