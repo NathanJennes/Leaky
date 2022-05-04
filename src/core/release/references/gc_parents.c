@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:31:44 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 15:58:12 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 17:54:02 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,93 +17,93 @@
 #include "src/core/release/core.h"
 #include "leaky.h"
 
-static int	init_parents(t_ptr *ptr);
-static int	grow_parents(t_ptr *ptr);
-static int	has_parent(t_ptr *ptr, t_ptr *parent);
+static int	init_parents(int64_t ptr);
+static int	grow_parents(int64_t ptr);
+static int	has_parent(int64_t ptr, int64_t parent);
 
-int	gc_add_parent(t_ptr *ptr, t_ptr *parent)
+int	gc_add_parent(int64_t ptr, int64_t parent)
 {
 	size_t	i;
 
 	if (has_parent(ptr, parent))
 		return (LK_FAILURE);
-	if (!ptr->parents && !init_parents(ptr))
+	if (!gc_ptr(ptr)->parents && !init_parents(ptr))
 		return (LK_FAILURE);
-	if (ptr->parent_capacity == ptr->parent_count && !grow_parents(ptr))
+	if (gc_ptr(ptr)->parent_capacity == gc_ptr(ptr)->parent_count && !grow_parents(ptr))
 		return (LK_FAILURE);
 	i = 0;
-	while (i < ptr->parent_capacity && ptr->parents[i] != -1)
+	while (i < gc_ptr(ptr)->parent_capacity && gc_ptr(ptr)->parents[i] != -1)
 		i++;
-	ptr->parents[i] = gc_get_internal_ptr_index(parent->address);
-	ptr->parent_count++;
+	gc_ptr(ptr)->parents[i] = gc_get_internal_ptr_index(gc_ptr(parent)->address);
+	gc_ptr(ptr)->parent_count++;
 	return (LK_SUCCESS);
 }
 
-int	gc_remove_parent(t_ptr *ptr, t_ptr *parent)
+int	gc_remove_parent(int64_t ptr, int64_t parent)
 {
 	size_t	i;
 	int64_t	parent_index;
 
-	if (!ptr->parents || !has_parent(ptr, parent))
+	if (!gc_ptr(ptr)->parents || !has_parent(ptr, parent))
 		return (LK_FAILURE);
-	parent_index = gc_get_internal_ptr_index(parent->address);
+	parent_index = gc_get_internal_ptr_index(gc_ptr(parent)->address);
 	i = 0;
-	while (i < ptr->parent_capacity && ptr->parents[i] != parent_index)
+	while (i < gc_ptr(ptr)->parent_capacity && gc_ptr(ptr)->parents[i] != parent_index)
 		i++;
-	if (i < ptr->parent_capacity)
+	if (i < gc_ptr(ptr)->parent_capacity)
 	{
-		ptr->parents[i] = -1;
-		ptr->parent_count--;
+		gc_ptr(ptr)->parents[i] = -1;
+		gc_ptr(ptr)->parent_count--;
 	}
 	return (LK_SUCCESS);
 }
 
-static int	init_parents(t_ptr *ptr)
+static int	init_parents(int64_t ptr)
 {
-	ptr->parents = gc_icalloc(5, sizeof (int64_t));
-	if (!ptr->parents)
+	gc_ptr(ptr)->parents = gc_icalloc(5, sizeof (int64_t));
+	if (!gc_ptr(ptr)->parents)
 		return (gc_error(gc_error_allocation()));
-	gc_memsetl(ptr->parents, -1, 5);
-	ptr->parent_capacity = 5;
+	gc_memsetl(gc_ptr(ptr)->parents, -1, 5);
+	gc_ptr(ptr)->parent_capacity = 5;
 	return (LK_SUCCESS);
 }
 
-static int	grow_parents(t_ptr *ptr)
+static int	grow_parents(int64_t ptr)
 {
 	int64_t	*new;
 	size_t	new_parent_capacity;
 
-	if (ptr->parent_capacity >= UINT64_MAX - 100)
+	if (gc_ptr(ptr)->parent_capacity >= UINT64_MAX - 100)
 		return (gc_error(gc_error_too_much_parents()));
-	if (ptr->parent_capacity > 100)
-		new_parent_capacity = ptr->parent_capacity + 100;
+	if (gc_ptr(ptr)->parent_capacity > 100)
+		new_parent_capacity = gc_ptr(ptr)->parent_capacity + 100;
 	else
-		new_parent_capacity = ptr->parent_capacity * 2;
+		new_parent_capacity = gc_ptr(ptr)->parent_capacity * 2;
 	new = gc_icalloc(new_parent_capacity, sizeof (int64_t));
 	if (!new)
 		return (gc_error(gc_error_allocation()));
 	gc_memsetl(new, -1, new_parent_capacity);
-	gc_memmove(new, ptr->parents, ptr->parent_capacity * sizeof (int64_t));
-	ptr->parent_capacity = new_parent_capacity;
-	gc_free(ptr->parents);
-	ptr->parents = new;
+	gc_memmove(new, gc_ptr(ptr)->parents, gc_ptr(ptr)->parent_capacity * sizeof (int64_t));
+	gc_ptr(ptr)->parent_capacity = new_parent_capacity;
+	gc_free(gc_ptr(ptr)->parents);
+	gc_ptr(ptr)->parents = new;
 	return (LK_SUCCESS);
 }
 
-static int	has_parent(t_ptr *ptr, t_ptr *parent)
+static int	has_parent(int64_t ptr, int64_t parent)
 {
 	size_t	i;
 	int64_t	parent_index;
 
-	if (!ptr->parents)
+	if (!gc_ptr(ptr)->parents)
 		return (LK_FALSE);
-	parent_index = gc_get_internal_ptr_index(parent->address);
+	parent_index = gc_get_internal_ptr_index(gc_ptr(parent)->address);
 	if (parent_index == -1)
 		return (LK_FALSE);
 	i = 0;
-	while (i < ptr->parent_capacity)
+	while (i < gc_ptr(ptr)->parent_capacity)
 	{
-		if (ptr->parents[i] == parent_index)
+		if (gc_ptr(ptr)->parents[i] == parent_index)
 			return (LK_TRUE);
 		i++;
 	}

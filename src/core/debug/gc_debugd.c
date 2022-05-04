@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:37:30 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 15:26:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:17:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	print_ptr_childs(t_ptr ptr);
 
 void	gc_print_status(void)
 {
-	size_t	i;
+	int64_t	i;
 	t_gc	*allocator;
 
 	allocator = gc_get();
@@ -30,7 +30,7 @@ void	gc_print_status(void)
 			i++;
 			continue ;
 		}
-		printf("\n[PTR %lu]:\t--%p--\n", i, allocator->pointers[i].address);
+		printf("\n[PTR %lld]:\t--%p--\n", i, allocator->pointers[i].address);
 		if (allocator->pointers[i].address)
 		{
 			printf("\tTemporary:\t%d\n", (int)allocator->pointers[i].temporary);

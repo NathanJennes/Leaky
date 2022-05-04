@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:48:09 by                   #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:31 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:09:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 		return (LK_FAILURE);
 	gc_memset(allocator, 0, sizeof(t_gc));
 	allocator->capacity = 100;
+	allocator->current_parent = -1;
 	allocator->pointers = ft_calloc(allocator->capacity, sizeof(t_ptr));
 	if (!allocator->pointers)
 		return (gc_error(gc_error_allocation()));
@@ -31,8 +32,8 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 size_t	gc_getfootprint(void)
 {
 	int		footprint;
-	size_t	i;
 	t_gc	*allocator;
+	int64_t	i;
 
 	allocator = gc_get();
 	i = 0;

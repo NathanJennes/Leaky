@@ -15,8 +15,8 @@
 
 int	gc_attach(void *ptr, void *parent)
 {
-	t_ptr	*internal_ptr;
-	t_ptr	*internal_parent;
+	int64_t	internal_ptr;
+	int64_t	internal_parent;
 
 	internal_ptr = gc_get_internal_ptr(ptr);
 	internal_parent = gc_get_internal_ptr(parent);
@@ -32,8 +32,8 @@ int	gc_attach(void *ptr, void *parent)
 //TODO: check this
 int	gc_detach(void *ptr, void *parent)
 {
-	t_ptr	*internal_ptr;
-	t_ptr	*internal_parent;
+	int64_t	internal_ptr;
+	int64_t	internal_parent;
 
 	internal_ptr = gc_get_internal_ptr(ptr);
 	internal_parent = gc_get_internal_ptr(parent);

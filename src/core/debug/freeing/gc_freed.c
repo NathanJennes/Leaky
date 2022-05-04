@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/04 15:04:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:04:10 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 #include "src/core/debug/cored.h"
 #include "leaky.h"
 
-static void	free_childs(t_ptr *ptr);
-static void	free_ptr(t_ptr *ptr);
-static void	update_parents(t_ptr *ptr);
+static void	free_childs(int64_t ptr);
+static void	free_ptr(int64_t ptr);
+static void	update_parents(int64_t ptr);
 
 int	gc_free(void *ptr)
 {
 	t_gc	*allocator;
-	t_ptr	*internal_ptr;
+	int64_t	internal_ptr;
 
 	allocator = gc_get();
 	if (allocator->capacity == 0)
 		return (LK_FAILURE);
 	internal_ptr = gc_get_internal_ptr(ptr);
-	if (!internal_ptr)
+	if (internal_ptr == -1)
 		return (LK_FAILURE);
 	free_childs(internal_ptr);
 	update_parents(internal_ptr);
@@ -38,7 +38,7 @@ int	gc_free(void *ptr)
 void	gct_free(void)
 {
 	t_gc	*allocator;
-	size_t	i;
+	int64_t	i;
 
 	allocator = gc_get();
 	i = 0;
@@ -46,62 +46,60 @@ void	gct_free(void)
 	{
 		if (allocator->pointers[i].temporary)
 		{
-			free_childs(&allocator->pointers[i]);
-			update_parents(&allocator->pointers[i]);
-			free_ptr(&allocator->pointers[i]);
+			free_childs(i);
+			update_parents(i);
+			free_ptr(i);
 		}
 		i++;
 	}
 }
 
-static void	free_childs(t_ptr *ptr)
+static void	free_childs(int64_t ptr)
 {
 	t_gc	*allocator;
 	size_t	i;
 
-	if (!ptr->childs)
+	if (!gc_ptr(ptr)->childs)
 		return ;
 	allocator = gc_get();
 	i = 0;
-	while (i < ptr->child_capacity)
+	while (i < gc_ptr(ptr)->child_capacity)
 	{
-		if (ptr->childs[i] != -1)
-			gc_free(allocator->pointers[ptr->childs[i]].address);
+		if (gc_ptr(ptr)->childs[i] != -1)
+			gc_free(allocator->pointers[gc_ptr(ptr)->childs[i]].address);
 		i++;
 	}
 }
 
-static void	update_parents(t_ptr *ptr)
+static void	update_parents(int64_t ptr)
 {
 	t_gc	*allocator;
 	size_t	i;
 
-	if (!ptr->parents)
+	if (!gc_ptr(ptr)->parents)
 		return ;
 	allocator = gc_get();
 	i = 0;
-	while (i < ptr->parent_capacity)
+	while (i < gc_ptr(ptr)->parent_capacity)
 	{
-		if (ptr->parents[i] != -1)
-			gc_remove_child(&allocator->pointers[ptr->parents[i]], ptr);
+		if (gc_ptr(ptr)->parents[i] != -1)
+			gc_remove_child(gc_ptr(ptr)->parents[i], ptr);
 		i++;
 	}
 }
 
-static void	free_ptr(t_ptr *ptr)
+static void	free_ptr(int64_t ptr)
 {
 	t_gc	*allocator;
-	size_t	ptr_index;
 
 	allocator = gc_get();
-	ptr_index = gc_get_internal_ptr_index(ptr->address);
-	if (ptr_index < allocator->first_free)
-		allocator->first_free = ptr_index;
+	if (ptr < allocator->first_free)
+		allocator->first_free = ptr;
 	allocator->ptrs_count--;
-	free(ptr->address);
-	if (ptr->childs)
-		gc_free(ptr->childs);
-	if (ptr->parents)
-		gc_free(ptr->parents);
-	*ptr = gc_null_ptr();
+	free(gc_ptr(ptr)->address);
+	if (gc_ptr(ptr)->childs)
+		gc_free(gc_ptr(ptr)->childs);
+	if (gc_ptr(ptr)->parents)
+		gc_free(gc_ptr(ptr)->parents);
+	*gc_ptr(ptr) = gc_null_ptr();
 }

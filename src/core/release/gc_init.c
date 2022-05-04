@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 14:48:09 by                   #+#    #+#             */
-/*   Updated: 2022/04/13 15:47:01 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:15:50 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 size_t	gc_getfootprint(void)
 {
 	int		footprint;
-	size_t	i;
 	t_gc	*allocator;
+	int64_t	i;
 
 	allocator = gc_get();
 	i = 0;

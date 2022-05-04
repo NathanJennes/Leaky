@@ -22,3 +22,13 @@ int	gc_has_global_parent(void)
 		return (LK_FALSE);
 	return (LK_TRUE);
 }
+
+t_ptr	*gc_ptr(int64_t index)
+{
+	t_gc	*allocator;
+
+	if (index == -1)
+		return (NULL);
+	allocator = gc_get();
+	return (&allocator->pointers[index]);
+}

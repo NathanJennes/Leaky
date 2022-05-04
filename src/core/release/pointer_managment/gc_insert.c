@@ -31,7 +31,7 @@ int	gc_can_insert(void *ptr)
 void	gc_insert_ptr(t_ptr ptr)
 {
 	t_gc	*allocator;
-	size_t	i;
+	int64_t	i;
 
 	allocator = gc_get();
 	i = allocator->first_free;

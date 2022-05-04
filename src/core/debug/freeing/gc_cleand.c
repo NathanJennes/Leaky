@@ -19,7 +19,7 @@ static void	check_for_warnings(t_gc *allocator);
 void	gc_clean(void)
 {
 	t_gc	*allocator;
-	size_t	i;
+	int64_t	i;
 
 	allocator = gc_get();
 	check_for_warnings(allocator);

@@ -44,7 +44,7 @@ void	gc_scope_end(void)
 
 static void	free_scope(t_gc *allocator, size_t scope)
 {
-	size_t	i;
+	int64_t	i;
 
 	i = 0;
 	while (i < allocator->capacity)
