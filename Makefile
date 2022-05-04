@@ -14,7 +14,8 @@ CC			:=		gcc
 #-----------#
 
 BASIC_DIR	:=		basics
-BASIC		:=		ft_calloc.c gc_memcpy.c gc_memmove.c gc_memset.c gc_memseti.c gc_memsetf.c gc_strlcpy.c gc_strlen.c
+BASIC		:=		ft_calloc.c gc_memcpy.c gc_memmove.c gc_memset.c gc_memseti.c gc_memsetf.c gc_strlcpy.c gc_strlen.c	\
+					gc_memsetl.c
 
 EXTRAS_DIR	:=		extras
 EXTRAS		:=		gc_get_next_line.c gc_strappend.c gc_split.c

@@ -15,6 +15,7 @@
 # define LEAKY_H
 
 # include <stddef.h>
+# include <stdint.h>
 
 # define BUFFER_SIZE 1024
 
@@ -622,6 +623,7 @@ size_t		gc_get_malloc_calls(void);
 
 void		*gc_memset(void *b, int c, size_t len);
 void		*gc_memseti(void *b, int c, size_t len);
+void		*gc_memsetl(void *b, int64_t c, size_t len);
 void		*gc_memsetf(void *b, float c, size_t len);
 void		*gc_memcpy(void *dst, const void *src, size_t n);
 void		*gc_memmove(void *dst, const void *src, size_t len);
