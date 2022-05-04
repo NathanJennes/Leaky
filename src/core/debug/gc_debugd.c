@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:37:30 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:29 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:26:01 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ static void	print_ptr_childs(t_ptr ptr)
 	while (i < ptr.child_capacity)
 	{
 		if (ptr.childs[i])
-			printf("\t\t[%lu]:\t%p\n", i, ptr.childs[i]->address);
+			printf("\t\t[%lu]:\t%p\n", i,
+				allocator->pointers[ptr.childs[i]].address);
 		i++;
 	}
 }

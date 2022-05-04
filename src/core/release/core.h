@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:15:03 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define CORE_H
 
 # include <stddef.h>
+# include <stdint.h>
 
 # define SCOPE_START 1
 # define SCOPE_END -1
@@ -23,10 +24,10 @@ typedef struct s_ptr
 	void			*address;
 	char			temporary;
 	size_t			scope;
-	struct s_ptr	**childs;
+	int64_t			*childs;
 	size_t			child_capacity;
 	size_t			child_count;
-	struct s_ptr	**parents;
+	int64_t			*parents;
 	size_t			parent_capacity;
 	size_t			parent_count;
 }					t_ptr;
@@ -34,7 +35,7 @@ typedef struct s_ptr
 typedef struct s_gc
 {
 	void		*new_ptr;
-	t_ptr		*current_parent;
+	int64_t		current_parent;
 	t_ptr		*pointers;
 	size_t		ptrs_count;
 	size_t		capacity;
@@ -70,7 +71,9 @@ int			can_change_settings(void);
 t_ptr		gc_null_ptr(void);
 t_ptr		*gc_get_internal_ptr(void *ptr);
 int			gc_contains_ptr(void *ptr);
-size_t		gc_get_internal_ptr_index(t_ptr *ptr);
+int64_t		gc_get_internal_ptr_index(void *ptr);
+t_ptr		*gc_get_current_parent(void);
+int			gc_has_global_parent(void);
 
 t_ptr		gc_create_generic_ptr(void *address);
 t_ptr		gc_create_temporary_ptr(void *address);

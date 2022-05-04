@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/04 13:42:38 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:04:09 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,30 +56,34 @@ void	gct_free(void)
 
 static void	free_childs(t_ptr *ptr)
 {
+	t_gc	*allocator;
 	size_t	i;
 
 	if (!ptr->childs)
 		return ;
+	allocator = gc_get();
 	i = 0;
 	while (i < ptr->child_capacity)
 	{
-		if (ptr->childs[i])
-			gc_free(ptr->childs[i]->address);
+		if (ptr->childs[i] != -1)
+			gc_free(allocator->pointers[ptr->childs[i]].address);
 		i++;
 	}
 }
 
 static void	update_parents(t_ptr *ptr)
 {
+	t_gc	*allocator;
 	size_t	i;
 
 	if (!ptr->parents)
 		return ;
+	allocator = gc_get();
 	i = 0;
 	while (i < ptr->parent_capacity)
 	{
-		if (ptr->parents[i])
-			gc_remove_child(ptr->parents[i], ptr);
+		if (ptr->parents[i] != -1)
+			gc_remove_child(&allocator->pointers[ptr->parents[i]], ptr);
 		i++;
 	}
 }

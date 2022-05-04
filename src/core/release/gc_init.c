@@ -18,6 +18,7 @@ int	gc_init(t_gc *allocator, int (*callback)(void *), void *param)
 	if (!allocator)
 		return (LK_FAILURE);
 	gc_memset(allocator, 0, sizeof(t_gc));
+	allocator->current_parent = -1;
 	allocator->capacity = 100;
 	allocator->pointers = ft_calloc(allocator->capacity, sizeof(t_ptr));
 	if (!allocator->pointers)

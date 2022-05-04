@@ -38,7 +38,7 @@ CORE_DIR	:=		core
 
 RELEASE_CORE_DIR		:=		$(CORE_DIR)/release
 RELEASE_CORE			:=		gc_gc.c gc_grow.c gc_own.c gc_alloc.c gc_free.c gc_destroy.c gc_clean.c					\
-								gc_utils.c																				\
+								gc_utils.c gc_utils2.c																	\
 								gc_init.c gc_scope.c																	\
 
 RELEASE_ERROR_DIR		:=		$(RELEASE_CORE_DIR)/error_management
@@ -65,7 +65,7 @@ RELEASE_PTR_MGT			:=		gc_own.c gc_grow.c gc_insert.c gc_ptr_factory.c
 
 DEBUG_CORE_DIR			:=		$(CORE_DIR)/debug
 DEBUG_CORE				:=		gc_gcd.c gc_growd.c gc_ownd.c															\
-								gc_utilsd.c																				\
+								gc_utilsd.c gc_utils2d.c																\
 								gc_initd.c gc_scoped.c																	\
 								gc_debugd.c
 
@@ -82,7 +82,7 @@ DEBUG_REFERENCES_DIR	:=		$(DEBUG_CORE_DIR)/references
 DEBUG_REFERENCES		:=		gc_objectd.c gc_attachd.c gc_childsd.c gc_parentsd.c
 
 DEBUG_ALLOCATION_DIR	:=		$(DEBUG_CORE_DIR)/allocation
-DEBUG_ALLOCATION			:=		gc_allocd.c
+DEBUG_ALLOCATION		:=		gc_allocd.c
 
 DEBUG_PTR_MGT_DIR		:=		$(DEBUG_CORE_DIR)/pointer_managment
 DEBUG_PTR_MGT			:=		gc_ownd.c gc_growd.c gc_insertd.c gc_ptr_factoryd.c

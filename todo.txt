@@ -14,3 +14,5 @@ Check errors on parents/child additions
 Check for circular dependencies
 
 Optimize freeing by skipping updating childs/parents for pointers that will be freed
+
+Create a gc_ifree() for pointers that are sure not to have childs (for internal use)

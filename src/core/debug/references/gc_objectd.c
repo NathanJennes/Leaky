@@ -6,18 +6,19 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 11:00:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 15:00:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "src/core/debug/cored.h"
 
+//TODO: add a warning for setting a global object that doesn't belong to Leaky
 void	gc_object_start(void *ptr)
 {
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	allocator->current_parent = gc_get_internal_ptr(ptr);
+	allocator->current_parent = gc_get_internal_ptr_index(ptr);
 }
 
 void	gc_object_end(void)
@@ -25,5 +26,5 @@ void	gc_object_end(void)
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	allocator->current_parent = NULL;
+	allocator->current_parent = -1;
 }

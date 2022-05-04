@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_object.c                                        :+:      :+:    :+:   */
+/*   gc_utils2d.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 11:00:50 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 14:39:27 by njennes          ###   ########.fr       */
+/*   Created: 2022/05/04 14:54:10 by njennes           #+#    #+#             */
+/*   Updated: 2022/05/04 14:54:17 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "src/core/release/core.h"
+#include "cored.h"
+#include "leaky.h"
 
-void	gc_object_start(void *ptr)
+int	gc_has_global_parent(void)
 {
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	allocator->current_parent = gc_get_internal_ptr_index(ptr);
-}
-
-void	gc_object_end(void)
-{
-	t_gc	*allocator;
-
-	allocator = gc_get();
-	allocator->current_parent = -1;
+	if (allocator->current_parent == -1)
+		return (LK_FALSE);
+	return (LK_TRUE);
 }

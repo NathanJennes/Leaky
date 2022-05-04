@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 14:39:01 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:33 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 14:56:06 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,30 @@ int	gc_contains_ptr(void *ptr)
 	return (LK_TRUE);
 }
 
-size_t	gc_get_internal_ptr_index(t_ptr *ptr)
+int64_t	gc_get_internal_ptr_index(void *ptr)
+{
+	t_gc	*allocator;
+	size_t	i;
+
+	if (!ptr)
+		return (-1);
+	allocator = gc_get();
+	i = 0;
+	while (i < allocator->capacity)
+	{
+		if (allocator->pointers[i].address == ptr)
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+t_ptr	*gc_get_current_parent(void)
 {
 	t_gc	*allocator;
 
 	allocator = gc_get();
-	return (ptr - allocator->pointers);
+	if (!gc_has_global_parent())
+		return (NULL);
+	return (&allocator->pointers[allocator->current_parent]);
 }
