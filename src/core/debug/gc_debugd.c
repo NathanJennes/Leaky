@@ -53,7 +53,7 @@ static void	print_ptr_childs(t_ptr ptr)
 	printf("\tChilds:\n");
 	while (i < ptr.child_capacity)
 	{
-		if (ptr.childs[i])
+		if (ptr.childs[i] != -1)
 			printf("\t\t[%lu]:\t%p\n", i,
 				allocator->pointers[ptr.childs[i]].address);
 		i++;
