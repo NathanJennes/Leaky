@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:37:30 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:17:55 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:15:56 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "cored.h"
 
 static void	print_ptr_childs(t_ptr ptr);
+static void	print_ptr_parents(t_ptr ptr);
 
 void	gc_print_status(void)
 {
@@ -38,6 +39,8 @@ void	gc_print_status(void)
 		}
 		if (allocator->pointers[i].child_capacity)
 			print_ptr_childs(allocator->pointers[i]);
+		if (allocator->pointers[i].parent_capacity)
+			print_ptr_parents(allocator->pointers[i]);
 		i++;
 	}
 	printf("-------------------------------------------------------\n");
@@ -55,7 +58,24 @@ static void	print_ptr_childs(t_ptr ptr)
 	{
 		if (ptr.childs[i] != -1)
 			printf("\t\t[%lu]:\t%p\n", i,
-				allocator->pointers[ptr.childs[i]].address);
+					allocator->pointers[ptr.childs[i]].address);
+		i++;
+	}
+}
+
+static void	print_ptr_parents(t_ptr ptr)
+{
+	size_t	i;
+	t_gc	*allocator;
+
+	allocator = gc_get();
+	i = 0;
+	printf("\tChilds:\n");
+	while (i < ptr.parent_capacity)
+	{
+		if (ptr.parents[i] != -1)
+			printf("\t\t[%lu]:\t%p\n", i,
+					allocator->pointers[ptr.parents[i]].address);
 		i++;
 	}
 }
