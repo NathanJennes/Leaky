@@ -94,7 +94,7 @@ static void	free_ptr(t_ptr *ptr)
 	size_t	ptr_index;
 
 	allocator = gc_get();
-	ptr_index = gc_get_internal_ptr_index(ptr);
+	ptr_index = gc_get_internal_ptr_index(ptr->address);
 	if (ptr_index < allocator->first_free)
 		allocator->first_free = ptr_index;
 	allocator->ptrs_count--;
