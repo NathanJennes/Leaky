@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:37:42 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 13:19:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@ typedef struct s_ptr
 	struct s_ptr	**childs;
 	size_t			child_capacity;
 	size_t			child_count;
+	struct s_ptr	**parents;
+	size_t			parent_capacity;
+	size_t			parent_count;
 }					t_ptr;
 
 typedef struct s_gc
@@ -64,7 +67,9 @@ char		**gc_istrarray_append(char **array, const char *str);
 char		**gc_istrarray_init(void);
 
 int			gc_add_child(t_ptr *ptr, t_ptr *child);
+int			gc_add_parent(t_ptr *ptr, t_ptr *parent);
 int			gc_remove_child(t_ptr *ptr, t_ptr *child);
+int			gc_remove_parent(t_ptr *ptr, t_ptr *parent);
 
 int			gc_error(const char *msg);
 int			gc_add_error(const char *msg);
@@ -78,6 +83,5 @@ size_t		gc_get_internal_ptr_index(t_ptr *ptr);
 t_ptr		gc_create_generic_ptr(void *address);
 t_ptr		gc_create_temporary_ptr(void *address);
 t_ptr		gc_create_internal_ptr(void *address);
-
 
 #endif

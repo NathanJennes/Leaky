@@ -51,7 +51,7 @@ RELEASE_SETTINGS_DIR	:=		$(RELEASE_CORE_DIR)/settings
 RELEASE_SETTINGS		:=		gc_settings.c gc_settings2.c
 
 RELEASE_REFERENCES_DIR	:=		$(RELEASE_CORE_DIR)/references
-RELEASE_REFERENCES		:=		gc_object.c gc_attach.c gc_references.c
+RELEASE_REFERENCES		:=		gc_object.c gc_attach.c gc_childs.c gc_parents.c
 
 RELEASE_ALLOCATION_DIR	:=		$(RELEASE_CORE_DIR)/allocation
 RELEASE_ALOCATION		:=		gc_alloc.c
@@ -79,7 +79,7 @@ DEBUG_SETTINGS_DIR		:=		$(DEBUG_CORE_DIR)/settings
 DEBUG_SETTINGS			:=		gc_settingsd.c gc_settings2d.c
 
 DEBUG_REFERENCES_DIR	:=		$(DEBUG_CORE_DIR)/references
-DEBUG_REFERENCES		:=		gc_objectd.c gc_attachd.c gc_referencesd.c
+DEBUG_REFERENCES		:=		gc_objectd.c gc_attachd.c gc_childsd.c gc_parentsd.c
 
 DEBUG_ALLOCATION_DIR	:=		$(DEBUG_CORE_DIR)/allocation
 DEBUG_ALOCATION			:=		gc_allocd.c

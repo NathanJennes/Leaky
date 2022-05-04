@@ -43,9 +43,7 @@ int	gc_remove_child(t_ptr *ptr, t_ptr *child)
 {
 	size_t	i;
 
-	if (!has_child(ptr, child))
-		return (gc_add_error(gc_error_detach_not_parent()));
-	if (!ptr->childs)
+	if (!ptr->childs || !has_child(ptr, child))
 		return (gc_add_error(gc_error_detach_not_parent()));
 	i = 0;
 	while (i < ptr->child_capacity && ptr->childs[i] != child)

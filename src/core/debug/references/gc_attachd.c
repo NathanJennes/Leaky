@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:21:49 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 13:29:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,11 @@ int	gc_attach(void *ptr, void *parent)
 	if (!internal_ptr)
 		return (gc_add_error(gc_error_attach_wrong_pointer()));
 	gc_add_child(internal_parent, internal_ptr);
+	gc_add_parent(internal_ptr, internal_parent);
 	return (LK_SUCCESS);
 }
 
+//TODO: check this
 int	gc_detach(void *ptr, void *parent)
 {
 	t_ptr	*internal_ptr;
@@ -40,5 +42,6 @@ int	gc_detach(void *ptr, void *parent)
 	if (!internal_ptr)
 		return (gc_add_error(gc_error_detach_wrong_pointer()));
 	gc_remove_child(internal_parent, internal_ptr);
+	gc_remove_parent(internal_ptr, internal_parent);
 	return (LK_SUCCESS);
 }

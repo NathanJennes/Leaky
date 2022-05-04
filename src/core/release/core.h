@@ -26,6 +26,9 @@ typedef struct s_ptr
 	struct s_ptr	**childs;
 	size_t			child_capacity;
 	size_t			child_count;
+	struct s_ptr	**parents;
+	size_t			parent_capacity;
+	size_t			parent_count;
 }					t_ptr;
 
 typedef struct s_gc
