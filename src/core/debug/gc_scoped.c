@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 16:29:25 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:32 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 13:35:44 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,7 @@ static void	free_scope(t_gc *allocator, size_t scope)
 	while (i < allocator->capacity)
 	{
 		if (allocator->pointers[i].scope == scope)
-		{
-			free(allocator->pointers[i].address);
-			allocator->pointers[i] = gc_null_ptr();
-			if (i < allocator->first_free)
-				allocator->first_free = i;
-			allocator->ptrs_count--;
-		}
+			gc_free(allocator->pointers[i].address);
 		i++;
 	}
 }

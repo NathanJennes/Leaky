@@ -42,7 +42,6 @@ void	gc_scope_end(void)
 	allocator->current_scope--;
 }
 
-//TODO: Fix this, it should also properly free childs, update parents
 static void	free_scope(t_gc *allocator, size_t scope)
 {
 	size_t	i;
@@ -51,13 +50,7 @@ static void	free_scope(t_gc *allocator, size_t scope)
 	while (i < allocator->capacity)
 	{
 		if (allocator->pointers[i].scope == scope)
-		{
-			free(allocator->pointers[i].address);
-			allocator->pointers[i] = gc_null_ptr();
-			if (i < allocator->first_free)
-				allocator->first_free = i;
-			allocator->ptrs_count--;
-		}
+			gc_free(allocator->pointers[i].address);
 		i++;
 	}
 }
