@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:27:03 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 17:54:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:07:15 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	gc_add_child(int64_t ptr, int64_t child)
 	i = 0;
 	while (i < gc_ptr(ptr)->child_capacity && gc_ptr(ptr)->childs[i] != -1)
 		i++;
-	gc_ptr(ptr)->childs[i] = gc_get_internal_ptr_index(gc_ptr(child)->address);
+	gc_ptr(ptr)->childs[i] = gc_get_internal_ptr(gc_ptr(child)->address);
 	gc_ptr(ptr)->child_count++;
 	return (LK_SUCCESS);
 }
@@ -46,7 +46,7 @@ int	gc_remove_child(int64_t ptr, int64_t child)
 
 	if (!gc_ptr(ptr)->childs || !has_child(ptr, child))
 		return (gc_add_error(gc_error_detach_not_parent()));
-	child_index = gc_get_internal_ptr_index(gc_ptr(child)->address);
+	child_index = gc_get_internal_ptr(gc_ptr(child)->address);
 	i = 0;
 	while (i < gc_ptr(ptr)->child_capacity && gc_ptr(ptr)->childs[i] != child_index)
 		i++;
@@ -97,7 +97,7 @@ static int	has_child(int64_t ptr, int64_t child)
 
 	if (!gc_ptr(ptr)->childs)
 		return (LK_FALSE);
-	child_index = gc_get_internal_ptr_index(gc_ptr(child)->address);
+	child_index = gc_get_internal_ptr(gc_ptr(child)->address);
 	if (child_index == -1)
 		return (LK_FALSE);
 	i = 0;
