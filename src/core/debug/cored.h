@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:21:56 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 18:29:48 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_ptr
 	int64_t			*parents;
 	size_t			parent_capacity;
 	size_t			parent_count;
+	int				internal;
 }					t_ptr;
 
 typedef struct s_gc

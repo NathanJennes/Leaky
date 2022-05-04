@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 12:41:43 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:49:30 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:38:48 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,6 @@ t_ptr	gc_create_internal_ptr(void *address)
 
 	ptr = gc_null_ptr();
 	ptr.address = address;
+	ptr.internal = LK_TRUE;
 	return (ptr);
 }

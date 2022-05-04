@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:37:30 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 19:16:02 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/04 19:38:21 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	gc_print_status(void)
 	printf("[LEAKY DEBUG]:\tallocator status:---------------------\n");
 	while (i < allocator->capacity)
 	{
-		if (!allocator->pointers[i].address)
+		if (!allocator->pointers[i].address || allocator->pointers[i].internal)
 		{
 			i++;
 			continue ;
