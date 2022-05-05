@@ -602,6 +602,18 @@ const char	*gc_error_attach_same_parent(void);
 const char	*gc_error_detach_not_parent(void);
 
 //----
+//  Get the error message when you are trying to start a new object by calling
+//  gc_object_start(), bot the pointer given doesn't belong to Leaky.
+//--
+//  Non-fatal error can be ignored with gc_ignore_warnings().
+//--
+//  Can be used to figure out the type of error that was thrown.
+//  Example:
+//    if (gc_get_last_error() == gc_error_wrong_object()) ...
+//----
+const char	*gc_error_wrong_object(void);
+
+//----
 //  Print Leaky's internal allocations.
 //  For Debug purposes.
 //----
