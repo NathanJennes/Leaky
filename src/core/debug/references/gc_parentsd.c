@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:03:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 12:58:25 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:58:51 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,10 @@ int	gc_remove_parent(int64_t ptr, int64_t parent)
 
 static int	init_parents(int64_t ptr)
 {
-	t_ptr	*internal_ptr;
+	int64_t	*new;
 
-	internal_ptr = gc_ptr(ptr);
-	internal_ptr->parents = gc_icalloc(5, sizeof (int64_t));
+	new = gc_icalloc(5, sizeof (int64_t));
+	gc_ptr(ptr)->parents = new;
 	if (!gc_ptr(ptr)->parents)
 		return (gc_error(gc_error_allocation()));
 	gc_memsetl(gc_ptr(ptr)->parents, -1, 5);

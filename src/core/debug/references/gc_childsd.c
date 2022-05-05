@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:27:03 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 12:58:51 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 13:07:45 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ int	gc_remove_child(int64_t ptr, int64_t child)
 
 static int	init_childs(int64_t ptr)
 {
-	t_ptr	*internal_ptr;
+	int64_t	*new;
 
-	internal_ptr = gc_ptr(ptr);
-	internal_ptr->childs = gc_icalloc(5, sizeof (int64_t));
+	new = gc_icalloc(5, sizeof (int64_t));
+	gc_ptr(ptr)->childs = new;
 	if (!gc_ptr(ptr)->childs)
 		return (gc_error(gc_error_allocation()));
 	gc_memsetl(gc_ptr(ptr)->childs, -1, 5);
