@@ -3,9 +3,9 @@ DEBUG_NAME			:=		libleakyd.a
 
 INC_DIR		:=		-I.
 
-CFLAGSD		:=		-Wall -Werror -Wextra -o2 -MD $(INC_DIR) -g3 -fsanitize=address -DDEBUG
+CFLAGSD		:=		-Wall -Werror -Wextra -O2 -MD $(INC_DIR) -g3 -fsanitize=address -DDEBUG
 
-CFLAGS		:=		-Wall -Werror -Wextra -o2 -MD $(INC_DIR)
+CFLAGS		:=		-Wall -Werror -Wextra -O2 -MD $(INC_DIR)
 
 CC			:=		gcc
 
