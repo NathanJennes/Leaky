@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 13:03:28 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:33:36 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:58:25 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	gc_add_parent(int64_t ptr, int64_t parent)
 		return (gc_add_error(gc_error_attach_same_parent()));
 	if (!gc_ptr(ptr)->parents && !init_parents(ptr))
 		return (LK_FAILURE);
-	if (gc_ptr(ptr)->parent_capacity == gc_ptr(ptr)->parent_count && !grow_parents(ptr))
+	if (gc_ptr(ptr)->parent_capacity == gc_ptr(ptr)->parent_count
+		&& !grow_parents(ptr))
 		return (LK_FAILURE);
 	i = 0;
 	while (i < gc_ptr(ptr)->parent_capacity && gc_ptr(ptr)->parents[i] != -1)
@@ -46,7 +47,8 @@ int	gc_remove_parent(int64_t ptr, int64_t parent)
 	if (!gc_ptr(ptr)->parents || !has_parent(ptr, parent))
 		return (gc_add_error(gc_error_detach_not_parent()));
 	i = 0;
-	while (i < gc_ptr(ptr)->parent_capacity && gc_ptr(ptr)->parents[i] != parent)
+	while (i < gc_ptr(ptr)->parent_capacity
+		&& gc_ptr(ptr)->parents[i] != parent)
 		i++;
 	if (i < gc_ptr(ptr)->parent_capacity)
 	{
@@ -58,7 +60,10 @@ int	gc_remove_parent(int64_t ptr, int64_t parent)
 
 static int	init_parents(int64_t ptr)
 {
-	gc_ptr(ptr)->parents = gc_icalloc(5, sizeof (int64_t));
+	t_ptr	*internal_ptr;
+
+	internal_ptr = gc_ptr(ptr);
+	internal_ptr->parents = gc_icalloc(5, sizeof (int64_t));
 	if (!gc_ptr(ptr)->parents)
 		return (gc_error(gc_error_allocation()));
 	gc_memsetl(gc_ptr(ptr)->parents, -1, 5);
@@ -82,7 +87,7 @@ static int	grow_parents(int64_t ptr)
 		return (gc_error(gc_error_allocation()));
 	gc_memsetl(new, -1, new_parent_capacity);
 	gc_memmove(new, gc_ptr(ptr)->parents,
-			gc_ptr(ptr)->parent_capacity * sizeof (int64_t));
+		gc_ptr(ptr)->parent_capacity * sizeof (int64_t));
 	gc_ptr(ptr)->parent_capacity = new_parent_capacity;
 	gc_free(gc_ptr(ptr)->parents);
 	gc_ptr(ptr)->parents = new;

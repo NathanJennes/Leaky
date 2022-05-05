@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 14:48:31 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 14:49:35 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:39:40 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,24 @@ int	gc_is_valid_ptr_index(int64_t index)
 	if (index >= 0)
 		return (1);
 	return (0);
+}
+
+size_t	gc_child_count(int64_t ptr)
+{
+	t_gc	*allocator;
+
+	if (!gc_is_valid_ptr_index(ptr))
+		return (0);
+	allocator = gc_get();
+	return (allocator->pointers[ptr].child_count);
+}
+
+size_t	gc_parent_count(int64_t ptr)
+{
+	t_gc	*allocator;
+
+	if (!gc_is_valid_ptr_index(ptr))
+		return (0);
+	allocator = gc_get();
+	return (allocator->pointers[ptr].parent_count);
 }

@@ -75,6 +75,8 @@ int			gc_contains_ptr(void *ptr);
 int64_t		gc_get_current_parent(void);
 int			gc_has_global_parent(void);
 int			gc_is_valid_ptr_index(int64_t index);
+size_t		gc_child_count(int64_t ptr);
+size_t		gc_parent_count(int64_t ptr);
 
 t_ptr		gc_create_generic_ptr(void *address);
 t_ptr		gc_create_temporary_ptr(void *address);

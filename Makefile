@@ -43,7 +43,8 @@ RELEASE_CORE			:=		gc_gc.c gc_grow.c gc_own.c gc_alloc.c gc_free.c gc_destroy.c 
 								gc_init.c gc_scope.c																	\
 
 RELEASE_ERROR_DIR		:=		$(RELEASE_CORE_DIR)/error_management
-RELEASE_ERROR			:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_get_errors3.c gc_error.c
+RELEASE_ERROR			:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_get_errors3.c gc_error.c		\
+								gc_get_errors4.c
 
 RELEASE_FREEING_DIR		:=		$(RELEASE_CORE_DIR)/freeing
 RELEASE_FREEING			:=		gc_clean.c gc_destroy.c gc_free.c
@@ -71,7 +72,8 @@ DEBUG_CORE				:=		gc_gcd.c gc_growd.c gc_ownd.c															\
 								gc_debugd.c
 
 DEBUG_ERROR_DIR			:=		$(DEBUG_CORE_DIR)/error_management
-DEBUG_ERROR				:=		gc_error_interfaced.c gc_get_errorsd.c gc_get_errors2d.c gc_get_errors3d.c gc_errord.c
+DEBUG_ERROR				:=		gc_error_interfaced.c gc_get_errorsd.c gc_get_errors2d.c gc_get_errors3d.c gc_errord.c	\
+								gc_get_errors4d.c
 
 DEBUG_FREEING_DIR		:=		$(DEBUG_CORE_DIR)/freeing
 DEBUG_FREEING			:=		gc_cleand.c gc_destroyd.c gc_freed.c

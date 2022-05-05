@@ -38,9 +38,3 @@ const char	*gc_error_own_twice(void)
 {
 	return ("Leaky: trying to own a pointer that Leaky already owns");
 }
-
-const char	*gc_error_wrong_object(void)
-{
-	return ("Leaky: Trying to start an object with a pointer that doesn't"
-			"belong to Leaky");
-}

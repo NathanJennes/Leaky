@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/20 15:13:47 by                   #+#    #+#             */
-/*   Updated: 2022/05/04 18:18:26 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:37:42 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	free_childs(int64_t ptr)
 {
 	t_gc	*allocator;
 	size_t	i;
+	int64_t	current_child;
 
 	if (!gc_ptr(ptr)->childs)
 		return ;
@@ -65,20 +66,19 @@ static void	free_childs(int64_t ptr)
 	i = 0;
 	while (i < gc_ptr(ptr)->child_capacity)
 	{
-		if (gc_ptr(ptr)->childs[i] != -1)
-			gc_free(allocator->pointers[gc_ptr(ptr)->childs[i]].address);
+		current_child = gc_ptr(ptr)->childs[i];
+		if (current_child != -1 && gc_parent_count(current_child) == 1)
+			gc_free(gc_ptr(current_child)->address);
 		i++;
 	}
 }
 
 static void	update_parents(int64_t ptr)
 {
-	t_gc	*allocator;
 	size_t	i;
 
 	if (!gc_ptr(ptr)->parents)
 		return ;
-	allocator = gc_get();
 	i = 0;
 	while (i < gc_ptr(ptr)->parent_capacity)
 	{

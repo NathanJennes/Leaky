@@ -6,7 +6,7 @@ if (( $? == 0 )); then
   exit
 fi
 
-make re
+make both_re
 
 if (( $? != 0 )); then
   echo "Make error!"

@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 13:41:37 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 12:26:40 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:41:00 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,4 @@ const char	*gc_error_detach_not_parent(void)
 const char	*gc_error_own_twice(void)
 {
 	return ("Leaky: trying to own a pointer that Leaky already owns");
-}
-
-const char	*gc_error_wrong_object(void)
-{
-	return ("Leaky: Trying to start an object with a pointer that doesn't"
-			"belong to Leaky");
 }

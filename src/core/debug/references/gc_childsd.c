@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/15 15:27:03 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:33:09 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:58:51 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ int	gc_add_child(int64_t ptr, int64_t child)
 		return (gc_add_error(gc_error_attach_same_parent()));
 	if (!gc_ptr(ptr)->childs && !init_childs(ptr))
 		return (LK_FAILURE);
-	if (gc_ptr(ptr)->child_capacity == gc_ptr(ptr)->child_count && !grow_childs(ptr))
+	if (gc_ptr(ptr)->child_capacity == gc_ptr(ptr)->child_count
+		&& !grow_childs(ptr))
 		return (LK_FAILURE);
 	i = 0;
 	while (i < gc_ptr(ptr)->child_capacity && gc_ptr(ptr)->childs[i] != -1)
@@ -48,7 +49,8 @@ int	gc_remove_child(int64_t ptr, int64_t child)
 		return (gc_add_error(gc_error_detach_not_parent()));
 	child_index = gc_get_internal_ptr(gc_ptr(child)->address);
 	i = 0;
-	while (i < gc_ptr(ptr)->child_capacity && gc_ptr(ptr)->childs[i] != child_index)
+	while (i < gc_ptr(ptr)->child_capacity
+		&& gc_ptr(ptr)->childs[i] != child_index)
 		i++;
 	if (i < gc_ptr(ptr)->child_capacity)
 	{
@@ -60,7 +62,10 @@ int	gc_remove_child(int64_t ptr, int64_t child)
 
 static int	init_childs(int64_t ptr)
 {
-	gc_ptr(ptr)->childs = gc_icalloc(5, sizeof (int64_t));
+	t_ptr	*internal_ptr;
+
+	internal_ptr = gc_ptr(ptr);
+	internal_ptr->childs = gc_icalloc(5, sizeof (int64_t));
 	if (!gc_ptr(ptr)->childs)
 		return (gc_error(gc_error_allocation()));
 	gc_memsetl(gc_ptr(ptr)->childs, -1, 5);
@@ -83,7 +88,8 @@ static int	grow_childs(int64_t ptr)
 	if (!new)
 		return (gc_error(gc_error_allocation()));
 	gc_memsetl(new, -1, new_child_capacity);
-	gc_memmove(new, gc_ptr(ptr)->childs, gc_ptr(ptr)->child_capacity * sizeof (int64_t));
+	gc_memmove(new, gc_ptr(ptr)->childs,
+		gc_ptr(ptr)->child_capacity * sizeof (int64_t));
 	gc_ptr(ptr)->child_capacity = new_child_capacity;
 	gc_free(gc_ptr(ptr)->childs);
 	gc_ptr(ptr)->childs = new;

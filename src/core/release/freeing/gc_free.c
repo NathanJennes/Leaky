@@ -58,6 +58,7 @@ static void	free_childs(int64_t ptr)
 {
 	t_gc	*allocator;
 	size_t	i;
+	int64_t	current_child;
 
 	if (!gc_ptr(ptr)->childs)
 		return ;
@@ -65,8 +66,9 @@ static void	free_childs(int64_t ptr)
 	i = 0;
 	while (i < gc_ptr(ptr)->child_capacity)
 	{
-		if (gc_ptr(ptr)->childs[i] != -1)
-			gc_free(allocator->pointers[gc_ptr(ptr)->childs[i]].address);
+		current_child = gc_ptr(ptr)->childs[i];
+		if (current_child != -1 && gc_parent_count(current_child) == 1)
+			gc_free(gc_ptr(current_child)->address);
 		i++;
 	}
 }
