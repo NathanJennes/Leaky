@@ -432,6 +432,11 @@ size_t		gc_strarray_size(char **array);
 const char	*gc_get_last_error(void);
 
 //----
+//  Returns an array of error strings. You should not free or modify it.
+//----
+const char	**gc_get_errors(void);
+
+//----
 //  Get the error message when an allocation crashes.
 //--
 //  Can be used to figure out the type of error that was thrown.
@@ -480,14 +485,7 @@ const char	*gc_error_own_twice(void);
 const char	*gc_error_too_much_parents(void);
 
 //----
-//  Returns an array of error strings. You should not free or modify it.
-//----
-const char	**gc_get_errors(void);
-
-//----
 //  Get the error message when you get too many errors.
-//--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
@@ -498,8 +496,6 @@ const char	*gc_error_errors_overflow(void);
 //----
 //  Get the error message when you call gc_clean() without allocating anything.
 //--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
-//--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
 //    if (gc_get_last_error() == gc_error_clean_empty()) ...
@@ -508,8 +504,6 @@ const char	*gc_error_clean_empty(void);
 
 //----
 //  Get the error message when you call gc_clean() without ending all scopes.
-//--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
@@ -521,8 +515,6 @@ const char	*gc_error_clean_scope_left(void);
 //  Get the error message when a fatal error occurs but your callback
 //    doesn't exit the program.
 //--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
-//--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
 //    if (gc_get_last_error() == gc_error_no_exit_callback()) ...
@@ -532,8 +524,6 @@ const char	*gc_error_no_exit_callback(void);
 //----
 //  Get the error message when a setting was changed but
 //    an allocation already occurred.
-//--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
@@ -545,8 +535,6 @@ const char	*gc_error_settings_after_allocation(void);
 //  Get the error message when you are trying to attach a pointer to another
 //    but the parent doesn't belong to Leaky.
 //--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
-//--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
 //    if (gc_get_last_error() == gc_error_attach_wrong_parent()) ...
@@ -556,8 +544,6 @@ const char	*gc_error_attach_wrong_parent(void);
 //----
 //  Get the error message when you are trying to attach a pointer to another
 //    but the pointer doesn't belong to Leaky.
-//--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
@@ -569,8 +555,6 @@ const char	*gc_error_attach_wrong_pointer(void);
 //  Get the error message when you are trying to detach a pointer
 //    from its parent but the pointer doesn't belong to Leaky.
 //--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
-//--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
 //    if (gc_get_last_error() == gc_error_detach_wrong_pointer()) ...
@@ -580,8 +564,6 @@ const char	*gc_error_detach_wrong_pointer(void);
 //----
 //  Get the error message when you are trying to attach a pointer
 //    to a parent, but it already has that parent.
-//--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
@@ -593,8 +575,6 @@ const char	*gc_error_attach_same_parent(void);
 //  Get the error message when you are trying to detach a pointer
 //    from its parent, but it didn't had that parent.
 //--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
-//--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
 //    if (gc_get_last_error() == gc_error_detach_not_parent()) ...
@@ -604,8 +584,6 @@ const char	*gc_error_detach_not_parent(void);
 //----
 //  Get the error message when you are trying to start a new object by calling
 //  gc_object_start(), bot the pointer given doesn't belong to Leaky.
-//--
-//  Non-fatal error can be ignored with gc_ignore_warnings().
 //--
 //  Can be used to figure out the type of error that was thrown.
 //  Example:
