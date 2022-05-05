@@ -15,9 +15,6 @@
 
 void	gc_destroy(void **ptr)
 {
-	t_gc	*allocator;
-
-	allocator = gc_get();
 	if (!ptr)
 		return ;
 	gc_free(*ptr);

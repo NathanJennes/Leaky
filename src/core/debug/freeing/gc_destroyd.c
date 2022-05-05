@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/11 14:33:45 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 17:34:41 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 void	gc_destroy(void **ptr)
 {
-	t_gc	*allocator;
-
-	allocator = gc_get();
 	if (!ptr)
 		return ;
 	gc_free(*ptr);

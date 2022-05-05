@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 19:07:26 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 12:29:53 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 17:38:55 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,10 @@ void	gc_clean_on_error(int clean_on_error)
 
 void	gc_set_default_capacity(size_t capacity)
 {
+	int a;
 	t_gc	*allocator;
 
+	a = 1;
 	if (!can_change_settings())
 		return ;
 	allocator = gc_get();
@@ -59,14 +61,4 @@ void	gc_set_default_capacity(size_t capacity)
 	allocator->pointers = ft_calloc(allocator->capacity, sizeof(t_ptr));
 	if (!allocator->pointers)
 		gc_error(gc_error_allocation());
-}
-
-void	gc_ignore_warnings(int ignore_warnings)
-{
-	t_gc	*allocator;
-
-	if (!can_change_settings())
-		return ;
-	allocator = gc_get();
-	allocator->ignore_warnings = ignore_warnings;
 }

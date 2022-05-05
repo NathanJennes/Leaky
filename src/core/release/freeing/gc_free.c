@@ -56,13 +56,11 @@ void	gct_free(void)
 
 static void	free_childs(int64_t ptr)
 {
-	t_gc	*allocator;
 	size_t	i;
 	int64_t	current_child;
 
 	if (!gc_ptr(ptr)->childs)
 		return ;
-	allocator = gc_get();
 	i = 0;
 	while (i < gc_ptr(ptr)->child_capacity)
 	{
@@ -75,12 +73,10 @@ static void	free_childs(int64_t ptr)
 
 static void	update_parents(int64_t ptr)
 {
-	t_gc	*allocator;
 	size_t	i;
 
 	if (!gc_ptr(ptr)->parents)
 		return ;
-	allocator = gc_get();
 	i = 0;
 	while (i < gc_ptr(ptr)->parent_capacity)
 	{

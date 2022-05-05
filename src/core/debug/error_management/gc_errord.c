@@ -31,7 +31,7 @@ int	gc_error(const char *msg)
 		gc_clean();
 	if (msg != gc_error_errors_overflow())
 		gc_add_error(gc_error_no_exit_callback());
-	return (LK_SUCCESS);
+	return (LK_FAILURE);
 }
 
 int	gc_add_error(const char *msg)

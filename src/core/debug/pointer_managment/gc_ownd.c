@@ -18,11 +18,9 @@ void			gc_insert_ptr(t_ptr ptr);
 
 int	gc_own(void *ptr)
 {
-	t_gc	*allocator;
 
 	if (!gc_can_insert(ptr))
 		return (LK_FAILURE);
-	allocator = gc_get();
 	gc_insert_ptr(gc_create_generic_ptr(ptr));
 	if (gc_has_global_parent())
 		gc_attach(ptr, gc_ptr(gc_get_current_parent())->address);
@@ -31,11 +29,9 @@ int	gc_own(void *ptr)
 
 int	gct_own(void *ptr)
 {
-	t_gc	*allocator;
 
 	if (!gc_can_insert(ptr))
 		return (LK_FAILURE);
-	allocator = gc_get();
 	gc_insert_ptr(gc_create_temporary_ptr(ptr));
 	if (gc_has_global_parent())
 		gc_attach(ptr, gc_ptr(gc_get_current_parent())->address);

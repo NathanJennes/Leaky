@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:00 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 18:29:48 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/05 12:35:28 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ typedef struct s_gc
 	const char	*last_error;
 	char		**errors;
 	int			clean_on_error;
-	int			ignore_warnings;
 }			t_gc;
 
 t_gc		*gc_get(void);
