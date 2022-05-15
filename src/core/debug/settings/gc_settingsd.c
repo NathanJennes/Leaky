@@ -44,10 +44,8 @@ void	gc_clean_on_error(int clean_on_error)
 
 void	gc_set_default_capacity(size_t capacity)
 {
-	int a;
 	t_gc	*allocator;
 
-	a = 1;
 	if (!can_change_settings())
 		return ;
 	allocator = gc_get();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gc_debugd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
+/*   By: cybattis <cybattis@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 14:37:30 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/05 12:40:39 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/15 16:29:45 by cybattis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	gc_print_status(void)
 			i++;
 			continue ;
 		}
-		printf("\n[PTR %lld]:\t--%p--\n", i, allocator->pointers[i].address);
+		printf("\n[PTR %lld]:\t--%p--\n", (long long)i, allocator->pointers[i].address);
 		if (allocator->pointers[i].address)
 		{
 			printf("\tTemporary:\t%d\n", (int)allocator->pointers[i].temporary);
