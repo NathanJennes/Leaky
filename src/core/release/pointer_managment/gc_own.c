@@ -6,7 +6,7 @@
 /*   By: njennes <njennes@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 15:43:52 by njennes           #+#    #+#             */
-/*   Updated: 2022/05/04 14:47:57 by njennes          ###   ########.fr       */
+/*   Updated: 2022/05/16 15:10:29 by njennes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void			gc_insert_ptr(t_ptr ptr);
 
 int	gc_own(void *ptr)
 {
-
 	if (!gc_can_insert(ptr))
 		return (LK_FAILURE);
 	gc_insert_ptr(gc_create_generic_ptr(ptr));
@@ -29,7 +28,6 @@ int	gc_own(void *ptr)
 
 int	gct_own(void *ptr)
 {
-
 	if (!gc_can_insert(ptr))
 		return (LK_FAILURE);
 	gc_insert_ptr(gc_create_temporary_ptr(ptr));

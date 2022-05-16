@@ -263,13 +263,18 @@ void		gc_object_end(void);
 //----
 //  Makes ptr a child of parent.
 //  If parent is freed, ptr will be too.
-//--
+//----
 int			gc_attach(void *ptr, void *parent);
 
 //----
 //  Detaches ptr from parent so that if parent is freed, ptr won't be freed.
-//--
+//----
 int			gc_detach(void *ptr, void *parent);
+
+//----
+//  Frees a 2D array, given the size of size of the array.
+//----
+void	gc_free2d(void **ptr, size_t size);
 
 //------------//
 //--Standard--//

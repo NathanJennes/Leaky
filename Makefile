@@ -48,7 +48,7 @@ RELEASE_ERROR			:=		gc_error_interface.c gc_get_errors.c gc_get_errors2.c gc_get
 								gc_get_errors4.c
 
 RELEASE_FREEING_DIR		:=		$(RELEASE_CORE_DIR)/freeing
-RELEASE_FREEING			:=		gc_clean.c gc_destroy.c gc_free.c
+RELEASE_FREEING			:=		gc_clean.c gc_destroy.c gc_free.c gc_free2d.c
 
 RELEASE_SETTINGS_DIR	:=		$(RELEASE_CORE_DIR)/settings
 RELEASE_SETTINGS		:=		gc_settings.c gc_settings2.c
@@ -77,7 +77,7 @@ DEBUG_ERROR				:=		gc_error_interfaced.c gc_get_errorsd.c gc_get_errors2d.c gc_g
 								gc_get_errors4d.c
 
 DEBUG_FREEING_DIR		:=		$(DEBUG_CORE_DIR)/freeing
-DEBUG_FREEING			:=		gc_cleand.c gc_destroyd.c gc_freed.c
+DEBUG_FREEING			:=		gc_cleand.c gc_destroyd.c gc_freed.c gc_free2dd.c
 
 DEBUG_SETTINGS_DIR		:=		$(DEBUG_CORE_DIR)/settings
 DEBUG_SETTINGS			:=		gc_settingsd.c gc_settings2d.c
