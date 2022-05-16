@@ -31,8 +31,8 @@ void	gc_print_status(void)
 			i++;
 			continue ;
 		}
-		printf("\n[PTR %ld]:\t--%p--\n",
-			(int64_t)i, allocator->pointers[i].address);
+		printf("\n[PTR %lld]:\t--%p--\n",
+			(long long int)i, allocator->pointers[i].address);
 		if (allocator->pointers[i].address)
 		{
 			printf("\tTemporary:\t%d\n", (int)allocator->pointers[i].temporary);
