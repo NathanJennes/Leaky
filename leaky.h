@@ -620,6 +620,7 @@ void		*gc_memset(void *b, int c, size_t len);
 void		*gc_memseti(void *b, int c, size_t len);
 void		*gc_memsetl(void *b, int64_t c, size_t len);
 void		*gc_memsetf(void *b, float c, size_t len);
+void		*gc_memsetd(void *b, double c, size_t len);
 void		*gc_memcpy(void *dst, const void *src, size_t n);
 void		*gc_memmove(void *dst, const void *src, size_t len);
 void		*ft_calloc(size_t count, size_t size);
