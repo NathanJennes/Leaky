@@ -14,6 +14,8 @@
 
 void	gc_free2d(void **ptr, size_t size)
 {
+	if (!ptr)
+		return ;
 	while (size)
 	{
 		gc_free(ptr[size - 1]);
